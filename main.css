@@ -1,3 +1,8 @@
+:root {
+    font-size:16px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    --border : #A7A7A7
+}
 
 .homeheader
 {
@@ -7,9 +12,24 @@
     position: fixed;
     top: 0;
     left: 0;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
     display: flex;
     flex-direction: row;
-    
+}
+
+body
+{
+    background-image: -webkit-linear-gradient(0deg,
+  hsl(273deg 41% 21%) 0%,
+  hsl(266deg 28% 30%) 9%,
+  hsl(260deg 20% 38%) 18%,
+  hsl(254deg 15% 47%) 27%,
+  hsl(267deg 14% 55%) 36%,
+  hsl(321deg 17% 63%) 45%,
+  hsl(349deg 26% 74%) 55%,
+  hsl(10deg 39% 83%) 64%,
+  hsl(18deg 50% 87%) 73%,
+  hsl(23deg 61% 90%) 82%,
+  hsl(28deg 76% 92%) 91%,
+  hsl(33deg 100% 94%) 100%
+    );
 }
