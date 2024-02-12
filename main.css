@@ -1,0 +1,15 @@
+
+.homeheader
+{
+    background-color: #38204c;
+    width: 100vw;
+    height: 5%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    
+}
