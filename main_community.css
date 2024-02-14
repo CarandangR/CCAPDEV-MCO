@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    font-size:16px;
+    font-family: "Roboto", sans-serif;
+    --border : #A7A7A7;
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-image: linear-gradient(45deg,
+  hsl(273deg 41% 21%) 0%,
+  hsl(266deg 28% 30%) 9%,
+  hsl(260deg 20% 38%) 18%,
+  hsl(254deg 15% 47%) 27%,
+  hsl(267deg 14% 55%) 36%,
+  hsl(321deg 17% 63%) 45%,
+  hsl(349deg 26% 74%) 55%,
+  hsl(10deg 39% 83%) 64%,
+  hsl(18deg 50% 87%) 73%,
+  hsl(23deg 61% 90%) 82%,
+  hsl(28deg 76% 92%) 91%,
+  hsl(33deg 100% 94%) 100%
+    );
+}
+
+.homecontainer
+{
+    padding: 0;
+    margin:0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.webheader
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    position: sticky;
+    width: 100%;
+    height: 7%;
+    background-color: #301D3D;
+}
+
+.headercontent
+{
+    align-items: center;
+    font-size: 20px;
+    color:white;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+}
+
+.headerhome
+{
+    display: flex;
+    align-items: center;
+    padding-left: 5vw;
+    height: 100%;
+    width: 30%;
+}
+
+.link
+{
+    font-size: 26px;
+}
+
+.headersearchbar
+{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 60%;
+}
+
+.searchbar
+{
+    background-color: rgba(124, 118, 152,0.5);
+    width: 100%;
+    height: 80%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    border: 0;
+}
+
+.searchbar input 
+{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 10px;
+    color: white;
+    font-size: 16px;
+    padding-left: 5px;
+}
+
+.searchbar:hover 
+{
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.headerprofile
+{
+    padding-top: 0px;
+    margin: 0;
+    padding-left: 10px;
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+}
+
+.profile
+{
+    height: 100%;
+    width: 70%;
+}
+
+.communitybanner
+{
+    width: 100vh;
+    height: 228px;
+    border: solid;
+}
+
+.communitybanner img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.communityiconinfo
+{
+    width: 100vw;
+    height: 100px;
+    border: solid;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.communityicon
+{
+    border: solid;
+    width: 72px;
+    height: 72px;
+}
+
+.communityname
+{
+    border: solid;
+    width: 350px;
+    height: 100px;
+}
+
+.commuinitybuttons
+{
+    border: solid;
+    width: 200px;
+    height: 100px;
+}
+
+.createpost
+{
+    margin-top: 10px;
+    width: 650px;
+    height: 110px;
+    background-color: #fff2e2;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+}
+
+.createposticon
+{
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.createpostusericonholder
+{
+    height: 65%;
+    border-style: solid;
+    border-color: #301D3D;
+    border-width: 1px;
+    width: 50%;
+    border-radius: 100%;
+}
+
+.createpostusericonholder img
+{
+    border-radius: 100%;
+    width: 100%;
+}
+
+.createposttext
+{
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.posttext
+{
+    margin: auto;
+    background: #fff2e2;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    border: 0;
+    border-color: #7c7698;
+    border-style: solid;
+    border-width: 1px;
+    width: 90%;
+    height: 50%;
+}
+
+.posttext input 
+{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 10px;
+    color: white;
+    font-size: 16px;
+    padding-left: 5px;
+}
+
+.posttext:hover
+{
+    border-color: #301D3D;
+    background-color: #7c7698;
+}
+
+.createpostpic
+{
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.createpostpic img
+{
+    width: 24px;
+    height: 24px;
+    object-fit: fill;
+}
+
+.createpostattach
+{
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.createpostattach img
+{
+    width: 24px;
+    height: 24px;
+    object-fit: fill;
+}
+
+.navigation
+{
+    margin-top: 10px;
+    width: 650px;
+    height: 110px;
+    background-color: #fff2e2;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.communities
+{
+    border: solid;
+    width: 70%;
+    height: 100%;
+}
+
+.newposts
+{
+    height: 100%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newposts img
+{
+    width: 24px;
+    height: 24px;
+    object-fit: fill;
+}
+
+.hotposts
+{
+    height: 100%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hotposts img
+{
+    width: 24px;
+    height: 24px;
+    object-fit: fill;
+}
+
+.postscontainer
+{
+    margin-top: 10px;
+    background-color: #fff2e2;
+    display: flex;
+    flex-direction: column;
+    width: 650px;
+    height: 640px;
+    border-radius: 8px;
+}
