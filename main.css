@@ -130,15 +130,13 @@ body
 
 .createpost
 {
-    object-fit: fill;
     margin-top: 10px;
-    width: 60%;
-    height: 10%;
+    width: 650px;
+    height: 110px;
     background-color: #fff2e2;
     border-radius: 8px;
     display: flex;
     flex-direction: row;
-    max-width: 600px;
 }
 
 .createposticon
@@ -208,24 +206,82 @@ body
 .createpostpic
 {
     width: 15%;
-    border: solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.createpostpic img
+{
+    width: 24px;
+    height: 24px;
+    object-fit: fill;
 }
 
 .createpostattach
 {
     width: 15%;
-    border: solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.createpostattach img
+{
+    width: 24px;
+    height: 24px;
+    object-fit: fill;
 }
 
 .navigation
 {
     margin-top: 10px;
-    width: 60%;
-    height: 10%;
+    width: 650px;
+    height: 110px;
     background-color: #fff2e2;
     border-radius: 8px;
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+
+.communities
+{
+    border: solid;
+    width: 70%;
+    height: 100%;
+}
+
+.newposts
+{
+    height: 100%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newposts img
+{
+    width: 24px;
+    height: 24px;
+    object-fit: fill;
+}
+
+.hotposts
+{
+    height: 100%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hotposts img
+{
+    width: 24px;
+    height: 24px;
+    object-fit: fill;
 }
 
 .postscontainer
@@ -234,7 +290,7 @@ body
     background-color: #fff2e2;
     display: flex;
     flex-direction: column;
-    width: 60%;
-    height: 100%;
+    width: 650px;
+    height: 640px;
     border-radius: 8px;
 }
