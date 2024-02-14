@@ -49,15 +49,57 @@ body
 
 .headercontent
 {
+    padding-top: 8px;
     font-size: 20px;
     color:white;
-    padding: 8px;
-    padding-left: 35px;
     font-weight: 600;
-
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
 }
 
-.postcontainer
+.headerhome
+{   
+    text-align: center;
+    height: 100%;
+    width: 30%;
+}
+
+.headersearchbar
+{
+    text-align: center;
+    height: 100%;
+    width: 60%;
+}
+
+.searchbar
+{
+    background: rgb(255, 255, 255, 0.2);
+    opacity: 0.4;
+    width: 100%;
+    height: 80%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.searchbar input
+{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+}
+
+.headericons
+{
+    height: 100%;
+    width: 30%;
+    border: solid;
+}
+
+.postscontainer
 {
     background-color: #fff2e2;
     display: flex;
