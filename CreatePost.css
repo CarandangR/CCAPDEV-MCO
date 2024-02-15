@@ -1,29 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 :root {
     font-size:16px;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Roboto", sans-serif;
     --border : #A7A7A7
 }
+body{
+    margin: 0;
+    background-image: linear-gradient(
+  45deg,
+  hsl(273deg 41% 21%) 0%,
+  hsl(266deg 28% 30%) 9%,
+  hsl(260deg 20% 38%) 18%,
+  hsl(254deg 15% 47%) 27%,
+  hsl(267deg 14% 55%) 36%,
+  hsl(321deg 17% 63%) 45%,
+  hsl(349deg 26% 74%) 55%,
+  hsl(10deg 39% 83%) 64%,
+  hsl(18deg 50% 87%) 73%,
+  hsl(23deg 61% 90%) 82%,
+  hsl(28deg 76% 92%) 91%,
+  hsl(33deg 100% 94%) 100%);
+  background-attachment: fixed;
+
+    
+}
+.link{
+    padding-left: 10px;
+    padding-top: 3px;
+    float: right;
+}
 .webheader{
+    padding-left: 10px;
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: left;
     position: fixed;
     width: 100%;
     height: 5%;
-    border-bottom: 1px solid;
+    border-bottom: 2px solid;
+    background: rgb(48,29,61);
+    background: linear-gradient(90deg, rgba(48,29,61,1) 0%, rgba(65,37,84,1) 35%, rgba(66,33,88,1) 63%, rgba(79,37,108,1) 100%);
+    
+}
+.logo{
+   
+    height: 30px;
+    width: 55px;
+    float:left;
+    max-width: 100%;
+    max-height:100%;
 }
 .headercontent{
+    text-align: center;
     font-size: 20px;
-    margin: 8px;
-    margin-left: 35px;
+    font-weight: 600;
+    
 }
+
 .signcontainer{
     
-    margin: auto;
-    width: 80%;
+    padding: 10%;
 }
 
 .container{
+    background-color: #fff2e2;
+    background: rgba(255, 242, 226, 0.5);
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -38,25 +80,68 @@
 
 }
 .inputs{
+    
     height: 85%;
 }
 
 .posttitle{
-    margin: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    
 }
 input[type="text"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
+    padding-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    background-color: #FFFBF4;
+}
+.icons{
+    padding-left: 25px;
+    
 }
 
-.contentarea{
-    margin: 20px;
+.attach, .bold, .italic{
+    height: 20px;
+    width: 20px;
+    
+
 }
+.iconbutton{
+    margin: 0;
+    padding: 0;
+    background-color: inherit ;
+    cursor: pointer;
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-bottom: none;
+    width: 3%;
+
+}
+.iconbutton:hover{
+    background: rgba(255, 242, 226, 0.5);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    
+    
+}
+.contentarea{
+    padding-left: 20px;
+    
+    padding-bottom: 20px;
+    padding-right: 20px;
+}
+    
 .content{
+    background-color: #FFFDFA;
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -66,28 +151,45 @@ input[type="text"] {
     resize: none;
 }
 .buttons{
+    
     display: flex;
     height: 15%;
     align-items: center;
     margin: auto;
 }
 .post{
-    margin: 30px;
+    
+    padding: 30px;
    
     width: 50%
 }
 
 .cancel{
-    margin: 30px;
+    
+    padding: 30px;
     width: 50%;
 }
 
 .submitbutton{
+    border: 0.5px solid #BD8FCB;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #BD8FCB;
     font-size: 14px;
-    margin-top: 10px;
     padding: 10px, 20px;
-    color: black;
-    height: 30px;
-    width: 90px;
+   
+    height: 35px;
+    width: 95px;
     cursor: pointer;
+    
+    border-radius: 15px;
+}
+.buttontext{
+    font-weight: 500;
+    color:beige;
+}
+
+.submitbutton:hover{
+    border: 1px solid #7A03A1;
+    background-color: #7A03A1;
 }
