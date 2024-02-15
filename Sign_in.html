@@ -6,6 +6,7 @@
 
 <div class = "webheader">
     <div class = "headercontent">
+        <img class = "logo" src = "logo.png">
         <span class = "link"> <a style = "color: beige; text-decoration: none" href = "google.com"> byte. </a> </span>
     </div>
 </div>
@@ -15,35 +16,36 @@
 <div class = "signcontainer">
     <div class = "container">
         <div class = "header">
-            <span> User Login </span>
-        </div>
-        
-        <div class = "Username">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
-        </div>
-
-        <div class = "Password">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
-        </div>
-
-        <div class = "remember">
             
-            <input type = "checkbox" id ="rememberme" name = "rememberme">
-            <label for = "rememberme"> Remember me </label>
+            <span class ="blocktitle"> User Login </span>
         </div>
+        <form action = "https://google.com">
+            <div class = "Username">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required/>
+            </div>
 
-        <div class = "noAccount">
-            <span> Don't have an account? <a href = "Sign_up.html"> Register here </a>
-            </span>
-        </div>
+            <div class = "Password">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required/>
+            </div>
 
-        <div class = "submit">
-        <a href = "https://google.com">
-            <button class  = "submitbutton" type = "submit" value = "submit"> Login </button>
-        </a>    
+            <div class = "remember">
+            
+                <input type = "checkbox" id ="rememberme" name = "rememberme">
+                <label for = "rememberme"> Remember me </label>
+            </div>
+
+            <div class = "noAccount">
+                <span> Don't have an account? <a href = "Sign_up.html"> Register here </a>
+                </span>
+            </div>
+
+            <div class = "submit">
+                
+                <button class  = "submitbutton" type = "submit" value = "submit"> <span class ="buttontext">Login </span></button>
   
+            </div>
         </div>
     </div>
 </div>
