@@ -170,6 +170,7 @@ body
     flex-direction: column;
     width: 90%;
     border: 1px solid;
+    border-radius: 10px;
 }
 
 .profileinfo h3,h4 {
@@ -201,6 +202,60 @@ body
     margin: auto;
     overflow-wrap: normal;
     border-radius: 8px;
-    
+    flex-direction: column;
+
+}
+
+.latestpost {
+    display: flex;
     flex-direction: row;
+    width: 650px;
+    height: auto;
+    margin: auto;
+    border-radius: 7px;
+    background-color: white;
+}
+
+.latestpostinfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    width: 30%;
+    float: left;
+    border-right: solid 1px;
+    border-color: rgb(196, 194, 194);
+    margin: 5px;
+}
+
+.latestpostpfp {
+    height: 64px;
+    width: 64px;
+    border: solid 1px #000000;
+    border-radius: 100%;
+    float: right;
+    overflow: hidden;
+    margin: 5px;
+}
+
+.latestpostinfo p {
+    margin: 10px;
+    font-size: 12px;
+}
+
+.latestpostsdetails {
+    margin: 10px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+.latestpostsdetails h4 {
+    padding: 2px;
+    border-bottom: 1px solid;
+}
+
+.latestpostsdetails p {
+    font-size: 12px;
 }

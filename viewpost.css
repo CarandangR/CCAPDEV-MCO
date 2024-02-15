@@ -175,7 +175,12 @@ body
     background-color: rgb(130, 0, 251);
     margin: auto;
     padding: 5px;
+    border-radius: 5px;
     
+}
+.replybutton a:hover {
+    background-color: rgb(101, 4, 137);
+
 }
 
 .replycontainer {
@@ -187,7 +192,6 @@ body
     width: 650px;
     height: auto;
     margin: auto;
-
     border-radius: 7px;
     background-color: white;
 }
