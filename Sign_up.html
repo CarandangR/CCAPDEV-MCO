@@ -4,28 +4,29 @@
 </head>
 <body>
 
-<div class = "webheader">
-    <div class = "headercontent">
-        <span class = "link"> <a style = "color: beige; text-decoration: none" href = "google.com"> byte. </a> </span>
+    <div class = "webheader">
+        <div class = "headercontent">
+            <img class = "logo" src = "logo.png">
+            <span class = "link"> <a style = "color: beige; text-decoration: none" href = "google.com"> byte. </a> </span>
+        </div>
     </div>
-</div>
 
 
 <div class = "signcontainer">
     <div class = "container">
         
         <div class = "header">
-            <span> User Registration </span>
+            <span class ="blocktitle"> User Registration </span>
         </div>
-        
+    <form action = "https://google.com">
         <div class = "Username">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
+            <input type="text" id="username" name="username" required/>
         </div>
 
         <div class = "Password">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
+            <input type="password" id="password" name="password" required/>
         </div>
 
         <div class = "noAccount">
@@ -34,11 +35,9 @@
         </div>
 
         <div class = "submit">
-        <a href = "https://google.com">
-            <button class  = "submitbutton" type = "submit" value = "submit"> Confirm </button>
-        </a>    
-  
+            <button class  = "submitbutton" type = "submit" value = "submit"> <span class ="buttontext">Confirm </span> </button>  
         </div>
+    </form>
     </div>
 </div>
 </body>
