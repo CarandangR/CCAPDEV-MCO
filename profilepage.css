@@ -1,0 +1,206 @@
+:root {
+    font-size:16px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    --border : #A7A7A7
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(45deg,
+  hsl(273deg 41% 21%) 0%,
+  hsl(266deg 28% 30%) 9%,
+  hsl(260deg 20% 38%) 18%,
+  hsl(254deg 15% 47%) 27%,
+  hsl(267deg 14% 55%) 36%,
+  hsl(321deg 17% 63%) 45%,
+  hsl(349deg 26% 74%) 55%,
+  hsl(10deg 39% 83%) 64%,
+  hsl(18deg 50% 87%) 73%,
+  hsl(23deg 61% 90%) 82%,
+  hsl(28deg 76% 92%) 91%,
+  hsl(33deg 100% 94%) 100%
+    );
+    background-attachment: fixed;
+}
+
+
+
+.webheader{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    position: sticky;
+    width: 100%;
+    height: 5%;
+    background-color: #301D3D;
+}
+
+.headercontent{
+    font-size: 20px;
+    color:white;
+    padding: 8px;
+    padding-left: 35px;
+    font-weight: 600;
+}
+
+.logo{
+    margin: 10px;
+    color: beige;
+}
+
+.searchbar
+{
+    background-color: rgba(124, 118, 152,0.5);
+    border-radius: 20px;
+    border: 0;
+    height: 70%;
+}
+
+.searchbar input     
+{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 10px;
+    color: white;
+    font-size: 16px;
+    padding-left: 5px;
+}
+
+.searchbar:hover 
+{
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.topbuttons {
+    display: block;
+    padding-left: 55%;
+    float: right;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+    overflow: clip;
+}
+
+.topbuttons a{
+    text-decoration: none;
+    text-align: center;
+    color: beige;
+    padding: 10px 5px 5px 5px;
+}
+
+.topbuttons a:hover {
+    background-color: rgb(142, 9, 204);
+    color: black;
+}
+
+.mainpage {
+    margin: 10px;
+}
+
+.profilecontainer {
+    display: flex;
+    width: 650px;
+    height: auto;
+    margin: auto;
+    overflow-wrap: normal;
+    border-radius: 8px;
+    background-color: white;
+    flex-direction: row;
+}
+
+.userinfo {
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    width: 30%;
+    float: left;
+    margin: 10px;
+
+}
+
+.userpfp {
+    
+    height: 128px;
+    width: 128px;
+    border: solid 1px #000000;
+    border-radius: 100%;
+    float: right;
+    overflow: hidden;
+}
+
+.userimg {
+    height: 100%;
+    width: 100%;
+}
+
+.editbutton {
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    margin: 10px;
+    text-align: center;
+}
+
+.editbutton a {
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+    display:block;
+    background-color: rgb(130, 0, 251);
+    margin: auto;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.editbutton a:hover {
+    background-color: rgb(101, 4, 137);
+}
+
+.profileinfo {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    border: 1px solid;
+}
+
+.profileinfo h3,h4 {
+    margin: 10px;
+}
+
+.profileinfo h5 {
+    margin: 10px;
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+.profileinfo p {
+    margin: 10px;
+    font-size: 14px;
+
+}
+
+.profiledesc {
+    display: flex;
+    flex-direction: column;
+}
+
+.latestpostscontainer {
+    padding-top: 20px;
+    display: flex;
+    width: 650px;
+    height: auto;
+    margin: auto;
+    overflow-wrap: normal;
+    border-radius: 8px;
+    
+    flex-direction: row;
+}
