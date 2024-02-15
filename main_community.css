@@ -10,7 +10,7 @@ body
 {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow: hidden;
     background-image: linear-gradient(45deg,
   hsl(273deg 41% 21%) 0%,
   hsl(266deg 28% 30%) 9%,
@@ -36,6 +36,7 @@ body
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
 }
 
 .webheader
@@ -45,8 +46,7 @@ body
     justify-content: left;
     position: sticky;
     width: 100%;
-    height: 7%;
-    background-color: #301D3D;
+    background-color: #301d3d;
 }
 
 .headercontent
@@ -57,17 +57,34 @@ body
     font-weight: 600;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    width: 100vw;
+    justify-content: left;
+    width: 100%;
 }
 
 .headerhome
 {
     display: flex;
     align-items: center;
-    padding-left: 5vw;
     height: 100%;
     width: 30%;
+}
+
+.websitelogo
+{ 
+    padding-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 30%;
+}
+
+.websitelogo img
+{
+    height: 30px;
+    width: 50px;
+    object-fit: contain;
+    padding-right: 10px;
 }
 
 .link
@@ -79,7 +96,7 @@ body
 {
     display: flex;
     align-items: center;
-    height: 100%;
+    height: 45px;
     width: 60%;
 }
 
@@ -171,8 +188,7 @@ body
 
 .communityname
 {
-    border: solid;
-    width: 350px;
+    width: 650px;
     height: 100px;
     display: flex;
     flex-direction: row;
@@ -181,33 +197,150 @@ body
 
 .communitydisplaynamecontainer
 {
-    width: 50%;
-    height: 70%;
-    border: solid;
+    padding-left: 10px;
+    width: 250px;
+    height: 40%;
 }   
 
 .communitydisplayname
 {
-
+    font-weight: bold;
+    color: #38204c;
+    display: flex;
+    height: 50%;
 }
 
 .communityhandle
 {
-
+    font-size: 14px;
+    color:  #7c7698;
 }
 
 .commuinitybuttons
 {
-    border: solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110;
+    height: 45px;
+}
+
+.commuinitybuttons button
+{
+    border-radius: 40px;
+    width: 100px;
+    height: 40px;
+    
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 3px;
+    padding: 0 16px;
+    border-radius: 4px;
+    color: #fff;
+    background: #38204c;
+    line-height: 1.15;
+    font-size: 14px;
+    height: 36px;
+    word-spacing: 0px;
+    letter-spacing: .0892857143em;
+    text-decoration: none;
+    text-transform: uppercase;
+    min-width: 64px;
+    border: none;
+    text-align: center;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.commuinitybuttons button:hover
+{
+    background: rgb(98, 0, 238);
+    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+}
+
+.communitystats
+{
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    height: 100%;
+}
+
+.totalmembers
+{
+    height: 100%;
     width: 50%;
-    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.onlinemembers
+{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.totalcounternumber
+{
+    width: 100%;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #301D3D;
+}
+
+.totalcountertext
+{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    height: 30%;
+    color:#38204c;
+    font-size: 12px;
+}
+
+.onlinecounternumber
+{
+    width: 100%;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #301D3D;
+}
+
+.onlinecountertext
+{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    height: 30%;
+    color:#38204c;
+    font-size: 12px;
 }
 
 .createpost
 {
     margin-top: 10px;
     width: 650px;
-    height: 110px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     background-color: #fff2e2;
     border-radius: 8px;
     display: flex;
@@ -257,7 +390,7 @@ body
     border-style: solid;
     border-width: 1px;
     width: 90%;
-    height: 50%;
+    height: 90%;
 }
 
 .posttext input 
@@ -310,9 +443,10 @@ body
 
 .navigation
 {
+    padding-top: 25px;
+    padding-bottom: 25px;
     margin-top: 10px;
     width: 650px;
-    height: 110px;
     background-color: #fff2e2;
     border-radius: 8px;
     display: flex;
@@ -322,11 +456,70 @@ body
 
 .communities
 {
-    border: solid;
     width: 70%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.dropdown 
+{
+    overflow: hidden;
+    width: 90%;
+    display: inline-block;
+}
+
+.dropdown a
+{
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ebd3cb;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown .dropbtn 
+{
+    width: 100%;
+    border-radius: 15px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: #38204c;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn 
+{
+    background-color: rgb(98, 0, 238);
+}
+
+.dropdown-content
+{
+    display: none;
+    position: absolute;
+    background-color: #38204c;
+    width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a:hover 
+{
+    background-color: rgb(98, 0, 238);
+}
+
+.dropdown:hover .dropdown-content 
+{
+    display: flex;
+    flex-direction: column;
+}
 .newposts
 {
     height: 100%;
