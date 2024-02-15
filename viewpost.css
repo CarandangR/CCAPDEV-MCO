@@ -47,6 +47,32 @@ body
     margin: 10px;
     color: beige;
 }
+
+.searchbar
+{
+    background-color: rgba(124, 118, 152,0.5);
+    border-radius: 20px;
+    border: 0;
+    height: 70%;
+}
+
+.searchbar input     
+{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 10px;
+    color: white;
+    font-size: 16px;
+    padding-left: 5px;
+}
+
+.searchbar:hover 
+{
+    background: rgba(255, 255, 255, 0.3);
+}
+
 .topbuttons {
     display: block;
     padding-left: 55%;
@@ -61,7 +87,7 @@ body
 .topbuttons a{
     text-decoration: none;
     text-align: center;
-    color: black;
+    color: beige;
     padding: 10px 5px 5px 5px;
 }
 
@@ -71,12 +97,13 @@ body
 }
 
 .postcontainer {
+  
     display: flex;
-    width: 70%;
+    width: 650px;
     height: auto;
     margin: auto;
 
-    border-radius: 7px;
+    border-radius: 8px;
     background-color: white;
 }
 .mainpage {
@@ -157,7 +184,7 @@ body
 
 .replybox {
     display: flex;
-    width: 70%;
+    width: 650px;
     height: auto;
     margin: auto;
 
