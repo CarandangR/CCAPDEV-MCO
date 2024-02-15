@@ -130,24 +130,22 @@ body
 
 .communitybanner
 {
-    width: 100vh;
+    border-radius: 10px;
+    width: 1280px;
     height: 228px;
-    border: solid;
-}
-
-.communitybanner img
-{
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
+    background: url("./images main/apple_banner.jpg") no-repeat scroll center transparent;
 }
 
 .communityiconinfo
 {
-    width: 100vw;
+    border-radius: 10px;
+    background-color: #ebd3cb;
+    width: 1280px;
     height: 100px;
-    border: solid;
     display: flex;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #301D3D;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -155,9 +153,20 @@ body
 
 .communityicon
 {
-    border: solid;
     width: 72px;
     height: 72px;
+    border-radius: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #301D3D;
+}
+
+.communityicon img
+{
+    object-fit: fill;
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
 }
 
 .communityname
@@ -165,12 +174,32 @@ body
     border: solid;
     width: 350px;
     height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.communitydisplaynamecontainer
+{
+    width: 50%;
+    height: 70%;
+    border: solid;
+}   
+
+.communitydisplayname
+{
+
+}
+
+.communityhandle
+{
+
 }
 
 .commuinitybuttons
 {
     border: solid;
-    width: 200px;
+    width: 50%;
     height: 100px;
 }
 
@@ -195,11 +224,11 @@ body
 
 .createpostusericonholder
 {
-    height: 65%;
+    height: 50px;
     border-style: solid;
     border-color: #301D3D;
     border-width: 1px;
-    width: 50%;
+    width: 50px;
     border-radius: 100%;
 }
 
@@ -246,7 +275,7 @@ body
 .posttext:hover
 {
     border-color: #301D3D;
-    background-color: #7c7698;
+    background-color: #ebd3cb;
 }
 
 .createpostpic
