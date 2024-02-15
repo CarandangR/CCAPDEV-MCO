@@ -102,7 +102,7 @@ body
     width: 650px;
     height: auto;
     margin: auto;
-
+    overflow-wrap: normal;
     border-radius: 8px;
     background-color: white;
 }
