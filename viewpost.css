@@ -45,6 +45,7 @@ body
 
 .logo{
     margin: 10px;
+    color: beige;
 }
 .topbuttons {
     display: block;
@@ -112,17 +113,21 @@ body
 }
 
 .postuserinfo {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
 }
 
 .postinfocontainer {
     width: 100%;
     padding-left: 5px;
+    padding-right: 10px;
 }
 
 .postinfocontainer p {
     font-size: 12px;
+}
+.postinfocontainer h4 {
+    border-bottom: solid 1px;
 }
 
 .replybutton {
@@ -131,6 +136,7 @@ body
     align-items: right;
     padding-top: 10%;
     padding-left: 80%;
+    padding-bottom: 2%;
     
 }
 
@@ -187,6 +193,10 @@ body
 .replycontent {
     width: 90%;
     max-height: 85%;
-    border: solid 1px;
     margin: 5px;
+}
+
+.replycontent p {
+    margin: 10px;
+    font-size: 12px;
 }
