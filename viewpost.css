@@ -125,8 +125,21 @@ body
     margin: 10px;
 }
 
+.postcommunity {
+    font-size: 12px;
+    font-weight: bolder;
+
+}
+.postdate {
+    font-size: 12px;
+}
+
+.postdate p {
+    font-size: 10px;
+    color: rgb(84, 83, 83);
+}
+
 .userinfo {
-    padding-top: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -222,6 +235,7 @@ body
     border-right: solid 1px;
     border-color: rgb(196, 194, 194);
     margin: 5px;
+    overflow-wrap: break-word; 
 }
 .replyinfo p {
     font-size: 10px;
