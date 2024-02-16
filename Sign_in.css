@@ -105,11 +105,12 @@ input[type="text"], [type = "password"] {
 }
 .remember{
     font-size: 13px;
+    margin-bottom: 8px;
 }
 
 .noAccount{
     font-size: 12px;
-    padding-left: 4px;
+    padding-left: 32px;
 }
 .submitbutton{
     font-size: 18px;
@@ -124,6 +125,7 @@ input[type="text"], [type = "password"] {
     border: 0.5px solid #BD8FCB;
     background-color: #BD8FCB;
     font-weight: 1000;
+    margin-left: 7px;
 
 }
 
