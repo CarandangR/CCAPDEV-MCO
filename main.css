@@ -43,10 +43,10 @@ body
 {
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: center;
     position: sticky;
     width: 100%;
-    background-color: #301D3D;
+    background-color: #301d3d;
 }
 
 .headercontent
@@ -65,9 +65,26 @@ body
 {
     display: flex;
     align-items: center;
-    padding-left: 5vw;
-    height: 45px;
+    height: 100%;
     width: 30%;
+}
+
+.websitelogo
+{ 
+    padding-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 30%;
+}
+
+.websitelogo img
+{
+    height: 30px;
+    width: 50px;
+    object-fit: contain;
+    padding-right: 10px;
 }
 
 .link
@@ -79,7 +96,7 @@ body
 {
     display: flex;
     align-items: center;
-    height: 100%;
+    height: 45px;
     width: 60%;
 }
 
@@ -115,17 +132,69 @@ body
 {
     padding-top: 0px;
     margin: 0;
-    padding-left: 10px;
     height: 100%;
     width: 30%;
     display: flex;
     flex-direction: row;
+    justify-content: right;
+    padding-right: 4vw;
 }
 
 .profile
 {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
     height: 100%;
     width: 70%;
+}
+
+.profileicon
+{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-right: 4px;
+}
+
+.profileiconholder
+{
+    border-width: 1px;
+    border-color: #ebd3cb;
+    border-style: solid;
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+}
+
+.profileiconholder img 
+{
+    border-radius: 100%;
+    width: 100%;
+}
+
+.profilehandlecontainer
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: right;
+    width: 70%;
+    height: 100%;
+}
+
+.profiledisplayname
+{
+    color:#ebd3cb;
+    font-size: 12px;
+}
+
+.profilehandlename
+{
+    color:#ebd3cb;
+    font-size: 8px;
 }
 
 .createpost
@@ -160,8 +229,8 @@ body
 
 .createpostusericonholder img
 {
-    border-radius: 100%;
     width: 100%;
+    border-radius: 100%;
 }
 
 .createposttext
@@ -236,10 +305,10 @@ body
 
 .navigation
 {
+    padding-top: 15px;
+    padding-bottom: 15px;
     margin-top: 10px;
     width: 650px;
-    padding-top: 25px;
-    padding-bottom: 25px;
     background-color: #fff2e2;
     border-radius: 8px;
     display: flex;
@@ -249,11 +318,70 @@ body
 
 .communities
 {
-    border: solid;
     width: 70%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.dropdown 
+{
+    overflow: hidden;
+    width: 90%;
+    display: inline-block;
+}
+
+.dropdown a
+{
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ebd3cb;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown .dropbtn 
+{
+    width: 100%;
+    border-radius: 15px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: #38204c;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn 
+{
+    background-color: rgb(98, 0, 238);
+}
+
+.dropdown-content
+{
+    display: none;
+    position: absolute;
+    background-color: #38204c;
+    width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a:hover 
+{
+    background-color: rgb(98, 0, 238);
+}
+
+.dropdown:hover .dropdown-content 
+{
+    display: flex;
+    flex-direction: column;
+}
 .newposts
 {
     height: 100%;

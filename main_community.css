@@ -43,7 +43,7 @@ body
 {
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: center;
     position: sticky;
     width: 100%;
     background-color: #301d3d;
@@ -57,7 +57,7 @@ body
     font-weight: 600;
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: center;
     width: 100%;
 }
 
@@ -132,17 +132,69 @@ body
 {
     padding-top: 0px;
     margin: 0;
-    padding-left: 10px;
     height: 100%;
     width: 30%;
     display: flex;
     flex-direction: row;
+    justify-content: right;
+    padding-right: 4vw;
 }
 
 .profile
 {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
     height: 100%;
     width: 70%;
+}
+
+.profileicon
+{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-right: 4px;
+}
+
+.profileiconholder
+{
+    border-width: 1px;
+    border-color: #ebd3cb;
+    border-style: solid;
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+}
+
+.profileiconholder img 
+{
+    border-radius: 100%;
+    width: 100%;
+}
+
+.profilehandlecontainer
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: right;
+    width: 70%;
+    height: 100%;
+}
+
+.profiledisplayname
+{
+    color:#ebd3cb;
+    font-size: 12px;
+}
+
+.profilehandlename
+{
+    color:#ebd3cb;
+    font-size: 8px;
 }
 
 .communitybanner
@@ -367,6 +419,12 @@ body
 
 .createpostusericonholder img
 {
+    width: 100%;
+    border-radius: 100%;
+}
+
+.createpostusericonholder img
+{
     border-radius: 100%;
     width: 100%;
 }
@@ -443,8 +501,8 @@ body
 
 .navigation
 {
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     margin-top: 10px;
     width: 650px;
     background-color: #fff2e2;
