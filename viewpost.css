@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root {
     font-size:16px;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Roboto", sans-serif;
     --border : #A7A7A7
 }
 
@@ -25,6 +27,18 @@ body
     background-attachment: fixed;
 }
 
+.homecontainer
+{
+    padding: 0;
+    margin:0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
 .webheader{
     display: flex;
     flex-direction: row;
@@ -44,28 +58,63 @@ body
     padding: 8px;
     padding-left: 35px;
     font-weight: 600;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.headerhome
+{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 30%;
 }
 
 .logo{
-   
+    padding-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 30%;
+}
+.logo img {
     height: 30px;
-    width: 55px;
-    float:left;
-    max-width: 100%;
-    max-height:100%;
+    width: 50px;
+    object-fit: contain;
+    padding-right: 10px;
 }
 
-.link{
+.link
+{
+    font-size: 26px;
+}
+
+.linkz{
     padding-top: 13px;
     float: right;
+}
+
+.headersearchbar
+{
+    display: flex;
+    align-items: center;
+    height: 45px;
+    width: 60%;
 }
 
 .searchbar
 {
     background-color: rgba(124, 118, 152,0.5);
+    width: 100%;
+    height: 80%;
     border-radius: 20px;
+    display: flex;
+    align-items: center;
     border: 0;
-    height: 70%;
+    padding-left: 10px;
 }
 
 .searchbar input     
@@ -79,33 +128,107 @@ body
     font-size: 16px;
     padding-left: 5px;
 }
-
 .searchbar:hover 
 {
     background: rgba(255, 255, 255, 0.3);
 }
 
+.headerprofile
+{
+    padding-top: 0px;
+    margin: 0;
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    padding-right: 4vw;
+}
+
+.profile
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    height: 100%;
+    width: 70%;
+}
+.profile a {
+    text-decoration: none;
+    color: #ebd3cb;
+}
+.profileicon
+{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-right: 4px;
+    border: 1px
+}
+
+.profileiconholder
+{
+    border-width: 1px;
+    border-color: #ebd3cb;
+    border-style: solid;
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+}
+
+.profileiconholder img 
+{
+    border-radius: 100%;
+    width: 100%;
+}
+
+.profilehandlecontainer
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: right;
+    width: 70%;
+    height: 100%;
+}
+
+.profiledisplayname
+{
+    color:#ebd3cb;
+    font-size: 12px;
+}
+
+.profilehandlename
+{
+    color:#ebd3cb;
+    font-size: 8px;
+}
 .topbuttons {
-    display: block;
-    padding-left: 55%;
+    display: flex;
     float: right;
     margin-top: 5px;
     margin-bottom: 5px;
     margin-left: 15px;
     margin-right: 15px;
+    font-size: 16px;
+    flex-direction: row;
+    background: transparent;
+    border-radius: 10px;
 }
 
 .topbuttons a{
     text-decoration: none;
     text-align: center;
     color: beige;
-    padding: 5px 5px 5px 5px;
-    background-color: #BD8FCB;
+    padding: 5px;
+    /*background-color: #BD8FCB;*/
 }
 
 .topbuttons a:hover {
-    background-color: rgb(142, 9, 204);
-    color: black;
+    background-color: #7903a1c8;
+    border-radius: 10px;
 }
 
 .topbuttons a:active {
@@ -148,8 +271,13 @@ body
     width: 35%;
     float: left;
     border-right: solid 1px;
-    border-color: rgb(196, 194, 194);
+    border-color: grey;
     margin: 10px;
+}
+
+.userhandle {
+    color: grey;
+    font-size: 10px;
 }
 
 .userpfp {
@@ -233,7 +361,7 @@ body
     width: 15%;
     float: left;
     border-right: solid 1px;
-    border-color: rgb(196, 194, 194);
+    border-color: grey;
     margin: 5px;
     overflow-wrap: break-word; 
 }
@@ -250,6 +378,9 @@ body
     margin: 5px;
 }
 
+.replypfp span {
+    font-size: 8px;
+}
 .replycontent {
     width: 90%;
     max-height: 85%;
