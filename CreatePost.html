@@ -4,27 +4,37 @@
 </head>
 
 <body>
-    <div class = "headercontainer">
-        <div class = "webheader">
-            <div class = "headercontent">
-                <a href ="https://google.com"><img class = "logo" src = "./images main/byte_logo.png"></a>
-                <span class = "link"> <a style = "color: beige; text-decoration: none" href = "google.com"> byte. </a> </span>
+    <div class = "webheader">
+        <div class = "headercontent">
+            <div class="headerhome">
+                <div class="websitelogo">
+                    <a href="./main.html"><img src="./images main/byte_logo.png"/></a>
+                    <span class = "link"> <a style = "color: beige; text-decoration: none" href = "./main.html"> byte. </a> </span>
+                </div>
             </div>
-        
-        <div class="headerprofile">
-            <div class="profile">
-                <div class="profileicon">
-                    <div class="profileiconholder">
-                        <img src="pfp.jpg"/>
+            <div class="headersearchbar">
+                <input type="search" class="searchbar" placeholder="Search byte"/>
+            </div>
+            <div class="headerprofile">
+                <div class="profile">
+                    <div class="profileicon">
+                        <div class="profileiconholder">
+                            <a href="./profilepage2.html">
+                            <img src="./images main/pfp.jpg"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="profilecontainer">
+                        <div class="profiledisplayname">
+                            <span>gojowithiphone</span>
+                        </div>
+                        <div class="profilehandlename">
+                            <span>u/gojo1234</span>
+                        </div>
                     </div>
                 </div>
-                <div class="profilecontainer">
-                    <div class="profiledisplayname">
-                        <span>gojowithiphone</span>
-                    </div>
-                    <div class="profilehandlename">
-                        <span>u/gojo1234</span>
-                    </div>
+                <div class="topbuttons">
+                    <a href="./main_not_logged.html"> Log out </a>
                 </div>
             </div>
         </div>
@@ -34,7 +44,7 @@
         <div class = "container">
           
             <div class = "inputs">
-                <form action = "https://google.com">
+                <form action = "./main.html">
                 <div class = "posttitle">
                     <input type="text" id="title" name="title" placeholder="Input Title" required/>
                 </div>
@@ -50,19 +60,19 @@
                     </button>
                 </div>
                 <div class = "contentarea">
-                    <textarea class ="content" rows = "19"> </textarea>
+                    <textarea class ="content" rows = "30"> </textarea>
                 </div>
             </div>
             <div class = "buttons">
                 <div class = "post">
-                    <a href = "https://google.com">
+                    <a href = "./main.html">
                         <button class  = "submitbutton" type = "post" value = "post"> <span class ="buttontext">Post</span> </button>
                     </a>
        
                 </div>
             </form> 
                 <div class = "cancel">
-                    <a href = "https://google.com">
+                    <a href = "./main.html">
                         <button class  = "submitbutton" type = "cancel" value = "cancel"> <span class ="buttontext">Cancel</span> </button>
                     </a>    
                 </div>
