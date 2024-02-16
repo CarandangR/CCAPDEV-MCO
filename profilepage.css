@@ -1,6 +1,9 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root {
     font-size:16px;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Roboto", sans-serif;
     --border : #A7A7A7
 }
 
@@ -25,7 +28,17 @@ body
     background-attachment: fixed;
 }
 
-
+.homecontainer
+{
+    padding: 0;
+    margin:0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
 
 .webheader{
     display: flex;
@@ -39,14 +52,101 @@ body
     background: rgb(48,29,61);
     background: linear-gradient(90deg, rgba(48,29,61,1) 0%, rgba(65,37,84,1) 35%, rgba(66,33,88,1) 63%, rgba(79,37,108,1) 100%);
 }
-
 .headercontent{
     font-size: 20px;
     color:white;
     padding: 8px;
     padding-left: 35px;
     font-weight: 600;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 }
+.headerhome
+{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 30%;
+}
+
+.logo{
+    padding-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 30%;
+}
+.logo img {
+    height: 30px;
+    width: 50px;
+    object-fit: contain;
+    padding-right: 10px;
+}
+
+.link
+{
+    font-size: 26px;
+}
+
+.linkz{
+    padding-top: 13px;
+    float: right;
+}
+
+.headersearchbar
+{
+    display: flex;
+    align-items: center;
+    height: 45px;
+    width: 60%;
+}
+
+.searchbar
+{
+    background-color: rgba(124, 118, 152,0.5);
+    width: 100%;
+    height: 80%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    border: 0;
+    padding-left: 10px;
+}
+
+.searchbar input     
+{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 10px;
+    color: white;
+    font-size: 16px;
+    padding-left: 5px;
+}
+.searchbar:hover 
+{
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.headerprofile
+{
+    padding-top: 0px;
+    margin: 0;
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    padding-right: 4vw;
+}
+
+
+
 
 .logo{
    
@@ -55,11 +155,6 @@ body
     float:left;
     max-width: 100%;
     max-height:100%;
-}
-
-.link{
-    padding-top: 13px;
-    float: right;
 }
 
 .searchbar
@@ -87,17 +182,6 @@ body
     background: rgba(255, 255, 255, 0.3);
 }
 
-.topbuttons {
-    display: block;
-    padding-left: 55%;
-    float: right;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 15px;
-    margin-right: 15px;
-    overflow: clip;
-}
-
 .topbuttons a{
     text-decoration: none;
     text-align: center;
@@ -115,6 +199,96 @@ body
 
 .mainpage {
     margin: 10px;
+}
+
+.profile
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    height: 100%;
+    width: 70%;
+}
+.profile a {
+    text-decoration: none;
+    color: #ebd3cb;
+}
+.profileicon
+{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-right: 4px;
+    border: 1px
+}
+
+.profileiconholder
+{
+    border-width: 1px;
+    border-color: #ebd3cb;
+    border-style: solid;
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+}
+
+.profileiconholder img 
+{
+    border-radius: 100%;
+    width: 100%;
+}
+
+.profilehandlecontainer
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: right;
+    width: 70%;
+    height: 100%;
+}
+
+.profiledisplayname
+{
+    color:#ebd3cb;
+    font-size: 12px;
+}
+
+.profilehandlename
+{
+    color:#ebd3cb;
+    font-size: 8px;
+}
+.topbuttons {
+    display: flex;
+    float: right;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 16px;
+    flex-direction: row;
+    background: transparent;
+    border-radius: 10px;
+}
+
+.topbuttons a{
+    text-decoration: none;
+    text-align: center;
+    color: beige;
+    padding: 5px;
+    /*background-color: #BD8FCB;*/
+}
+
+.topbuttons a:hover {
+    background-color: #7903a1c8;
+    border-radius: 10px;
+}
+
+.topbuttons a:active {
+    background-color:rgb(166, 9, 223)
 }
 
 .profilecontainer {
@@ -204,6 +378,12 @@ body
 
 }
 
+.profileinfo span {
+    color: grey;
+    padding-left: 12px;
+    font-size: 12px;
+}
+
 .profiledesc {
     display: flex;
     flex-direction: column;
@@ -225,10 +405,11 @@ body
     display: flex;
     flex-direction: row;
     width: 650px;   
-    height: auto;
+    height: 100px;
     margin: auto;
     border-radius: 7px;
     background: rgba(255, 242, 226, 0.5);
+    overflow: hidden;
 }
 
 .latestpostinfo {
@@ -242,6 +423,11 @@ body
     border-right: solid 1px;
     border-color: rgb(196, 194, 194);
     margin: 5px;
+}
+
+.latestpostinfo span {
+    font-size: 10px;
+    color: grey;
 }
 
 .latestpostpfp {
@@ -273,6 +459,7 @@ body
 
 .latestpostsdetails p {
     font-size: 12px;
+    overflow:hidden
 }
 
 .latestpostsdetails a {
