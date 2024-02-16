@@ -275,6 +275,10 @@ body
     margin: 10px;
 }
 
+.userinfo span {
+    color: grey;
+    font-size: 10px;
+}
 .userhandle {
     color: grey;
     font-size: 10px;
@@ -367,6 +371,11 @@ body
 }
 .replyinfo p {
     font-size: 10px;
+}
+
+.replyinfo span {
+    color:grey;
+    padding: 5px;
 }
 .replypfp {
     height: 54px;
