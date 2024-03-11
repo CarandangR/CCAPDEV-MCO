@@ -2,10 +2,13 @@
   "name": "ccapdev-mco",
   "version": "1.0.0",
   "description": "Package for CCAPDEV MCO",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
     "test": "test"
   },
   "author": "Carandang, Nunez, Tan",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
 }
