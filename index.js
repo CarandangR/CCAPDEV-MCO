@@ -8,12 +8,15 @@ app.use(express.static("./"));
 app.engine("hbs", exphbs.engine({extname: 'hbs'}));
 app.set("view engine", "hbs");
 
-const usersData = [{
-    username: "gojowithiphone",
+const userData = {
+    username: "gojowithiphone@gmail.com",
     password: "crazyapple",
     bits: "1000"
 
-}];
+};
+
+let usersData = [];
+usersData.push(userData);
 app.get("/", function (req, res) {
     //res.sendFile(__dirname + "/views/main.html"); unknown thing i dont know
     res.redirect('/mainpage');
@@ -55,15 +58,44 @@ app.get('/Sign_up', function (req, res) {
     res.render("signup.hbs");
 });
 
-app.post('/submit', (req,res) => { 
-    const newUser ={
-        username: req.body.username,
-        password: req.body.password,
-        bits: "0"
-    };
+app.get('/Sign_in', function (req, res) {
+    res.render("signin.hbs");
+});
+
+app.post('/submitsignup', (req,res) => { 
+    let newusername = req.body.username;
+    let newpassword = req.body.password;
+    let confirmpass = req.body.confirmpass;
+    
+    if (newpassword == confirmpass){
+        const newUser ={
+            username: newusername,
+            password: newpassword,
+            bits: "0"
+        };
     usersData.push(newUser);
     console.log(usersData);
     res.redirect('/mainpage')
+}
+})
+
+app.post('/submitsignin', (req,res) => { 
+    
+    let username = req.body.username
+    let password = req.body.password
+    console.log(usersData.length);
+    console.log(usersData[0].username);
+    for (let i = 0; i < usersData.length; i++){
+        if (usersData[i].username == username){
+            for (let j = 0; j < usersData.length; j++){
+                if (usersData[j].password == password){
+                    res.redirect('/mainpage')
+                } 
+            }
+        }
+    }
+    
+    
 })
 
 app.listen(3000, function () {
