@@ -2,20 +2,24 @@ const express = require("express");
 const exphbs = require('express-handlebars');
 const port = 3000;
 const app = express();
-
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./"));
-
 app.engine("hbs", exphbs.engine({extname: 'hbs'}));
 app.set("view engine", "hbs");
 
+const usersData = [{
+    username: "gojowithiphone",
+    password: "crazyapple",
+    bits: "1000"
 
-
+}];
 app.get("/", function (req, res) {
     //res.sendFile(__dirname + "/views/main.html"); unknown thing i dont know
-    res.redirect('/home');
+    res.redirect('/mainpage');
 });
 
-app.get('/home', (req, res) => {
+app.get('/mainpage', (req, res) => {
     res.render("mainpage.hbs", {Title: "first sample post"});
 });
 
@@ -46,6 +50,22 @@ app.get('/samplepost2', (req, res) => {
     res.render("samplepost2", {Title: "first sample post"});
 });
 
-app.listen(port, function () {
+
+app.get('/Sign_up', function (req, res) {
+    res.render("signup.hbs");
+});
+
+app.post('/submit', (req,res) => { 
+    const newUser ={
+        username: req.body.username,
+        password: req.body.password,
+        bits: "0"
+    };
+    usersData.push(newUser);
+    console.log(usersData);
+    res.redirect('/mainpage')
+})
+
+app.listen(3000, function () {
     console.log("Server is running on localhost 3000");
 });
