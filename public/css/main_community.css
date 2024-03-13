@@ -227,7 +227,7 @@ body
     border-radius: 10px;
     width: 1280px;
     min-height: 228px;
-    background-image: url("./images main/apple_banner.jpg");
+    background-image: url("/public/img/apple_banner.jpg");
     background-position: 50% 50%;
 }
 
