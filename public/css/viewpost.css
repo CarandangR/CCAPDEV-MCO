@@ -228,7 +228,8 @@ body
     height: auto;
     margin: auto;
     overflow-wrap: normal;
-    border-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     background-color: rgba(255, 242, 226, 0.5);
 }
 .mainpage {
@@ -292,9 +293,12 @@ body
 }
 
 .postinfocontainer {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     padding-left: 5px;
     padding-right: 10px;
+    position: relative;
 }
 
 .postinfocontainer p {
@@ -304,13 +308,88 @@ body
     border-bottom: solid 1px;
 }
 
+.footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;   
+    display:flex; 
+    flex-direction: flex-end;
+    padding-right: 20px;
+}
+/* added */
+.postfooter
+{
+    background-color: rgba(255, 242, 226, 0.5);
+    height: 30px;
+    width: 650px;
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    justify-content: left;
+}
+
+.upbit
+{
+    width: 24px;
+    height: 24px;
+}
+
+.upbit img
+{
+    border-radius: 4px;
+    width: 100%;
+}
+
+.upbit img:hover
+{
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.downbit
+{
+    width: 24px;
+    height: 24px;
+}
+
+.downbit img
+{
+    border-radius: 4px;
+    width: 100%;
+}
+
+.downbit img:hover
+{
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.share
+{
+    width: 24px;
+    height: 24px;
+}
+
+.share img
+{
+    border-radius: 4px;
+    width: 100%;
+}
+
+.share img:hover
+{
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+/* up to here */
+
+
+
 .replybutton {
     display: flex;
     flex-direction: column;
     align-items: right;
-    padding-top: 10%;
+    padding-top: 5px;
     padding-left: 80%;
     padding-bottom: 2%;
+    height: auto;
     
 }
 
@@ -327,14 +406,43 @@ body
 }
 .replybutton a:hover {
     background-color: #7A03A1;
+}
 
+.replyinputarea {
+    width: 650px;
+    justify-content: center;
+    align-items: center;
+    height: 90px;
+    margin: auto;
+    overflow-wrap: break-word;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: rgba(255, 242, 226, 0.5);
+}
+
+.replyinputbox {
+    justify-content: center;
+    padding: 15px;
+    height: auto;
+    width: auto;
+}
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #FFFBF4;
 }
 
 .replycontainer {
     padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .replybox {
+    margin: 10px;
     display: flex;
     width: 650px;
     height: auto;
