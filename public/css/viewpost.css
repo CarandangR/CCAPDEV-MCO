@@ -448,6 +448,9 @@ input[type="text"] {
     border-radius: 7px;
     background-color: rgba(255, 242, 226, 0.5);
 }
+.replybox:not(:last-child) {
+    margin-bottom: 20px; /* Add margin-bottom for all reply boxes except the last one */
+}
 
 .replyinfo {
     display: flex;

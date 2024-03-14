@@ -2,7 +2,8 @@
 <html>
 <head>
     <title> {{Title}} </title>
-    <link rel="stylesheet" type="text/css" href="/public/css/viewpost.css" />
+    <link rel="stylesheet" type="text/css" href="../public/css/viewpost.css" />
+    <script src="../public/js/posts.js" defer></script>
 </head>
 
 <body>
@@ -11,7 +12,7 @@
             <div class = "headercontent">
                 <div class="headerhome">
                     <div class="websitelogo">
-                        <a href="./main.html"><img src="/public/img/byte_logo.png"/></a>
+                        <a href="./main.html"><img src="../public/img/byte_logo.png"/></a>
                         <span class = "link"> <a style = "color: beige; text-decoration: none" href = "./main.html"> byte. </a> </span>
                     </div>
                 </div>
@@ -22,17 +23,17 @@
                     <div class="profile">
                         <div class="profileicon">
                             <div class="profileiconholder">
-                                <a href="./profilepage2.html">
-                                <img src="/public/img/pfp.jpg"/>
+                                <a href="{{CurrUserProfileLink}}">
+                                <img src="{{UserProfileImgDir}}"/>
                                 </a>
                             </div>
                         </div>
                         <div class="profilecontainer">
                             <div class="profiledisplayname">
-                                <span>{{nick}}</span>
+                                <span>{{CurrUserDisplayName}}</span>
                             </div>
                             <div class="profilehandlename">
-                                <span>{{userhandle}}</span>
+                                <span>{{CurrUserHandle}}</span>
                             </div>
                         </div>
                     </div>
@@ -49,14 +50,14 @@
                         <h5> {{community}} </h5>
                     </div>
                     <div class ="userpfp">
-                        <a href="./profilepage1.html"> <img class="userimg" src="/public/img/AYAKA.jpg"> </a>
+                        <a href="{{PosterProfileLink}}"> <img class="userimg" src="{{PosterPfpDir}}"> </a>
                     </div>
                 <div class="postuserinfo"> 
                     <p> {{PosterName}} <br><span>{{PosterHandle}}</span><br> Bits: {{PosterBits}}</p>
                 </div>
                 <div class="postdate"> 
                     <h5> Posted on: {{DateString}}</h5>
-                    <p> {{DateDistance}} ago </p>
+                    <p> {{DateDistance}} </p>
                 </div>
             </div>
             <div class="postinfocontainer">
@@ -70,12 +71,12 @@
             <div class="replybox">
                 <div class = "replyinfo"> 
                     <div class="replypfp"> 
-                        <a href="./profilepage2.html"> <img class="userimg" src="/public/img/pfp.jpg"> </a>
+                        <a href="{{ReplierProfileLink}}"> <img class="userimg" src="{{ReplierPfpDir}}"> </a>
                     </div>
-                    <p> {{ReplyUsername}} <br><span> {{ReplyHandle}} </span><br> Bits: {{ReplyBits}}</p>
+                    <p> {{ReplierUsername}} <br><span> {{ReplierHandle}} </span><br> Bits: {{ReplierBits}}</p>
                     <div class="postdate"> 
                         <h5> Posted on: {{ReplyDate}} </h5>
-                        <p> {{ReplyDateDistance}} ago </p>
+                        <p> {{ReplyDateDistance}} </p>
                     </div>
                 </div>
                 

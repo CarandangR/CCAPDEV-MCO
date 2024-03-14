@@ -42,12 +42,14 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     
     function displayReplies(replies) { 
-        document.querySelector("div.replycontainer").innerText = "";
+
         const currDate = new Date();
         const day = currDate.getDate();
         const month = currDate.getMonth();
         const year = currDate.getFullYear();
         const formattedDate = monthNames[month] + " " + day + ", " + year;
+        document.querySelector(".replycontainer").innerText = "";
+
 
         for(i = 0; i < replies.length; i++) {
             const currentReply = "<div class='replybox'>" +
@@ -62,14 +64,24 @@ document.addEventListener("DOMContentLoaded", function() {
                                         "</div>" +
                                     "</div>" +
                                     "<div class='replycontent'>" +
-                                        "<p>"+ replies[i].replycontent +"<br> </p>" +
-                                        "<div class='replybutton'> <a href=''> Reply </a></div>" +
+                                    "<p>"+ replies[i].replycontent +"<br> </p>" +
+                                    "<div class='footer'>" +
+                                        "<div class='upbit'>" +
+                                            "<img src='../public/img/up-arrow-regular-24.png'/>" +
+                                        "</div>" +
+                                        "<div class='downbit'>" +
+                                            "<img src='../public/img/down-arrow-regular-24.png'/>" +
+                                        "</div>" +
+                                        "<div class='share'>" +
+                                            "<img src='../public/img/share-regular-24.png'/>" +
+                                        "</div>" +
+                                        "<div class='replybutton'><a href=''> Reply </a></div>" +
                                     "</div>" +
-                                "</div>"
-
+                                "</div>" +
+                            "</div>";
             document.querySelector("div.replycontainer").innerHTML += currentReply;
         }
-    }
+    };
     function toggleImage(imgElement, originalSrc, clickedSrc) {
         if (imgElement.getAttribute('src').includes(clickedSrc)) {
             imgElement.setAttribute('src', originalSrc);
