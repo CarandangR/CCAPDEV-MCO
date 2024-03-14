@@ -11,14 +11,14 @@
             <span>·</span>
             <span>Posted by</span>
             <span class="postedby"><a href="{{userhandlelink}}">{{userhandle}}</a></span>
-            <span class="postdate">{{dateofpost}}</span>
+            <span class="postdate">{{relativeTime dateofpost}}</span>
         </div>
     </div>
     <div class="posttitleheader">
         <span><h3><a href="{{linkofpost}}">{{postheader}}</a></h3></span>
     </div>
     <div class="posttextcontent">
-        <span>{{postcontent}}</span>
+        <span>{{postcontent}}</span> 
     </div>
     <div class="postpicturecontent">
         {{#if postpicturecontent}}
@@ -29,9 +29,11 @@
     </div>
     <div class="postfooter">
         <div class="upbit">
+            <span>{{shortenVotes upvotes}}</span>
             <img src="/public/img/up-arrow-regular-24.png"/>
         </div>
         <div class="downbit">
+            <span>{{shortenVotes downvotes}}</span>
             <img src="/public/img/down-arrow-regular-24.png"/>
         </div>
         <div class="comment">

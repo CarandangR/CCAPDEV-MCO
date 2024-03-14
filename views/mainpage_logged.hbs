@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/public/css/main.css"/>
+<html>
+    <title>
+        Byte | Home 
+    </title>
+    <body>
+        <div class="homecontainer">
+            <div class = "webheader">
+                <div class = "headercontent">
+                    <div class="headerhome">
+                        <div class="websitelogo">
+                            <a href="/main.html"><img src="/public/img/byte_logo.png"/></a>
+                            <span class = "link"> <a style = "color: beige; text-decoration: none" href = "/main.html"> byte. </a> </span>
+                        </div>
+                    </div>
+                    <div class="headersearchbar">
+                        <input type="search" class="searchbar" placeholder="Search byte"/>
+                    </div>
+                    <div class="headerprofile">
+                        <div class="profile">
+                            <div class="profileicon">
+                                <div class="profileiconholder">
+                                    <a href="/profilepage2.html">
+                                    <img src="/public/img/pfp.jpg"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="profilecontainer">
+                                <div class="profiledisplayname">
+                                    <span>gojowithiphone</span>
+                                </div>
+                                <div class="profilehandlename">
+                                    <span>u/gojo1234</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="topbuttons">
+                            <a href="/main_not_logged.html"> Log out </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="createpost">
+                <div class="createposticon">
+                    <div class="createpostusericonholder">
+                        <img src="/public/img/pfp.jpg"/>
+                    </div>
+                </div>
+                <div class="createposttext">
+                    <input type="search" class="posttext" placeholder="Create Post" onclick="redirectToAnotherPage()"/>
+                </div>
+                <div class="createpostpic">
+                    <a href="/CreatePost.html">
+                    <img src="/public/img/image-alt-regular-24.png"/>
+                    </a>
+                </div>
+                <div class="createpostattach">
+                    <a href="/CreatePost.html">
+                    <img src="/public/img/folder-plus-regular-24.png"/>
+                    </a>
+                </div>
+            </div>
+            <div class="navigation">
+                <div class="communities">
+                    <div class="dropdown">
+                        <button class="dropbtn">Communities
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="/main_community.html">r/apple</a>
+                          <a href="#">Link 2</a>
+                          <a href="#">Link 3</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="newposts">
+                    <a href="/main.html">
+                    <img src="/public/img/badge-regular-24.png">
+                    </a>
+                </div>
+                <div class="hotposts">
+                    <a href="/main.html">
+                    <img src="/public/img/hot-solid-24.png">
+                    </a>
+                </div>
+            </div>
+            {{#each posts}}
+                {{> postview this}}
+            {{/each}}
+        </div>
+    </body>
+</html>

@@ -582,7 +582,7 @@ body
 
 .upbit
 {
-    width: 24px;
+    display: flex;
     height: 24px;
 }
 
@@ -599,7 +599,7 @@ body
 
 .downbit
 {
-    width: 24px;
+    display: flex;
     height: 24px;
 }
 

@@ -6,6 +6,7 @@ const crypto = require ('crypto');
 const port = 3000;
 const app = express();
 const bodyParser = require('body-parser');
+const moment = require('moment')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/public", express.static(__dirname + '/public'));
@@ -15,36 +16,76 @@ app.engine("hbs", exphbs.engine(
         defaultLayout: 'main', 
         layoutsDir: path.join(__dirname, 'views'),
         partialsDir  : [
-        //  path to your partials
             path.join(__dirname, 'views/templates'),
-        ]
+        ],
+
+        helpers: {
+            shortenVotes: (vote) => {
+                if (vote < 1000) {
+                    return vote;
+                }
+                return Math.round((vote / 1000) * 10) / 10 + 'K';
+            },
+    
+            relativeTime: (date) => {
+                const diff = moment().diff(date);
+                
+                return moment.duration(diff).humanize() + " ago";
+            }
+        }
     }
 ));
 app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "hbs");
 
-const post = {
-    poster: "gojowithiphone",
-    title: "Example",
-    content: "test",
-    date: "February 1",
-    replies: [{
-        poster: "sukuna",
-        replycontent: "test2",
-        date: "March 14"
-    }]
-};
 
-const userData = {
-    username: "gojowithiphone@gmail.com",
-    password: "crazyapple",
-    bits: "1000"
-};
+//Objects for Each data
 
-let replies = [1,2,3]
+const post = function(postId, communityicon,community, communitylink, userhandlelink,
+                        userhandle, username, dateofpost, linkofpost, postheader,
+                        postcontent, postpicturecontent, upvotes, downvotes, numberofreplies){
+    
+    this.postId = postId;
+    this.communityicon = communityicon;
+    this.community = community;
+    this.communitylink = communitylink;
+    this.userhandlelink = userhandlelink;
+    this.userhandle = userhandle;
+    this.username = username;
+    this.dateofpost = dateofpost;
+    this.linkofpost = linkofpost;
+    this.postheader = postheader;
+    this.postcontent = postcontent;
+    this.postpicturecontent = postpicturecontent;
+    this.upvotes = upvotes;
+    this.downvotes = downvotes;
+    this.numberofreplies = numberofreplies;            
+}
 
+const users = function(username, userhandle, password, bits, aboutme){
+
+    this.username = username;
+    this.userhandle = userhandle;
+    this.password = password;
+    this.bits = bits;
+    this.aboutme = aboutme;
+}
+
+const reply = function(userdeets, replycontent, replydate){
+
+    this.postId = postId;
+    this.userdeets = userdeets;
+    this.replycontent = replycontent;
+    this.replydate = replydate;
+}
+
+let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "infinite", "Nah, I'd win.");
+let repliesData = [1,2,3]
+let postsData = [];
+let usersData = [];
 let Posts = [
     {
+        postId: 1111,
         communityicon: "../public/img/apple_logo.jpg",
         community: "b/apple",
         communitylink: "/main_community",
@@ -56,11 +97,13 @@ let Posts = [
         postheader: "Apple just dropped the new iPhone 16!!!",
         postcontent: "it good :D",
         postpicturecontent: "../public/img/gojowithiphone1.png",
-        numberofreplies: replies.length + "replies"
-    }
+        upvotes: 4447,
+        downvotes: 0,
+        numberofreplies: replies.length + " replies"
+    },
+    
 ];
 
-let usersData = [];
 usersData.push(userData);
 app.get("/", function (req, res) {
     res.redirect('/mainpage');
@@ -74,30 +117,6 @@ app.get('/mainpage', (req, res) => {
 app.get('/Create_post', function (req, res) {
     res.render("CreatePost.hbs");
 });
-
-app.get('/samplepost1', (req, res) => {
-    res.render("samplepost1", {
-        Title: "first sample post", 
-        nick: "gojowithiphone", 
-        userhandle: "u/gojo1234",
-        community: "b/WebDevelopment",
-        PosterName: "Wala_3h",
-        PosterHandle: "u/WalaEh",
-        PosterBits: 1,
-        DateString: "February 8, 2024",
-        DateDistance: "8 days",
-        PostTitle: "MDN is very convenient",
-        PostContent: "It really helped us in creating this website! It gave a fast and easy way to access information to different elements. ^_^",
-        ReplyUsername: "gojowithiphone",
-        ReplyHandle: "u/gojo1234",
-        ReplyBits: 999999,
-        ReplyDate: "February 9, 2024",
-        ReplyDateDistance: "7 days",
-        ReplyContent: "really"
-        //i highly doubt it'll be like this, just for testing though
-    });
-});
-
 app.get('/samplepost2', (req, res) => {
     res.render("samplepost2", {Title: "first sample post"});
 });
@@ -204,8 +223,6 @@ app.post('/submitsignin', (req,res) => {
     
     
 })
-
-
 
 app.listen(3000, function () {
     console.log("Server is running on localhost 3000");
