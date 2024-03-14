@@ -8,6 +8,13 @@ app.use(express.static("./"));
 app.engine("hbs", exphbs.engine({extname: 'hbs'}));
 app.set("view engine", "hbs");
 
+const post = {
+    poster: "gojowithiphone",
+    title: "Example",
+    content: "test",
+    replies: ["reply1", "reply2"]
+};
+
 const userData = {
     username: "gojowithiphone@gmail.com",
     password: "crazyapple",
@@ -15,15 +22,22 @@ const userData = {
 
 };
 
+
+let Posts = [];
+Posts.push(post);
 let usersData = [];
 usersData.push(userData);
 app.get("/", function (req, res) {
     //res.sendFile(__dirname + "/views/main.html"); unknown thing i dont know
-    res.redirect('/mainpage');
+    res.redirect('/Create_post');
 });
 
 app.get('/mainpage', (req, res) => {
     res.render("mainpage.hbs", {Title: "first sample post"});
+});
+
+app.get('/Create_post', function (req, res) {
+    res.render("CreatePost.hbs");
 });
 
 app.get('/samplepost1', (req, res) => {
@@ -61,6 +75,24 @@ app.get('/Sign_up', function (req, res) {
 app.get('/Sign_in', function (req, res) {
     res.render("signin.hbs");
 });
+app.post('/submitpost', (req,res) => {
+    let newposter = "gojowithiphone" //change this later
+    let newtitle = req.body.title
+    const newcontent = req.body.content
+    console.log(newtitle)
+    console.log(newcontent)
+    if (newtitle !== "" && newcontent !== ""){
+        const newPost = {
+            poster: newposter,
+            title: newtitle,
+            content: newcontent,
+            replies: []
+        }
+        Posts.push(newPost) 
+        console.log(Posts)
+        res.redirect('/mainpage')
+    }
+})
 
 app.post('/submitsignup', (req,res) => { 
     let newusername = req.body.username;
