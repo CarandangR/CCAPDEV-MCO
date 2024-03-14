@@ -70,9 +70,6 @@ document.addEventListener("DOMContentLoaded", function() {
             document.querySelector("div.replycontainer").innerHTML += currentReply;
         }
     }
-
-    let testing = document.querySelector('.upbit img').getAttribute('src');
-    console.log(testing);
     function toggleImage(imgElement, originalSrc, clickedSrc) {
         if (imgElement.getAttribute('src').includes(clickedSrc)) {
             imgElement.setAttribute('src', originalSrc);

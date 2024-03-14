@@ -315,6 +315,7 @@ body
     display:flex; 
     flex-direction: flex-end;
     padding-right: 20px;
+    align-items: center;
 }
 /* added */
 .postfooter
@@ -385,12 +386,9 @@ body
 .replybutton {
     display: flex;
     flex-direction: column;
-    align-items: right;
-    padding-top: 5px;
-    padding-left: 80%;
-    padding-bottom: 2%;
+    justify-content: right;
     height: auto;
-    
+    padding: 10px;
 }
 
 .replybutton a {
@@ -412,7 +410,7 @@ body
     width: 650px;
     justify-content: center;
     align-items: center;
-    height: 90px;
+    height: auto;
     margin: auto;
     overflow-wrap: break-word;
     border-bottom-left-radius: 8px;
@@ -489,6 +487,7 @@ input[type="text"] {
     width: 90%;
     max-height: 85%;
     margin: 5px;
+    position: relative;
 }
 
 .replycontent p {
