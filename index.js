@@ -17,11 +17,24 @@ const post = {
     poster: "gojowithiphone",
     title: "Example",
     content: "test",
-    date: "February 1",
+    date: {
+        year: "2020",
+        month: "08",
+        day: "21",
+        hour: "12",
+        minute: "25"
+    },
+    imgsrc: "",
     replies: [{
         poster: "sukuna",
         replycontent: "test2",
-        date: "March 14"
+        date: {
+            year: "2020",
+            month: "08",
+            day: "22",
+            hour: "10",
+            minute: "10"
+        }
     }]
 };
 
@@ -103,19 +116,43 @@ var upload = multer({ storage: storage })
 app.post('/submitpost', upload.single('file'), (req,res) => {
     let newposter = "gojowithiphone" //change this later
     let newtitle = req.body.title
-    console.log(req.file)
+    let uploadedFile
+    try {
+        uploadedFile = req.file.filename;
+    } catch (error) {
+        uploadedFile = ""
+        console.error("Error while getting the filename:", error);
+        // Handle the error here, perhaps by sending an error response
+        
+    }
     const newcontent = req.body.content
-    console.log(newtitle)
-    console.log(newcontent)
+
+    const uploadedTime = new Date()
+    const year = uploadedTime.getFullYear()
+    const month = uploadedTime.getMonth()
+    const day = uploadedTime.getDate()
+    const hours = uploadedTime.getHours()
+    const mins = uploadedTime.getMinutes()
+
+
+    console.log(year, month, day, hours, mins)
     if (newtitle !== "" && newcontent !== ""){
         const newPost = {
             poster: newposter,
             title: newtitle,
             content: newcontent,
+            date: {
+                year: year,
+                month: month,
+                day: day,
+                hour: hours,
+                minute: mins
+            },
+            imgsrc: uploadedFile,
             replies: []
         }
-        Posts.push(newPost) 
-        console.log(Posts)
+        Posts.push(newPost)
+        console.log(Posts) 
         res.redirect('/mainpage')
 
     }
@@ -161,3 +198,4 @@ app.post('/submitsignin', (req,res) => {
 app.listen(3000, function () {
     console.log("Server is running on localhost 3000");
 });
+
