@@ -359,9 +359,40 @@ body
 .editbutton {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    text-align: center;
+}
+.editbutton button {
+    background-color: #BD8FCB;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 7px;
+    margin: 10px;
+    display: none;   
+}
+.editbutton button:hover {
+    background-color: #7A03A1;
+}
+
+.pfpeditbutton {
+    display: flex;
+    flex-direction: column;
     align-items: right;
     margin: 10px;
     text-align: center;
+}
+
+.pfpeditbutton a {
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+    display:block;
+    background-color: #BD8FCB;
+    margin: auto;
+    padding: 7px;
+    border-radius: 5px;
 }
 
 .editbutton a {
@@ -413,6 +444,7 @@ body
 .profiledesc {
     display: flex;
     flex-direction: column;
+    overflow-wrap:break-word;
 }
 
 .latestpostscontainer {

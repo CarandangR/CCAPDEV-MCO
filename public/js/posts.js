@@ -1,6 +1,3 @@
-// Focus first on Reply feature, making use of reply object (?) just like the flashcard
-
-
 let replies = [];
 let replycount = 0;
 const monthNames = [
@@ -17,12 +14,7 @@ const reply = function(user, userhandle, userbits, userimg, replycontent) {
 
 document.addEventListener("DOMContentLoaded", function() {
     window.scrollTo(0, 0);
-    const upvote = document.querySelector('div.upbit');
-    const downvote = document.getElementById('div.downbit');
-    //usign the flashcard approach, it assumes that there is a way to input the text and all requirements before pressing the button.
-    // --> this means that I need to implement a way to input the required data (text, since profile information is obtained
-    // through the current login details (?)
-    document.querySelector(".replybutton").addEventListener("click", function(e) { 
+    document.querySelector(".replybutton a").addEventListener("click", function(e) { 
 		e.preventDefault();
         
         console.log("Reply clicked");

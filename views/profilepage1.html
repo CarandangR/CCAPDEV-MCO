@@ -2,7 +2,8 @@
 <html>
 <head>
     <title> Profile page </title>
-    <link rel="stylesheet" type="text/css" href="/public/css/profilepage.css" />
+    <link rel="stylesheet" type="text/css" href="../public/css/profilepage.css" />
+    <script src="../public/js/profile.js" defer></script>
 </head>
 <body>
     <div class="homecontainer">
@@ -10,7 +11,7 @@
             <div class = "headercontent">
                 <div class="headerhome">
                     <div class="websitelogo">
-                        <a href="./main.html"><img src="/public/img/byte_logo.png"/></a>
+                        <a href="./main.html"><img src="../public/img/byte_logo.png"/></a>
                         <span class = "link"> <a style = "color: beige; text-decoration: none" href = "./main.html"> byte. </a> </span>
                     </div>
                 </div>
@@ -22,7 +23,7 @@
                         <div class="profileicon">
                             <div class="profileiconholder">
                                 <a href="./profilepage2.html">
-                                <img src="/public/img/pfp.jpg"/>
+                                <img src="../public/img/pfp.jpg"/>
                                 </a>
                             </div>
                         </div>
@@ -46,21 +47,23 @@
             <div class="profilecontainer1">
                 <div class="userinfo">
                     <div class="userpfp">
-                        <img class="userimg" src="/public/img/AYAKA.jpg" />
+                        <img class="userimg" src="../public/img/AYAKA.jpg" />
                     </div>
-                    <div class="editbutton"> <a href=""> Edit </a></a></div>
+                    <div class="pfpeditbutton"> <a href=""> Edit </a></div>
                 </div>
 
                 <div class="profileinfo"> 
                     <h3> Wala_3h </h3> <span> u/WalaEh </span><span class="usertitle" style="color: green"> byte Admin</span>
                     <h5> Bits: 1 </h5>
                     <h4> About me: </h4>
-                    <p> 
                     
-                        Average college student <br>
-                        not-so-epic gamer
-                    </p>
+                    <div class="profiledesc">
+                        <p>hello!</p>
+                    </div>
+                        
+                    
                     <div class="editbutton"> 
+                        <form method="post"><button type="submit">Confirm</button></form>
                         <a href=""> Edit description </a> 
                     </div>
                 </div> 
@@ -70,7 +73,7 @@
                 <div class="latestpost"> 
                     <div class="latestpostinfo">
                         <div class="latestpostpfp"> 
-                            <a href="./profilepage1.html"> <img class="userimg" src="/public/img/AYAKA.jpg"/> </a>
+                            <a href="./profilepage1.html"> <img class="userimg" src="../public/img/AYAKA.jpg"/> </a>
                         </div>
                         <p> Wala_3h <br> <span style="padding: 5px;">u/WalaEh</span><br> Bits: 1</p>
                     </div>
