@@ -1,14 +1,17 @@
 const express = require("express");
 const exphbs = require('express-handlebars');
+const multer  = require('multer');
+const path = require ('path');
+const crypto = require ('crypto');
 const port = 3000;
 const app = express();
 const bodyParser = require('body-parser');
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./"));
-app.engine("hbs", exphbs.engine({extname: 'hbs', partialsDir: __dirname + '/views/templates/'}));
+app.engine("hbs", exphbs.engine({extname: 'hbs'}));
 app.set("view engine", "hbs");
-app.set("views", "./views");
-app.set("view cache", false);
 
 const post = {
     poster: "gojowithiphone",
@@ -74,7 +77,9 @@ app.get('/samplepost2', (req, res) => {
     res.render("samplepost2", {Title: "first sample post"});
 });
 
-
+app.get('/createpost.js', function (req, res){
+    res.sendFile(__dirname + "/views/createpost.js");
+})
 app.get('/Sign_up', function (req, res) {
     res.render("signup.hbs");
 });
@@ -82,9 +87,23 @@ app.get('/Sign_up', function (req, res) {
 app.get('/Sign_in', function (req, res) {
     res.render("signin.hbs");
 });
-app.post('/submitpost', (req,res) => {
+
+var storage = multer.diskStorage({
+    destination: './public/img/',
+    filename: function (req, file, cb) {
+      crypto.pseudoRandomBytes(16, function (err, raw) {
+        if (err) return cb(err)
+  
+        cb(null, raw.toString('hex') + path.extname(file.originalname))
+      })
+    }
+  })
+  
+var upload = multer({ storage: storage })
+app.post('/submitpost', upload.single('file'), (req,res) => {
     let newposter = "gojowithiphone" //change this later
     let newtitle = req.body.title
+    console.log(req.file)
     const newcontent = req.body.content
     console.log(newtitle)
     console.log(newcontent)
@@ -98,6 +117,7 @@ app.post('/submitpost', (req,res) => {
         Posts.push(newPost) 
         console.log(Posts)
         res.redirect('/mainpage')
+
     }
 })
 
@@ -119,7 +139,6 @@ app.post('/submitsignup', (req,res) => {
 })
 
 app.post('/submitsignin', (req,res) => { 
-    
     let username = req.body.username
     let password = req.body.password
     console.log(usersData.length);
@@ -136,6 +155,8 @@ app.post('/submitsignin', (req,res) => {
     
     
 })
+
+
 
 app.listen(3000, function () {
     console.log("Server is running on localhost 3000");

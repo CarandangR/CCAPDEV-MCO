@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/public/css/CreatePost.css"/>
 </head>
 
@@ -44,20 +45,15 @@
         <div class = "container">
           
             <div class = "inputs">
-                <form action = "/submitpost" method="POST">
+                <form action = "/submitpost" method="POST" name = "myform" enctype="multipart/form-data">
                 <div class = "posttitle">
                     <input type="text" id="title" name="title" placeholder="Input Title" required/>
                 </div>
                 <div class = "icons">
-                    <button class = "iconbutton" type = "button">
+                    <label for = "file-upload" class = "custom-file-upload">
                         <img class ="attach" src = "/public/img/attach.png" title="Attach a file">
-                    </button>
-                    <button class = "iconbutton" type = "button">
-                        <img class ="bold" src = "/public/img/bold.png" title = "Embolden">
-                    </button>
-                    <button class = "iconbutton" type = "button">
-                        <img class ="italic" src = "/public/img/italics.png" title = "Italicize">
-                    </button>
+                        <input id = "file-upload" name = "file" type = "file" accept ="image/*">
+                    </label>
                 </div>
                 <div class = "contentarea">
                     <textarea class ="content" name = "content" rows = "23"></textarea>
@@ -79,6 +75,7 @@
             </div>
         </div>
     </div>
-
+    
 
 </body>
+

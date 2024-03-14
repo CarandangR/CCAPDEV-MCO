@@ -331,7 +331,7 @@ input[type="text"] {
     
 
 }
-.iconbutton{
+.attachbutton, .boldbutton, .italicbutton {
     margin: 0;
     padding: 0;
     background-color: inherit ;
@@ -343,7 +343,7 @@ input[type="text"] {
     width: 3%;
 
 }
-.iconbutton:hover{
+.attachbutton:hover, .boldbutton:hover, .italicbutton:hover{
     background: rgba(255, 242, 226, 0.5);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
