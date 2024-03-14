@@ -2,6 +2,19 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/public/css/CreatePost.css"/>
+
+    <script>
+        function updateFileName(input) {
+        var fileNameDisplay = document.getElementById("fileNameDisplay");
+            if (input.files.length > 0) {
+        fileNameDisplay.textContent = input.files[0].name;
+        fileNameDisplay.style.display = "inline"; // Show the uploaded filename
+        } else {
+        fileNameDisplay.textContent = "";
+        fileNameDisplay.style.display = "none"; // Hide if no file is selected
+        }
+}
+    </script>
 </head>
 
 <body>
@@ -52,7 +65,8 @@
                 <div class = "icons">
                     <label for = "file-upload" class = "custom-file-upload">
                         <img class ="attach" src = "/public/img/attach.png" title="Attach a file">
-                        <input id = "file-upload" name = "file" type = "file" accept ="image/*">
+                        <input id = "file-upload" name = "file" type = "file" accept ="image/*" onchange="updateFileName(this)"> 
+                        <span id="fileNameDisplay"></span>
                     </label>
                 </div>
                 <div class = "contentarea">
@@ -61,9 +75,7 @@
             </div>
             <div class = "buttons">
                 <div class = "post">
-                    <a href = "./main.html">
                         <button class  = "submitbutton" type = "post" value = "post"> <span class ="buttontext">Post</span> </button>
-                    </a>
        
                 </div>
             </form> 
@@ -78,4 +90,5 @@
     
 
 </body>
+
 
