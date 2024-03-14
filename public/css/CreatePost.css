@@ -413,3 +413,20 @@ input[type="text"] {
     border: 1px solid #7A03A1;
     background-color: #7A03A1;
 }
+#file-upload {
+    display: none;
+}
+input[ type= "file"]{
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#fileNameDisplay {
+    display: none; /* Initially hidden */
+    margin: 5px; /* Adjust as needed */
+    
+}
+
