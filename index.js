@@ -12,7 +12,12 @@ const post = {
     poster: "gojowithiphone",
     title: "Example",
     content: "test",
-    replies: ["reply1", "reply2"]
+    date: "February 1",
+    replies: [{
+        poster: "sukuna",
+        replycontent: "test2",
+        date: "March 14"
+    }]
 };
 
 const userData = {
