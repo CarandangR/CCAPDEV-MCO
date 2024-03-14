@@ -7,6 +7,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./"));
 app.engine("hbs", exphbs.engine({extname: 'hbs'}));
 app.set("view engine", "hbs");
+app.set("views", "./views");
+app.set("view cache", false);
 
 const post = {
     poster: "gojowithiphone",
