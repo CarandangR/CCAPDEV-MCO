@@ -5,7 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./"));
-app.engine("hbs", exphbs.engine({extname: 'hbs'}));
+app.engine("hbs", exphbs.engine({extname: 'hbs', partialsDir: __dirname + '/views/templates/'}));
 app.set("view engine", "hbs");
 app.set("views", "./views");
 app.set("view cache", false);
