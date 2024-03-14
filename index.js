@@ -7,43 +7,56 @@ const port = 3000;
 const app = express();
 const bodyParser = require('body-parser');
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("./"));
-app.engine("hbs", exphbs.engine({extname: 'hbs'}));
+app.use("/public", express.static(__dirname + '/public'));
+app.engine("hbs", exphbs.engine(
+    {
+        extname: 'hbs',
+        defaultLayout: 'main', 
+        layoutsDir: path.join(__dirname, 'views'),
+        partialsDir  : [
+        //  path to your partials
+            path.join(__dirname, 'views/templates'),
+        ]
+    }
+));
+app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "hbs");
-
-const post = {
-    poster: "gojowithiphone",
-    title: "Example",
-    content: "test",
-    date: "February 1",
-    replies: [{
-        poster: "sukuna",
-        replycontent: "test2",
-        date: "March 14"
-    }]
-};
 
 const userData = {
     username: "gojowithiphone@gmail.com",
     password: "crazyapple",
     bits: "1000"
-
 };
 
+let replies = [1,2,3]
 
-let Posts = [];
-Posts.push(post);
+let Posts = [
+    {
+        communityicon: "../public/img/apple_logo.jpg",
+        community: "b/apple",
+        communitylink: "/main_community",
+        userhandlelink: "/profilepage",
+        userhandle: "u/gojo1234",
+        username: "gojowithiphone",
+        dateofpost: new Date(2018, 11, 24, 10, 33, 30, 0),
+        linkofpost: "/samplepost",
+        postheader: "Apple just dropped the new iPhone 16!!!",
+        postcontent: "it good :D",
+        postpicturecontent: "../public/img/gojowithiphone1.png",
+        numberofreplies: replies.length + "replies"
+    }
+];
+
 let usersData = [];
 usersData.push(userData);
 app.get("/", function (req, res) {
-    //res.sendFile(__dirname + "/views/main.html"); unknown thing i dont know
-    res.redirect('/Create_post');
+    res.redirect('/mainpage');
 });
 
 app.get('/mainpage', (req, res) => {
-    res.render("mainpage.hbs", {Title: "first sample post"});
+    console.log
+    res.render("mainpage.hbs", {posts: Posts});
 });
 
 app.get('/Create_post', function (req, res) {
