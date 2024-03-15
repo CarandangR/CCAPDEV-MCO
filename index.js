@@ -224,7 +224,7 @@ let Posts = [
 ];
 
 app.get("/", function (req, res) {
-    res.redirect('/mainpage_logged');
+    res.redirect('/mainpage');
     
 
 });
