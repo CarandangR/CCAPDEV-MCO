@@ -85,10 +85,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.querySelector('div.upbit').addEventListener('click', function() {
         toggleImage(document.querySelector('.upbit img'), '../public/img/up-arrow-regular-24.png', '../public/img/up-arrow-solid-24.png');
+        if(document.querySelector('.downbit img').getAttribute('src').includes('../public/img/down-arrow-solid-24.png')) {
+            document.querySelector('.downbit img').setAttribute('src', '../public/img/down-arrow-regular-24.png');  
+        }
     });
 
     document.querySelector('div.downbit').addEventListener('click', function() {
         toggleImage(document.querySelector('.downbit img'), '../public/img/down-arrow-regular-24.png', '../public/img/down-arrow-solid-24.png');
+        if(document.querySelector('.upbit img').getAttribute('src').includes('../public/img/up-arrow-solid-24.png')) {
+            document.querySelector('.upbit img').setAttribute('src', '../public/img/up-arrow-regular-24.png');
+        }
     });
 
 
