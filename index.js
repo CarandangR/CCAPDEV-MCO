@@ -8,6 +8,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const moment = require('moment')
 
+let currPost = 0;
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/public", express.static(__dirname + '/public'));
 app.engine("hbs", exphbs.engine(
@@ -77,7 +79,7 @@ const users = function(username, userhandle, password, pfplink, bits, aboutme){
     this.pfplink = pfplink
     this.bits = bits;
     this.aboutme = aboutme;
-    this.userprofilelink = userprofilelink;
+    this.userprofilelink = pfplink;
 }
 
 const Reply = function(postId, username, userhandle, password, pfplink, bits, aboutme, replycontent, replydate) {
@@ -216,6 +218,7 @@ app.get('/Sign_in', function (req, res) {
 
 app.get ('/samplepost1/:postId', (req, res) =>{
     const id = req.params.postId
+    currPost = id;
     console.log(id)
     let returnedPost, userPosted
     let postReplies = []
@@ -365,7 +368,13 @@ app.post('/deletepost/:postId', (req, res) => {
     res.redirect('/mainpage_logged')
 })
 
-
+app.post('/submitreply', (req, res) => {
+    let replyDate = new Date();
+    let replycontent = req.body.replytextcontent;
+    let currReply = new Reply(currPost, currentUser.username, currentUser.userhandle, currentUser.password, currentUser.pfplink, currentUser.bits, currentUser.aboutme, replycontent, replyDate);
+    Replies.push(currReply);
+    res.redirect('/samplepost1/'+currPost);
+})
 
 app.listen(3000, function () {
     console.log("Server is running on localhost 3000");
