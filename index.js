@@ -347,19 +347,27 @@ app.post('/submitpost', upload.single('file'), (req,res) => {
 
 app.post('/submitsignup', (req,res) => { 
     let newusername = req.body.username;
+    let newuserhandle = req.body.userhandle
     let newpassword = req.body.password;
     let confirmpass = req.body.confirmpass;
     
+    for (let i = 0 ; i < usersData.length; i++){
+        if (newusername == usersData[i].username){
+            return res.status(400).json({ error: "Username already taken" });
+        }
+        if (newuserhandle == usersData[i].userhandle){
+            return res.status(400).json({ error: "Userhandle already taken" });        }
+    }
     if (newpassword == confirmpass){
-        const newUser ={
-            username: newusername,
-            password: newpassword,
-            bits: "0"
-        };
+        let newUser = new users(newusername,"u/"+newuserhandle,newpassword,"../public/img/nopfp.jpg", "0", "", "/profileview/"+newusername)
+        
     usersData.push(newUser);
+    currentUser = newUser
     console.log(usersData);
     res.redirect('/mainpage_logged')
-}
+    } else{
+        return res.status(400).json({ error: "Passwords are the same" }); 
+    }
 })
 
 app.post('/submitsignin', (req,res) => { 
@@ -372,7 +380,9 @@ app.post('/submitsignin', (req,res) => {
             for (let j = 0; j < usersData.length; j++){
                 if (usersData[j].password == password){
                     res.redirect('/mainpage_logged')
-                } 
+                } else{
+                    return res.status(400).json({ error: "Wrong Username/Password" }); 
+                }
             }
         }
     }
