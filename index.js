@@ -40,10 +40,13 @@ app.set("view engine", "hbs");
 
 
 //Objects for Each data
-const community = function (communityicon, community, communitylink){
+const community = function (communityicon, communitydisplayname, community, communitylink, totalmembers, onlinemembers){
     this.communityicon = communityicon;
+    this.communitydisplayname = communitydisplaymain;
     this.community = community;
     this.communitylink = communitylink;
+    this.totalmembers = totalmembers;
+    this.onlinemembers = onlinemembers;
 }
 const post = function(postId, communityinfo, communityicon,community, communitylink, userhandlelink,
                         userhandle, username, dateofpost, linkofpost, postheader,
@@ -77,7 +80,7 @@ const users = function(username, userhandle, password, pfplink, bits, aboutme){
     this.pfplink = pfplink
     this.bits = bits;
     this.aboutme = aboutme;
-    this.userprofilelink = userprofilelink;
+    this.userprofilelink = "/Profile";
 }
 
 const Reply = function(postId, username, userhandle, password, pfplink, bits, aboutme, replycontent, replydate) {
@@ -98,6 +101,7 @@ let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "../public/
 let newUser = new users("sukunewithnokia", "u/sukuna", "12345", "../public/img/sukunayes.png", "1000", "Nah, I'd lose.");
 let applecommunity = new community("../public/img/apple_logo.jpg", "b/apple", "/main_community/apple")
 let webdevcommunity = new community("../public/img/webdevicon.png", "b/webdev", "/main_community/webdev")
+let currentCommunity = applecommunity;
  
 let repliesData = [1,2,3]
 let usersData = [];
@@ -180,6 +184,8 @@ app.get('/mainpage', (req, res) => {
 });
 app.get('/main_community/:community', function(req,res){
     const communityname = req.params.community
+    currentCommunity = communityname
+    let user = currentUser;
     let filteredPosts = []
     console.log("b/"+communityname)
     for (let i = 0; i < Posts[i].length; i++){
@@ -188,7 +194,7 @@ app.get('/main_community/:community', function(req,res){
         }
     }
     console.log(filteredPosts)
-    res.render ("main_community.hbs")
+    res.render ("main_community.hbs", {posts: filteredPosts, user: user}) //comment add community object here for handlebars
 })
 app.get('/mainpage_logged', (req, res) => {
     let user = currentUser;
