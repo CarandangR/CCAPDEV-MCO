@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title> {{Title}} </title>
+    <title> {{returnedPost.postheader}} </title>
     <link rel="stylesheet" type="text/css" href="../public/css/viewpost.css" />
     <script src="../public/js/posts.js" defer></script>
 </head>
@@ -12,8 +12,8 @@
             <div class = "headercontent">
                 <div class="headerhome">
                     <div class="websitelogo">
-                        <a href="./main.html"><img src="../public/img/byte_logo.png"/></a>
-                        <span class = "link"> <a style = "color: beige; text-decoration: none" href = "./main.html"> byte. </a> </span>
+                        <a href="./mainpage"><img src="../public/img/byte_logo.png"/></a>
+                        <span class = "link"> <a style = "color: beige; text-decoration: none" href = "./mainpage"> byte. </a> </span>
                     </div>
                 </div>
                 <div class="headersearchbar">
@@ -23,17 +23,17 @@
                     <div class="profile">
                         <div class="profileicon">
                             <div class="profileiconholder">
-                                <a href="{{CurrUserProfileLink}}">
-                                <img src="{{UserProfileImgDir}}"/>
+                                <a href="{{userPosted.userhandlelink}}">
+                                <img src="{{userPosted.pfplink}}"/>
                                 </a>
                             </div>
                         </div>
                         <div class="profilecontainer">
                             <div class="profiledisplayname">
-                                <span>{{username}}</span>
+                                <span>{{userPosted.username}}</span>
                             </div>
                             <div class="profilehandlename">
-                                <span>{{userhandle}}</span>
+                                <span>{{userPosted.userhandle}}</span>
                             </div>
                         </div>
                     </div>
@@ -47,46 +47,28 @@
             <div class="postcontainer">
                 <div class="userinfo">
                     <div class="postcommunity"> 
-                        <h5> {{community}} </h5>
+                        <h5> {{returnedPost.community}} </h5>
                     </div>
                     <div class ="userpfp">
-                        <a href="{{PosterProfileLink}}"> <img class="userimg" src="{{PosterPfpDir}}"> </a>
+                        <a href="{{userPosted.username}}"> <img class="userimg" src="{{userPosted.pfplink}}"> </a>
                     </div>
                 <div class="postuserinfo"> 
-                    <p> {{username}} <br><span>{{userhandle}}</span><br> Bits: {{PosterBits}}</p>
+                    <p> {{userPosted.username}} <br><span>{{userPosted.userhandle}}</span><br> Bits: {{userPosted.bits}}</p>
                 </div>
                 <div class="postdate"> 
-                    <h5> Posted on: {{dateofpost}}</h5>
+                    <h5> Posted on: {{returnedPost.dateofpost}}</h5>
                     <p> {{DateDistance}} </p>
                 </div>
             </div>
             <div class="postinfocontainer">
-                <h4> {{postheader}} </h4>
-                <p> {{postcontent}} </p>
+                <h4> {{returnedPost.postheader}} </h4>
+                <p> {{returnedPost.postcontent}} </p>
                 <div class="replybutton"> <a href=""> Reply </a> </div>
             </div>
         </div>
-
-        <div class="replycontainer"> 
-            <div class="replybox">
-                <div class = "replyinfo"> 
-                    <div class="replypfp"> 
-                        <a href="{{ReplierProfileLink}}"> <img class="userimg" src="{{ReplierPfpDir}}"> </a>
-                    </div>
-                    <p> {{ReplierUsername}} <br><span> {{ReplierHandle}} </span><br> Bits: {{ReplierBits}}</p>
-                    <div class="postdate"> 
-                        <h5> Posted on: {{ReplyDate}} </h5>
-                        <p> {{ReplyDateDistance}} </p>
-                    </div>
-                </div>
-                
-                
-                <div class="replycontent"> 
-                    <p> {{ReplyContent}} <br> </p>
-                    <div class="replybutton"> <a href=""> Reply </a></div>
-                </div>
-            </div>
-        </div>
+        {{#each reply}}
+                {{> postreply this}}
+        {{/each}}
     </div>
 </div>
 </body>

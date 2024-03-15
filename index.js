@@ -43,7 +43,7 @@ app.set("view engine", "hbs");
 
 const post = function(postId, communityicon,community, communitylink, userhandlelink,
                         userhandle, username, dateofpost, linkofpost, postheader,
-                        postcontent, postpicturecontent, upvotes, downvotes, numberofreplies){
+                        postcontent, postpicturecontent, upvotes, downvotes, numberofreplies, replies, replierusername){
     
     this.postId = postId;
     this.communityicon = communityicon;
@@ -57,16 +57,18 @@ const post = function(postId, communityicon,community, communitylink, userhandle
     this.postheader = postheader;
     this.postcontent = postcontent;
     this.postpicturecontent = postpicturecontent;
-    this.upvotes = upvotes;
-    this.downvotes = downvotes;
-    this.numberofreplies = numberofreplies;            
+    this.upvotes = upvotes,
+    this.downvotes = downvotes,
+    this.numberofreplies = numberofreplies;
+              
 }
 
-const users = function(username, userhandle, password, bits, aboutme){
+const users = function(username, userhandle, password, pfplink, bits, aboutme){
 
     this.username = username;
     this.userhandle = userhandle;
     this.password = password;
+    this.pfplink = pfplink
     this.bits = bits;
     this.aboutme = aboutme;
 }
@@ -79,10 +81,16 @@ const reply = function(userdeets, replycontent, replydate){
     this.replydate = replydate;
 }
 
-let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "infinite", "Nah, I'd win.");
+let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "../public/img/pfp.jpg", "infinite", "Nah, I'd win.");
 let repliesData = [1,2,3]
 let postsData = [];
 let usersData = [];
+let Replies = [{
+    postId : "1111",
+    username : "Sukuna",
+    replycontent : "Bakit",
+    replydate : new Date(2018, 11, 25, 10, 33, 30, 0),
+}]
 let Posts = [
     {
         postId: "1111",
@@ -99,7 +107,10 @@ let Posts = [
         postpicturecontent: "../public/img/gojowithiphone1.png",
         upvotes: 4447,
         downvotes: 0,
-        numberofreplies: repliesData.length + " replies"
+        numberofreplies: repliesData.length + " replies",
+        replies : [{
+            
+        }]
     },
     
 ];
@@ -140,16 +151,28 @@ app.get('/Sign_in', function (req, res) {
 app.get ('/samplepost1/:postId', (req, res) =>{
     const id = req.params.postId
     console.log(id)
-    let returnedPost
+    let returnedPost, userPosted
+    let postReplies = []
     for (let i = 0 ;i < Posts.length ; i++ ){
         if (id == Posts[i].postId){
             returnedPost = Posts[i]
-            console.log(returnedPost)
+            for (let j = 0; j < usersData.length; j++){
+                if (returnedPost.username == usersData[j].username){
+                    userPosted = usersData[j]
+                }
+            }
+
+            for (let k = 0; k <Replies.length; k++){
+                if (returnedPost.postId == Replies[k].postId){
+                    postReplies.push(Replies[k])
+                }
+            }
+            
+            //console.log(returnedPost)
         }
     }
-    
     //const post = Posts.find(post => post.postId === parseInt(id))
-    res.render ("samplepost1.hbs", returnedPost)
+    res.render ("samplepost1", {returnedPost, userPosted, reply: postReplies})
 
 })
 
