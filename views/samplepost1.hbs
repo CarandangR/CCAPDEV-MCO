@@ -63,12 +63,40 @@
             <div class="postinfocontainer">
                 <h4> {{returnedPost.postheader}} </h4>
                 <p> {{returnedPost.postcontent}} </p>
-                <div class="replybutton"> <a href=""> Reply </a> </div>
+                <div class="footer">
+                    <div class="upbit">
+                        <img src="../public/img/up-arrow-regular-24.png"/>
+                    </div>
+                    <div class="downbit">
+                        <img src="../public/img/down-arrow-regular-24.png"/>
+                    </div>
+                    <div class="share">
+                        <img src="../public/img/share-regular-24.png"/>
+                    </div>
+                </div>
             </div>
         </div>
-        {{#each reply}}
-                {{> postreply this}}
-        {{/each}}
+
+        <div class="replycontainer"> 
+            <div class="replybox">
+                <div class = "replyinfo"> 
+                    <div class="replypfp"> 
+                        <a href="{{ReplierProfileLink}}"> <img class="userimg" src="{{ReplierPfpDir}}"> </a>
+                    </div>
+                    <p> {{ReplierUsername}} <br><span> {{ReplierHandle}} </span><br> Bits: {{ReplierBits}}</p>
+                    <div class="postdate"> 
+                        <h5> Posted on: {{ReplyDate}} </h5>
+                        <p> {{ReplyDateDistance}} </p>
+                    </div>
+                </div>
+                
+                
+                <div class="replycontent"> 
+                    <p> {{ReplyContent}} <br> </p>
+                    <div class="replybutton"> <a href=""> Reply </a></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
