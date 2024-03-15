@@ -49,7 +49,12 @@
                     <div class="userpfp">
                         <img class="userimg" src="{{selectedProfile.pfplink}}" />
                     </div>
-                    <div class="pfpeditbutton"> <a href=""> Edit </a></div>
+                    <div class="pfpeditbutton">
+                         <form action="/submiteditpfp"method="POST">
+                            <label for="pfpupload">Edit</label>
+                            <input type="file" id="pfpupload" name="pfpupload" class="inputfile">
+                        </form>
+                </div>
                 </div>
 
                 <div class="profileinfo"> 
