@@ -40,15 +40,21 @@ app.set("view engine", "hbs");
 
 
 //Objects for Each data
-
-const post = function(postId, communityicon,community, communitylink, userhandlelink,
+const community = function (communityicon, community, communitylink){
+    this.communityicon = communityicon;
+    this.community = community;
+    this.communitylink = communitylink;
+}
+const post = function(postId, communityinfo, communityicon,community, communitylink, userhandlelink,
                         userhandle, username, dateofpost, linkofpost, postheader,
                         postcontent, postpicturecontent, upvotes, downvotes, numberofreplies){
     
     this.postId = postId;
-    this.communityicon = communityicon;
-    this.community = community;
-    this.communitylink = communitylink;
+    this.communityinfo = {
+        communityicon : communityicon,
+        community : community,
+        communitylink : communitylink
+    }
     this.userhandlelink = userhandlelink;
     this.userhandle = userhandle;
     this.username = username;
@@ -89,8 +95,10 @@ const Reply = function(postId, username, userhandle, password, pfplink, bits, ab
 
 let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "../public/img/pfp.jpg", "infinite", "Nah, I'd win.");
 let newUser = new users("sukunewithnokia", "u/sukuna", "12345", "../public/img/sukunayes.png", "1000", "Nah, I'd lose.");
+let applecommunity = new community("../public/img/apple_logo.jpg", "b/apple", "/main_community/apple")
+let webdevcommunity = new community("../public/img/webdevicon.png", "b/webdev", "/main_community/webdev")
+ 
 let repliesData = [1,2,3]
-let postsData = [];
 let usersData = [];
 let Replies = [{
     postId : "1111",
@@ -115,9 +123,7 @@ let Replies = [{
 let Posts = [
     {
         postId: "1111",
-        communityicon: "../public/img/apple_logo.jpg",
-        community: "b/apple",
-        communitylink: "/main_community",
+        communityinfo: applecommunity,
         userhandlelink: "/profilepage",
         userhandle: "u/gojo1234",
         username: "gojowithiphone",
@@ -133,8 +139,34 @@ let Posts = [
             
         }]
     },
+    {
+        postId: "1112",
+        communityinfo: webdevcommunity,
+        userhandlelink: "/profilepage",
+        userhandle: "u/wala3h",
+        username: "sukunaryomen",
+        dateofpost: new Date(2018, 11, 24, 10, 33, 30, 0),
+        linkofpost: "/samplepost1/1112" , 
+        postheader: "MDN is very nice",
+        postcontent: "It really helped us in creating this website! It gave a fast and easy way to access information to different elements. ^_^",
+        postpicturecontent: "",
+        upvotes: 20,
+        downvotes: 0,
+        numberofreplies: repliesData.length + " replies",
+        replies : [{
+            
+        }]
+    }
     
 ];
+
+
+
+
+
+
+
+
 
 usersData.push(currentUser);
 app.get("/", function (req, res) {
@@ -145,7 +177,18 @@ app.get('/mainpage', (req, res) => {
     console.log
     res.render("mainpage.hbs", {posts: Posts});
 });
-
+app.get('/main_community/:community', function(req,res){
+    const communityname = req.params.community
+    let filteredPosts = []
+    console.log("b/"+communityname)
+    for (let i = 0; i < Posts[i].length; i++){
+        if (Posts[i].communityinfo.community == ("b/"+communityname)){
+            filteredPosts.push(Posts[i])
+        }
+    }
+    console.log(filteredPosts)
+    res.render ("main_community.hbs")
+})
 app.get('/mainpage_logged', (req, res) => {
     console.log
     res.render("mainpage_logged.hbs", {posts: Posts});
