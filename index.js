@@ -478,8 +478,9 @@ app.post('/deletepost/:postId', (req, res) => {
 app.post('/submitreply', (req, res) => {
     let replyDate = new Date();
     let replycontent = req.body.replytextcontent;
-    let currReply = new Reply(currPost, currentUser.username, currentUser.userhandle, currentUser.password, currentUser.pfplink, currentUser.bits, currentUser.aboutme, replycontent, replyDate);
+    let currReply = new Reply(currPost, currentUser.username, currentUser.userhandle, currentUser.userprofilelink, currentUser.pfplink, currentUser.bits,replycontent,replyDate)
     Replies.push(currReply);
+    console.log(currReply)
     res.redirect('/samplepost1/'+currPost);
 })
 
@@ -489,6 +490,24 @@ app.post('/submiteditprofile', (req, res) => {
     console.log("New profile description:", newDesc);
     res.redirect('/profilepage');
 });
+
+app.post('/submiteditpfp', upload.single('file'), (req,res) => {
+    let uploadedFile
+    try {
+        uploadedFile = req.file.filename;
+    } catch (error) {
+        uploadedFile = ""
+        console.error("Error while getting the filename:", error);
+    }
+    if (uploadedFile != ""){
+        uploadedFile = "../public/img/" + uploadedFile
+    }
+    currentUser.pfplink = uploadedFile;
+    console.log(uploadedFile);
+    console.log(currentUser.pfplink);
+    res.redirect("/profilepage");
+});
+
 app.listen(3000, function () {
     console.log("Server is running on localhost 3000");
 });
