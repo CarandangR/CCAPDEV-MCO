@@ -10,8 +10,8 @@
                 <div class = "headercontent">
                     <div class="headerhome">
                         <div class="websitelogo">
-                            <a href="../mainpage_logged"><img src="/public/img/byte_logo.png"/></a>
-                            <span class = "link"> <a style = "color: beige; text-decoration: none" href = "../mainpage_logged"> byte. </a> </span>
+                            <a href="./main.html"><img src="/public/img/byte_logo.png"/></a>
+                            <span class = "link"> <a style = "color: beige; text-decoration: none" href = "./main.html"> byte. </a> </span>
                         </div>
                     </div>
                     <div class="headersearchbar">
@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="topbuttons">
-                            <a href="/mainpage"> Log out </a>
+                            <a href="./main_not_logged.html"> Log out </a>
                         </div>
                     </div>
                 </div>
@@ -48,15 +48,15 @@
 
             <div class="communityiconinfo">
                 <div class="communityicon">
-                    <img src="{{currentCommunity.communityicon}}"/>
+                    <img src="/public/img/apple_logo.jpg"/>
                 </div>
                 <div class="communityname">
                     <div class="communitydisplaynamecontainer">
                         <div class="communitydisplayname">
-                            <span>{{currentCommunity.communitydisplayname}}</span>
+                            <span>{{community.communitydisplayname}}</span>
                         </div>
                         <div class="communityhandle">
-                            <span>{{currentCommunity.community}}</span>
+                            <span>{{community.community}}</span>
                         </div>
                     </div>
                     <div class="commuinitybuttons">
@@ -65,7 +65,7 @@
                     <div class="communitystats">
                         <div class="totalmembers">
                             <div class="totalcounternumber">
-                                <span>{{shortenVotes currentCommunity.totalmembers}}</span>
+                                <span>{{shortenVotes community.totalmembers}}</span>
                             </div>
                             <div class="totalcountertext">
                                 <span>Total Members</span>
@@ -73,7 +73,7 @@
                         </div>
                         <div class="onlinemembers">
                             <div class="onlinecounternumber">
-                                <span> {{shortenVotes currentCommunity.onlinemembers}}</span>
+                                <span> {{shortenVotes community.onlinemembers}}</span>
                             </div>
                             <div class="onlinecountertext">
                                 <span>Online Members</span>
@@ -92,12 +92,12 @@
                     <input type="search" class="posttext" placeholder="Create Post" onclick="redirectToAnotherPage()"/>
                 </div>
                 <div class="createpostpic">
-                    <a href="/Create_Post">
+                    <a href="./CreatePost.html">
                     <img src="/public/img/image-alt-regular-24.png"/>
                     </a>
                 </div>
                 <div class="createpostattach">
-                    <a href="/Create_Post">
+                    <a href="./CreatePost.html">
                     <img src="/public/img/folder-plus-regular-24.png"/>
                     </a>
                 </div>
@@ -105,30 +105,25 @@
             <div class="navigation">
                 <div class="communities">
                     <div class="dropdown">
-                        <button class="dropbtn">{{currentCommunity.community}}
+                        <button class="dropbtn">{{community.community}}
                           <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-content">
-                            {{#each communitydrop}}
-                                {{> dropdown this}}
-                            {{/each}}
+                          <a href="/mainpage_logged">Home</a>
                         </div>
                     </div>
                 </div>
                 <div class="newposts">
-                    <a href="./main.html">
+                    <a href="/newposts">
                     <img src="/public/img/badge-regular-24.png">
                     </a>
                 </div>
                 <div class="hotposts">
-                    <a href="./main.html">
+                    <a href="/hotposts">
                     <img src="/public/img/hot-solid-24.png">
                     </a>
                 </div>
             </div>
-            {{#each posts}}
-                {{> postview this}}
-            {{/each}}
         </div>
     </body>
 </html>

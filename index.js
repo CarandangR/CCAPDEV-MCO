@@ -84,7 +84,11 @@ const users = function(username, userhandle, password, pfplink, bits, aboutme, u
     this.bits = bits;
     this.aboutme = aboutme;
     this.userprofilelink = userprofilelink;
-    this.communitiesmember = communitiesmember;
+    this.communitiesmember =  communitiesmember || [];
+
+    this.addCommunity = function(newCommunity) {
+        this.communitiesmember.push(newCommunity);
+    };
 }
 
 const Reply = function(postId, username, userhandle, password, pfplink, bits, aboutme, replycontent, replydate) {
@@ -100,12 +104,13 @@ const Reply = function(postId, username, userhandle, password, pfplink, bits, ab
     this.replycontent = replycontent;
     this.replydate = replydate;
 };
+let applecommunity = new community("../public/img/apple_logo.jpg", "Apple", "b/apple", "/main_community/apple", "100","75", "../public/img/apple_banner.jpg" )
+let webdevcommunity = new community("../public/img/webdevicon.png", "b/webdev", "b/webdev", "/main_community/webdev", "1000", "500", "")
+let currentCommunity = applecommunity;
+
 let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "../public/img/pfp.jpg", "infinite", "Nah, I'd win.", "/profileview/gojowithiphone", applecommunity);
 let newUser = new users("sukunawithnokia", "u/sukuna", "12345", "../public/img/sukunayes.png", "1000", "Nah, I'd lose.", "/profileview/sukunawithnokia");
 
-let applecommunity = new community("../public/img/apple_logo.jpg", "b/apple", "b/apple", "/main_community/apple", "100","75", "../public/img/apple_banner.jpg" )
-let webdevcommunity = new community("../public/img/webdevicon.png", "b/webdev", "b/webdev", "/main_community/webdev", "1000", "500", "")
-let currentCommunity = applecommunity;
 
 let communityData = []
 communityData.push(applecommunity, webdevcommunity)
@@ -146,7 +151,7 @@ let Posts = [
         postheader: "Apple just dropped the new iPhone 16!!!",
         postcontent: "it good :D",
         postpicturecontent: "../public/img/gojowithiphone1.png",
-        upvotes: 4447,
+        upvotes: 1,
         downvotes: 0,
         numberofreplies: repliesData.length + " replies",
         replies : [{
@@ -184,7 +189,7 @@ let Posts = [
 
 
 app.get("/", function (req, res) {
-    res.redirect('/mainpage');
+    res.redirect('/mainpage_logged');
 });
 
 app.get('/mainpage', (req, res) => {
@@ -195,7 +200,7 @@ app.get('/main_community/:community', function(req,res){
     const communityname = req.params.community
     //currentCommunity = communityname
     for (let i = 0; i < communityData.length; i++){
-        if (communityData[i].communitydisplayname == ("b/"+communityname)){
+        if (communityData[i].community== ("b/"+communityname)){
             currentCommunity = communityData[i]
         }
     }
@@ -207,14 +212,25 @@ app.get('/main_community/:community', function(req,res){
             filteredPosts.push(Posts[j])
         }
     }
-    res.render ("main_community.hbs", {posts: filteredPosts, user: user, currentCommunity, communitydrop: user.communitiesmember}) //comment add community object here for handlebars
+    console.log(currentCommunity);
+    res.render ("main_community.hbs", {posts: filteredPosts, user: user, community: currentCommunity})
 })
 app.get('/mainpage_logged', (req, res) => {
     let user = currentUser;
-    
-    res.render("mainpage_logged.hbs", {posts: Posts, user: user, communitydrop: user.communitiesmember});
+    res.render("mainpage_logged.hbs", {posts: Posts, user: user});
 });
 
+app.get('/hotposts', (req, res) => {
+    let user = currentUser;
+    let hotposts = Posts.sort((a, b) => b.upvotes - a.upvotes);
+    res.render("mainpage_logged.hbs", {posts: hotposts, user: user});
+});
+
+app.get('/newposts', (req, res) => {
+    let user = currentUser;
+    let newposts = posts.sort((a, b) => b.dateofpost - a.dateofpost);
+    res.render("mainpage_logged.hbs", {posts: newposts, user: user});
+});
 app.get('/profileview/:username', (req, res) => {
     const profilename = req.params.username
     let selectedProfile
