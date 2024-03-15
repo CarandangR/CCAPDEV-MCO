@@ -85,7 +85,7 @@ let postsData = [];
 let usersData = [];
 let Posts = [
     {
-        postId: 1111,
+        postId: "1111",
         communityicon: "../public/img/apple_logo.jpg",
         community: "b/apple",
         communitylink: "/main_community",
@@ -93,18 +93,18 @@ let Posts = [
         userhandle: "u/gojo1234",
         username: "gojowithiphone",
         dateofpost: new Date(2018, 11, 24, 10, 33, 30, 0),
-        linkofpost: "/samplepost",
+        linkofpost: "/samplepost1/1111" , 
         postheader: "Apple just dropped the new iPhone 16!!!",
         postcontent: "it good :D",
         postpicturecontent: "../public/img/gojowithiphone1.png",
         upvotes: 4447,
         downvotes: 0,
-        numberofreplies: replies.length + " replies"
+        numberofreplies: repliesData.length + " replies"
     },
     
 ];
 
-usersData.push(userData);
+usersData.push(currentUser);
 app.get("/", function (req, res) {
     res.redirect('/mainpage');
 });
@@ -112,6 +112,11 @@ app.get("/", function (req, res) {
 app.get('/mainpage', (req, res) => {
     console.log
     res.render("mainpage.hbs", {posts: Posts});
+});
+
+app.get('/mainpage_logged', (req, res) => {
+    console.log
+    res.render("mainpage_logged.hbs", {posts: Posts});
 });
 
 app.get('/Create_post', function (req, res) {
@@ -131,6 +136,22 @@ app.get('/Sign_up', function (req, res) {
 app.get('/Sign_in', function (req, res) {
     res.render("signin.hbs");
 });
+
+app.get ('/samplepost1/:postId', (req, res) =>{
+    const id = req.params.postId
+    console.log(id)
+    let returnedPost
+    for (let i = 0 ;i < Posts.length ; i++ ){
+        if (id == Posts[i].postId){
+            returnedPost = Posts[i]
+            console.log(returnedPost)
+        }
+    }
+    
+    //const post = Posts.find(post => post.postId === parseInt(id))
+    res.render ("samplepost1.hbs", returnedPost)
+
+})
 
 var storage = multer.diskStorage({
     destination: './public/img/',
@@ -164,27 +185,36 @@ app.post('/submitpost', upload.single('file'), (req,res) => {
     const day = uploadedTime.getDate()
     const hours = uploadedTime.getHours()
     const mins = uploadedTime.getMinutes()
+    const seconds = uploadedTime.getSeconds()
+
+    console.log(uploadedFile)
 
 
     console.log(year, month, day, hours, mins)
     if (newtitle !== "" && newcontent !== ""){
         const newPost = {
-            poster: newposter,
-            title: newtitle,
-            content: newcontent,
-            date: {
+            postId : Posts.length + 1,
+            userhandle : "u/gojo1234",
+            username : "gojowithiphone",
+            dateofpost: {
                 year: year,
                 month: month,
                 day: day,
                 hour: hours,
-                minute: mins
+                minute: mins,
+                seconds : seconds
             },
-            imgsrc: uploadedFile,
-            replies: []
+            linkofpost: "/samplepost1/" + (Posts.length + 1),
+            postheader: newtitle,
+            postcontent: newcontent,
+            postpicturecontent: "../public/img/" + uploadedFile,
+            upvotes : "0",
+            downvotes : "0",
+            numberofreplies : "0" 
         }
         Posts.push(newPost)
         console.log(Posts) 
-        res.redirect('/mainpage')
+        res.redirect('/mainpage_logged')
 
     }
 })
@@ -202,7 +232,7 @@ app.post('/submitsignup', (req,res) => {
         };
     usersData.push(newUser);
     console.log(usersData);
-    res.redirect('/mainpage')
+    res.redirect('/mainpage_logged')
 }
 })
 
@@ -215,7 +245,7 @@ app.post('/submitsignin', (req,res) => {
         if (usersData[i].username == username){
             for (let j = 0; j < usersData.length; j++){
                 if (usersData[j].password == password){
-                    res.redirect('/mainpage')
+                    res.redirect('/mainpage_logged')
                 } 
             }
         }

@@ -30,10 +30,10 @@
                         </div>
                         <div class="profilecontainer">
                             <div class="profiledisplayname">
-                                <span>{{CurrUserDisplayName}}</span>
+                                <span>{{username}}</span>
                             </div>
                             <div class="profilehandlename">
-                                <span>{{CurrUserHandle}}</span>
+                                <span>{{userhandle}}</span>
                             </div>
                         </div>
                     </div>
@@ -53,16 +53,16 @@
                         <a href="{{PosterProfileLink}}"> <img class="userimg" src="{{PosterPfpDir}}"> </a>
                     </div>
                 <div class="postuserinfo"> 
-                    <p> {{PosterName}} <br><span>{{PosterHandle}}</span><br> Bits: {{PosterBits}}</p>
+                    <p> {{username}} <br><span>{{userhandle}}</span><br> Bits: {{PosterBits}}</p>
                 </div>
                 <div class="postdate"> 
-                    <h5> Posted on: {{DateString}}</h5>
+                    <h5> Posted on: {{dateofpost}}</h5>
                     <p> {{DateDistance}} </p>
                 </div>
             </div>
             <div class="postinfocontainer">
-                <h4> {{PostTitle}} </h4>
-                <p> {{PostContent}} </p>
+                <h4> {{postheader}} </h4>
+                <p> {{postcontent}} </p>
                 <div class="replybutton"> <a href=""> Reply </a> </div>
             </div>
         </div>
