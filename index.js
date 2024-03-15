@@ -8,6 +8,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const moment = require('moment')
 
+let currPost = 0;
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/public", express.static(__dirname + '/public'));
 app.engine("hbs", exphbs.engine(
@@ -210,6 +212,10 @@ app.get('/mainpage_logged', (req, res) => {
     res.render("mainpage_logged.hbs", {posts: Posts, user: user});
 });
 
+app.get('/profilepage', (req, res) => {
+    res.render("profileview", {currentUser});
+});
+
 app.get('/Create_post', function (req, res) {
     res.render("CreatePost.hbs");
 });
@@ -230,6 +236,7 @@ app.get('/Sign_in', function (req, res) {
 
 app.get ('/samplepost1/:postId', (req, res) =>{
     const id = req.params.postId
+    currPost = id;
     console.log(id)
     let returnedPost, userPosted
     let postReplies = []
@@ -379,8 +386,23 @@ app.post('/deletepost/:postId', (req, res) => {
     res.redirect('/mainpage_logged')
 })
 
+app.post('/submitreply', (req, res) => {
+    let replyDate = new Date();
+    let replycontent = req.body.replytextcontent;
+    let currReply = new Reply(currPost, currentUser.username, currentUser.userhandle, currentUser.password, currentUser.pfplink, currentUser.bits, currentUser.aboutme, replycontent, replyDate);
+    Replies.push(currReply);
+    res.redirect('/samplepost1/'+currPost);
+})
 
+app.post('/submiteditprofile', (req, res) => {
+    let newDesc = req.body.profileDescription;
+    currentUser.aboutme = newDesc;
+    // Handle the updated profile description here (save to database, etc.)
+    console.log("New profile description:", newDesc);
 
+    // Redirect the user back to the profile page or any other page
+    res.redirect('/profilepage');
+});
 app.listen(3000, function () {
     console.log("Server is running on localhost 3000");
 });

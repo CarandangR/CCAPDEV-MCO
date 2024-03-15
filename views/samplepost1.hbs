@@ -85,9 +85,11 @@
         </div>
         <div class="replyinputarea"> 
             <div class="replyinputbox">
+                <form action="/submitreply" method="POST"> 
                 <input type="text" id="replytextcontent" name="replytextcontent" placeholder="Reply to this post..."/> 
             </div>
-            <div class="replybutton"> <a href=""> Reply </a> </div>
+            <div class="replybutton"><button type="submit" value="submit"> Reply </button> </div>
+            </form>
         </div>
         </div>
         {{#each reply}}

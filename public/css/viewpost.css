@@ -402,6 +402,19 @@ body
     border-radius: 5px;
     
 }
+
+.replybutton button {
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+    display:block;
+    background-color: #BD8FCB;
+    margin: auto;
+    padding: 5px;
+    border-radius: 5px;
+    border: none; 
+}
+
 .replybutton a:hover {
     background-color: #7A03A1;
 }
