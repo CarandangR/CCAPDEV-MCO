@@ -229,6 +229,7 @@ app.get('/profileview/:username', (req, res) => {
 });
 
 app.get('/Create_post', function (req, res) {
+    console.log(currentCommunity)
     res.render("CreatePost.hbs", currentUser);
 });
 app.get('/samplepost2', (req, res) => {
