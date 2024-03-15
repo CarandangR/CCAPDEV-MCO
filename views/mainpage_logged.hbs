@@ -21,17 +21,17 @@
                         <div class="profile">
                             <div class="profileicon">
                                 <div class="profileiconholder">
-                                    <a href="{{userhandlelink}}">
-                                    <img src="{{pfplink}}"/>
+                                    <a href="{{user.userhandlelink}}">
+                                    <img src="{{user.pfplink}}"/>
                                     </a>
                                 </div>
                             </div>
                             <div class="profilecontainer">
                                 <div class="profiledisplayname">
-                                    <span>gojowithiphone</span>
+                                    <span>{{user.username}}</span>
                                 </div>
                                 <div class="profilehandlename">
-                                    <span>u/gojo1234</span>
+                                    <span>{{user.userhandle}}</span>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
             <div class="createpost">
                 <div class="createposticon">
                     <div class="createpostusericonholder">
-                        <img src="/public/img/pfp.jpg"/>
+                        <img src="{{pfplink}}"/>
                     </div>
                 </div>
                 <div class="createposttext">

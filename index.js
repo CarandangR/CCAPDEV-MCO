@@ -191,7 +191,8 @@ app.get('/main_community/:community', function(req,res){
 })
 app.get('/mainpage_logged', (req, res) => {
     console.log
-    res.render("mainpage_logged.hbs", {posts: Posts});
+    let user = currentUser;
+    res.render("mainpage_logged.hbs", user,{posts: Posts});
 });
 
 app.get('/Create_post', function (req, res) {
