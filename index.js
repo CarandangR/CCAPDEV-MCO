@@ -104,10 +104,10 @@ const Reply = function(postId, username, userhandle, userhandlelink, pfplink, bi
     this.replydate = replydate;
 };
 
-let applecommunity = new community("../public/img/apple_logo.jpg", "Apple", "b/apple", "/main_community/apple", "100","75", "../public/img/apple_banner.jpg" );
-let webdevcommunity = new community("../public/img/webdevicon.png", "Web Development", "b/webdev", "/main_community/webdev", "1000", "500", "");
-let pcMasterrace = new community("../public/img/pcmrlogo.png", "PC MasterRace", "b/PCMasterRace", "/main_community/PCMasterRace", "1000", "500", "");
-let pcBuilding = new community("../public/img/pcbuildinglogo.png", "PC Building", "b/PCBuilding", "/main_community/PCBuilding", "1000", "500", "");
+let applecommunity = new community("../public/img/apple_logo.jpg", "apple", "b/apple", "/main_community/apple", "100","75", "../public/img/apple_banner.jpg" );
+let webdevcommunity = new community("../public/img/webdevicon.png", "web development", "b/webdev", "/main_community/webdev", "1000", "500", "");
+let pcMasterrace = new community("../public/img/pcmrlogo.png", "pc masterrace", "b/pcmasterrace", "/main_community/pcmasterRace", "1000", "500", "");
+let pcBuilding = new community("../public/img/pcbuildinglogo.png", "pc building", "b/pcbuilding", "/main_community/pcbuilding", "1000", "500", "");
 let currentCommunity = applecommunity;
 
 let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "../public/img/pfp.jpg", "infinite", "Nah, I'd win.", "/profileview/gojowithiphone");
@@ -248,7 +248,7 @@ app.get('/main_community/:community', function(req,res){
             filteredPosts.push(Posts[j])
         }
     }
-    console.log(currentCommunity);
+    console.log(filteredPosts);
     res.render ("main_community.hbs", {posts: filteredPosts, user: user, community: currentCommunity})
 })
 app.get('/mainpage_logged', (req, res) => {
