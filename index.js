@@ -228,8 +228,13 @@ app.get('/profileview/:username', (req, res) => {
             userPosts.push(Posts[j])
         }
     }
-
-    res.render("profileview.hbs", {currentUser, selectedProfile, posts: userPosts});
+    if(currentUser.username != profilename) {
+        res.render("guest_profileview.hbs", {currentUser, selectedProfile, posts: userPosts});
+        console.log("not own profilepage");
+    }
+    else{ 
+        res.render("profileview.hbs", {currentUser, selectedProfile, posts: userPosts});
+    }
 });
 
 app.get('/Create_post', function (req, res) {
@@ -413,10 +418,7 @@ app.post('/submitreply', (req, res) => {
 app.post('/submiteditprofile', (req, res) => {
     let newDesc = req.body.profileDescription;
     currentUser.aboutme = newDesc;
-    // Handle the updated profile description here (save to database, etc.)
     console.log("New profile description:", newDesc);
-
-    // Redirect the user back to the profile page or any other page
     res.redirect('/profilepage');
 });
 app.listen(3000, function () {
