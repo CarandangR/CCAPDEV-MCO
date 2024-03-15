@@ -112,7 +112,7 @@ let currentCommunity = applecommunity;
 
 let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "../public/img/pfp.jpg", "infinite", "Nah, I'd win.", "/profileview/gojowithiphone");
 let newUser = new users("sukunawithnokia", "u/sukuna", "12345", "../public/img/sukunayes.png", "1000", "Nah, I'd lose.", "/profileview/sukunawithnokia");
-let newUser2 = new users("Wala_3h", "u/WalaEh", "12345", "../public/img/AYAKA.jpg", "1", "hello!", "/profileview/WalaEh");
+let newUser2 = new users("Wala_3h", "u/WalaEh", "12345", "../public/img/AYAKA.jpg", "1", "hello!", "/profileview/Wala_3h");
 let newUser3 = new users("Goatkotsu", "u/yutaokkotsu", "12345", "../public/img/goatkotsu.png", "100", "Nah, I'd copy.", "/profileview/Goatkotsu");
 let newUser4 = new users("LumpiangToge", "u/tunamayo", "12345", "../public/img/lumpiangtoge.jpg", "tuna", "Bonito flakes salmon cod roe", "/profileview/LumpiangToge");
 let newUser5 = new users("JoshHutcherson", "u/weewoowooweewoo", "12345", "../public/img/joshhutcherson.PNG", "46290", "Stream whistle", "/profileview/JoshHutcherson");
@@ -162,9 +162,9 @@ let Posts = [
     {
         postId: "1112",
         communityinfo: webdevcommunity,
-        userhandlelink: "/profileview/sukunawithnokia",
+        userhandlelink: "/profileview/Wala_3h",
         userhandle: "u/wala3h",
-        username: "sukunaryomen",
+        username: "Wala_3h",
         dateofpost: new Date(2017, 11, 24, 10, 33, 30, 0),
         linkofpost: "/samplepost1/1112" , 
         postheader: "MDN is very nice",
@@ -179,7 +179,7 @@ let Posts = [
         communityinfo: applecommunity,
         userhandlelink: "/profileview/sukunawithnokia",
         userhandle: "u/sukunaryomen",
-        username: "SukunaWithNokia",
+        username: "sukunawithnokia",
         dateofpost: new Date(2019, 11, 24, 10, 33, 30, 0),
         linkofpost: "/samplepost1/1113" , 
         postheader: "Sell me on the iphone",
