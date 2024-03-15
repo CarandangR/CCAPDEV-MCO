@@ -43,7 +43,7 @@ app.set("view engine", "hbs");
 
 const post = function(postId, communityicon,community, communitylink, userhandlelink,
                         userhandle, username, dateofpost, linkofpost, postheader,
-                        postcontent, postpicturecontent, upvotes, downvotes, numberofreplies, replies, replierusername){
+                        postcontent, postpicturecontent, upvotes, downvotes, numberofreplies){
     
     this.postId = postId;
     this.communityicon = communityicon;
@@ -73,24 +73,45 @@ const users = function(username, userhandle, password, pfplink, bits, aboutme){
     this.aboutme = aboutme;
 }
 
-const reply = function(userdeets, replycontent, replydate){
-
+const Reply = function(postId, username, userhandle, password, pfplink, bits, aboutme, replycontent, replydate) {
     this.postId = postId;
-    this.userdeets = userdeets;
+    this.userdeets = {
+        username: username,
+        userhandle: userhandle,
+        password: password,
+        pfplink: pfplink,
+        bits: bits,
+        aboutme: aboutme
+    };
     this.replycontent = replycontent;
     this.replydate = replydate;
-}
+};
 
 let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "../public/img/pfp.jpg", "infinite", "Nah, I'd win.");
+let newUser = new users("sukunewithnokia", "u/sukuna", "12345", "../public/img/sukunayes.png", "1000", "Nah, I'd lose.");
 let repliesData = [1,2,3]
 let postsData = [];
 let usersData = [];
 let Replies = [{
     postId : "1111",
-    username : "Sukuna",
+    userdeets: newUser,
     replycontent : "Bakit",
     replydate : new Date(2018, 11, 25, 10, 33, 30, 0),
-}]
+},{
+    postId : "1111",
+    userdeets: newUser,
+    replycontent : "Fraudjo",
+    replydate : new Date(2018, 11, 25, 10, 35, 30, 0),
+},{
+    postId : "1112",
+    userdeets: newUser,
+    replycontent : "Test",
+    replydate : new Date(2018, 11, 25, 10, 35, 30, 0),
+}
+]
+
+
+
 let Posts = [
     {
         postId: "1111",
