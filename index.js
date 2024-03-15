@@ -112,11 +112,12 @@ let usersData = [];
 usersData.push(currentUser, newUser);
 
 //sample replies
-let reply1 = new Reply("1111", newUser.username, newUser.userhandle, newUser.profilelink, newUser.pfplink, newUser.bits, "Bakit", new Date(2018, 11, 25, 10, 33, 30, 0))
-let reply2 = new Reply("1111", newUser.username, newUser.userhandle, newUser.profilelink, newUser.pfplink, newUser.bits, "Fraudjo", new Date(2018, 11, 25, 10, 35, 30, 0))
-let reply3 = new Reply("1112", newUser.username, newUser.userhandle, newUser.profilelink, newUser.pfplink, newUser.bits, "Skill Issue", new Date(2018, 12, 25, 10, 33, 30, 0))
+let reply1 = new Reply("1111", newUser.username, newUser.userhandle, newUser.userprofilelink, newUser.pfplink, newUser.bits, "Bakit", new Date(2018, 11, 25, 10, 33, 30, 0))
+let reply2 = new Reply("1111", newUser.username, newUser.userhandle, newUser.userprofilelink, newUser.pfplink, newUser.bits, "Fraudjo", new Date(2018, 11, 25, 10, 35, 30, 0))
+let reply3 = new Reply("1112", newUser.username, newUser.userhandle, newUser.userprofilelink, newUser.pfplink, newUser.bits, "Skill Issue", new Date(2018, 12, 25, 10, 33, 30, 0))
 
 let Replies = []
+
 Replies.push(reply1, reply2, reply3)
 
 
@@ -171,6 +172,8 @@ let Posts = [
 
 app.get("/", function (req, res) {
     res.redirect('/mainpage_logged');
+    
+
 });
 
 app.get('/mainpage', (req, res) => {
@@ -179,7 +182,6 @@ app.get('/mainpage', (req, res) => {
 });
 app.get('/main_community/:community', function(req,res){
     const communityname = req.params.community
-    //currentCommunity = communityname
     for (let i = 0; i < communityData.length; i++){
         if (communityData[i].communitydisplayname == ("b/"+communityname)){
             currentCommunity = communityData[i]
@@ -268,7 +270,7 @@ app.get ('/samplepost1/:postId', (req, res) =>{
             
         }
     }
-    console.log(userPosted)
+    console.log(postReplies)
     //const post = Posts.find(post => post.postId === parseInt(id))
     res.render ("samplepost1", {returnedPost, userPosted, reply: postReplies})
 

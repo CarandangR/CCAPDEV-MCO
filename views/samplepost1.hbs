@@ -92,9 +92,16 @@
             </form>
         </div>
         </div>
-        {{#each reply}}
-                {{> postreply}}
-        {{/each}}
+        {{#if reply}}
+            {{#each reply}}
+                    {{> postreply}}
+            {{/each}}
+        {{else}}
+            
+            <div class="replybox"> 
+                    <h4 style="text-align: center">Wow such empty</h4>
+            </div>
+        {{/if}}
     </div>
 </div>
 </body>
