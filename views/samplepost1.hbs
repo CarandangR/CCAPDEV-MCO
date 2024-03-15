@@ -76,7 +76,13 @@
                 </div>
             </div>
         </div>
-
+        <div class="replyinputarea"> 
+            <div class="replyinputbox">
+                <input type="text" id="replytextcontent" name="replytextcontent" placeholder="Reply to this post..."/> 
+            </div>
+            <div class="replybutton"> <a href=""> Reply </a> </div>
+        </div>
+        </div>
         {{#each reply}}
                 {{> postreply this}}
         {{/each}}
