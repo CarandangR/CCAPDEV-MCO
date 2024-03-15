@@ -63,6 +63,13 @@
             <div class="postinfocontainer">
                 <h4> {{returnedPost.postheader}} </h4>
                 <p> {{returnedPost.postcontent}} </p>
+                <div class="postpicturecontent">
+                {{#if returnedPost.postpicturecontent}}
+                    <img src="{{returnedPost.postpicturecontent}}"/>
+                {{else}}
+                    <span></span>
+                {{/if}}
+    </div>
                 <div class="footer">
                     <div class="upbit">
                         <img src="../public/img/up-arrow-regular-24.png"/>

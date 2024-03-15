@@ -232,9 +232,10 @@ app.get ('/samplepost1/:postId', (req, res) =>{
                 }
             }
             
-            //console.log(returnedPost)
+            
         }
     }
+    console.log(returnedPost)
     //const post = Posts.find(post => post.postId === parseInt(id))
     res.render ("samplepost1", {returnedPost, userPosted, reply: postReplies})
 
