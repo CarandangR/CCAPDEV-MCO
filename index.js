@@ -84,6 +84,7 @@ const users = function(username, userhandle, password, pfplink, bits, aboutme, u
     this.pfplink = pfplink
     this.bits = bits;
     this.aboutme = aboutme;
+    this.userprofilelink = userprofilelink
 }
 
 const Reply = function(postId, username, userhandle, password, pfplink, bits, aboutme, replycontent, replydate) {
@@ -228,7 +229,7 @@ app.get('/profileview/:username', (req, res) => {
         }
     }
 
-    res.render("profileview.hbs", {selectedProfile, posts: userPosts});
+    res.render("profileview.hbs", {currentUser, selectedProfile, posts: userPosts});
 });
 
 app.get('/Create_post', function (req, res) {

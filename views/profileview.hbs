@@ -11,8 +11,8 @@
             <div class = "headercontent">
                 <div class="headerhome">
                     <div class="websitelogo">
-                        <a href="./main.html"><img src="../public/img/byte_logo.png"/></a>
-                        <span class = "link"> <a style = "color: beige; text-decoration: none" href = "./main.html"> byte. </a> </span>
+                        <a href="../mainpage_logged"><img src="../public/img/byte_logo.png"/></a>
+                        <span class = "link"> <a style = "color: beige; text-decoration: none" href = "../mainpage_logged"> byte. </a> </span>
                     </div>
                 </div>
                 <div class="headersearchbar">
@@ -22,22 +22,22 @@
                     <div class="profile">
                         <div class="profileicon">
                             <div class="profileiconholder">
-                                <a href="{{CurrUserProfileLink}}">
-                                <img src="{{selectedProfile.pfplink}}"/>
+                                <a href="{{currentUser.userprofilelink}}">
+                                <img src="{{currentUser.pfplink}}"/>
                                 </a>
                             </div>
                         </div>
                         <div class="profilecontainer">
                             <div class="profiledisplayname">
-                                <span>{{selectedProfile.username}}</span>
+                                <span>{{currentUser.username}}</span>
                             </div>
                             <div class="profilehandlename">
-                                <span>{{selectedProfile.userhandle}}</span>
+                                <span>{{currentUser.userhandle}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="topbuttons">
-                        <a href="./main_not_logged.html"> Log out </a>
+                        <a href="/Sign_up"> Log out </a>
                     </div>
                 </div>
             </div>
