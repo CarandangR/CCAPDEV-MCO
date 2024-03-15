@@ -77,6 +77,7 @@ const users = function(username, userhandle, password, pfplink, bits, aboutme){
     this.pfplink = pfplink
     this.bits = bits;
     this.aboutme = aboutme;
+    this.userprofilelink = userprofilelink;
 }
 
 const Reply = function(postId, username, userhandle, password, pfplink, bits, aboutme, replycontent, replydate) {
@@ -170,7 +171,7 @@ let Posts = [
 
 usersData.push(currentUser);
 app.get("/", function (req, res) {
-    res.redirect('/mainpage');
+    res.redirect('/mainpage_logged');
 });
 
 app.get('/mainpage', (req, res) => {
@@ -190,9 +191,9 @@ app.get('/main_community/:community', function(req,res){
     res.render ("main_community.hbs")
 })
 app.get('/mainpage_logged', (req, res) => {
-    console.log
     let user = currentUser;
-    res.render("mainpage_logged.hbs", user,{posts: Posts});
+    console.log(user);
+    res.render("mainpage_logged.hbs", {posts: Posts, user: user});
 });
 
 app.get('/Create_post', function (req, res) {
