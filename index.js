@@ -44,7 +44,7 @@ app.set("view engine", "hbs");
 //Objects for Each data
 const community = function (communityicon, communitydisplayname, community, communitylink, totalmembers, onlinemembers){
     this.communityicon = communityicon;
-    this.communitydisplayname = communitydisplaymain;
+    this.communitydisplayname = communitydisplayname;
     this.community = community;
     this.communitylink = communitylink;
     this.totalmembers = totalmembers;
@@ -82,7 +82,7 @@ const users = function(username, userhandle, password, pfplink, bits, aboutme){
     this.pfplink = pfplink
     this.bits = bits;
     this.aboutme = aboutme;
-    this.userprofilelink = "/Profile";
+    this.userprofilelink = "/profilepage";
 }
 
 const Reply = function(postId, username, userhandle, password, pfplink, bits, aboutme, replycontent, replydate) {
@@ -202,6 +202,10 @@ app.get('/mainpage_logged', (req, res) => {
     let user = currentUser;
     console.log(user);
     res.render("mainpage_logged.hbs", {posts: Posts, user: user});
+});
+
+app.get('/profilepage', (req, res) => {
+    res.render("profileview", {currentUser});
 });
 
 app.get('/Create_post', function (req, res) {
@@ -382,6 +386,15 @@ app.post('/submitreply', (req, res) => {
     res.redirect('/samplepost1/'+currPost);
 })
 
+app.post('/submiteditprofile', (req, res) => {
+    let newDesc = req.body.profileDescription;
+    currentUser.aboutme = newDesc;
+    // Handle the updated profile description here (save to database, etc.)
+    console.log("New profile description:", newDesc);
+
+    // Redirect the user back to the profile page or any other page
+    res.redirect('/profilepage');
+});
 app.listen(3000, function () {
     console.log("Server is running on localhost 3000");
 });
