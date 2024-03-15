@@ -51,7 +51,7 @@ const community = function (communityicon, communitydisplayname, community, comm
     this.onlinemembers = onlinemembers;
     this.communitybanner = communitybanner;
 }
-const post = function(postId, communityinfo, communityicon,community, communitylink, userhandlelink,
+const post = function(postId, communityicon,community, communitylink, userhandlelink,
                         userhandle, username, dateofpost, linkofpost, postheader,
                         postcontent, postpicturecontent, upvotes, downvotes, numberofreplies){
     
@@ -64,7 +64,6 @@ const post = function(postId, communityinfo, communityicon,community, communityl
     this.userhandlelink = userhandlelink;
     this.userhandle = userhandle;
     this.username = username;
-    this.userprofilelink = userprofilelink;
     this.dateofpost = dateofpost;
     this.linkofpost = linkofpost;
     this.postheader = postheader;
@@ -102,6 +101,7 @@ const Reply = function(postId, username, userhandle, password, pfplink, bits, ab
 };
 let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "../public/img/pfp.jpg", "infinite", "Nah, I'd win.", "/profileview/gojowithiphone");
 let newUser = new users("sukunawithnokia", "u/sukuna", "12345", "../public/img/sukunayes.png", "1000", "Nah, I'd lose.", "/profileview/sukunawithnokia");
+
 let applecommunity = new community("../public/img/apple_logo.jpg", "b/apple", "b/apple", "/main_community/apple", "100","75", "../public/img/apple_banner.jpg" )
 let webdevcommunity = new community("../public/img/webdevicon.png", "b/webdev", "b/webdev", "/main_community/webdev", "1000", "500", "")
 let currentCommunity = applecommunity;
@@ -238,7 +238,7 @@ app.get('/profileview/:username', (req, res) => {
 });
 
 app.get('/Create_post', function (req, res) {
-    res.render("CreatePost.hbs");
+    res.render("CreatePost.hbs", currentUser);
 });
 app.get('/samplepost2', (req, res) => {
     res.render("samplepost2", {Title: "first sample post"});
@@ -320,30 +320,32 @@ app.post('/submitpost', upload.single('file'), (req,res) => {
     const seconds = uploadedTime.getSeconds()
 
     console.log(uploadedFile)
-
+    if (uploadedFile != ""){
+        uploadedFile = "../public/img/" + uploadedFile
+    }
 
     console.log(year, month, day, hours, mins)
     if (newtitle !== "" && newcontent !== ""){
-        const newPost = {
-            postId : Posts.length + 1,
-            userhandle : "u/gojo1234",
-            username : "gojowithiphone",
-            dateofpost: {
-                year: year,
-                month: month,
-                day: day,
-                hour: hours,
-                minute: mins,
-                seconds : seconds
-            },
-            linkofpost: "/samplepost1/" + (Posts.length + 1),
-            postheader: newtitle,
-            postcontent: newcontent,
-            postpicturecontent: "../public/img/" + uploadedFile,
-            upvotes : "0",
-            downvotes : "0",
-            numberofreplies : "0" 
-        }
+
+        const newPost = new post(Posts.length+1, 
+        currentCommunity.communityicon,
+        currentCommunity.community,
+        currentCommunity.communitylink,
+        currentUser.userprofilelink,
+        currentUser.userhandle,
+        currentUser.username,
+        uploadedTime,
+        "/samplepost1/" + (Posts.length + 1),
+        newtitle,
+        newcontent,
+        uploadedFile,
+        "0",
+        "0",
+        "0"
+          )
+        
+
+          
         Posts.push(newPost)
         console.log(Posts) 
         res.redirect('/mainpage_logged')
