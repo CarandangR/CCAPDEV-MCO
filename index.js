@@ -342,6 +342,29 @@ app.post('/submitsignin', (req,res) => {
     
 })
 
+
+app.post('/deletepost/:postId', (req, res) => {
+    const id = req.params.postId
+    console.log(id)
+    let removedId
+    for (let i = 0 ;i < Posts.length ; i++ ){
+        if (id == Posts[i].postId){
+            removedId = Posts[i].id
+            Posts.splice(1,i)
+            for (let k = 0; k <Replies.length; k++){
+                if (removedId == Replies[k].postId){
+                    Replies.splice(1, k)
+                }
+            }
+            
+            
+        }
+    }
+    res.redirect('/mainpage_logged')
+})
+
+
+
 app.listen(3000, function () {
     console.log("Server is running on localhost 3000");
 });
