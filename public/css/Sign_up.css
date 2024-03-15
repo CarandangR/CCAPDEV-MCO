@@ -122,7 +122,7 @@ body{
 
 }
 
-input[type="email"], [type = "password"] {
+input[type="text"], [type = "password"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
