@@ -337,7 +337,7 @@ app.get ('/samplepost1/:postId', (req, res) =>{
     }
     console.log(postReplies)
     //const post = Posts.find(post => post.postId === parseInt(id))
-    res.render ("samplepost1", {returnedPost, userPosted, reply: postReplies})
+    res.render ("samplepost1", {returnedPost, userPosted, reply: postReplies, currentUser})
 
 })
 
