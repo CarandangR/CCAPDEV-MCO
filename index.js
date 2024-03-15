@@ -415,6 +415,24 @@ app.post('/submiteditprofile', (req, res) => {
     console.log("New profile description:", newDesc);
     res.redirect('/profilepage');
 });
+
+app.post('/submiteditpfp', upload.single('file'), (req,res) => {
+    let uploadedFile
+    try {
+        uploadedFile = req.file.filename;
+    } catch (error) {
+        uploadedFile = ""
+        console.error("Error while getting the filename:", error);
+    }
+    if (uploadedFile != ""){
+        uploadedFile = "../public/img/" + uploadedFile
+    }
+    currentUser.pfplink = uploadedFile;
+    console.log(uploadedFile);
+    console.log(currentUser.pfplink);
+    res.redirect("/profilepage");
+});
+
 app.listen(3000, function () {
     console.log("Server is running on localhost 3000");
 });
