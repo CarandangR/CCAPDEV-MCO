@@ -23,7 +23,7 @@
                     <div class="profile">
                         <div class="profileicon">
                             <div class="profileiconholder">
-                                <a href="{{userPosted.userhandlelink}}">
+                                <a href="{{userPosted.userprofilelink}}">
                                 <img src="{{userPosted.pfplink}}"/>
                                 </a>
                             </div>
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="topbuttons">
-                        <a href="./main_not_logged.html"> Log out </a>
+                        <a href="/mainpage"> Log out </a>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                         <h5> {{returnedPost.community}} </h5>
                     </div>
                     <div class ="userpfp">
-                        <a href="{{userPosted.username}}"> <img class="userimg" src="{{userPosted.pfplink}}"> </a>
+                        <a href="{{userPosted.userprofilelink}}"> <img class="userimg" src="{{userPosted.pfplink}}"> </a>
                     </div>
                 <div class="postuserinfo"> 
                     <p> {{userPosted.username}} <br><span>{{userPosted.userhandle}}</span><br> Bits: {{userPosted.bits}}</p>
@@ -92,9 +92,16 @@
             </form>
         </div>
         </div>
-        {{#each reply}}
-                {{> postreply this}}
-        {{/each}}
+        {{#if reply}}
+            {{#each reply}}
+                    {{> postreply}}
+            {{/each}}
+        {{else}}
+            
+            <div class="replybox"> 
+                    <h4 style="text-align: center">Wow such empty</h4>
+            </div>
+        {{/if}}
     </div>
 </div>
 </body>

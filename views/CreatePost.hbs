@@ -33,18 +33,21 @@
                 <div class="profile">
                     <div class="profileicon">
                         <div class="profileiconholder">
-                            <a href="./profilepage2.html">
+                            <a href="{{currentUser.userprofilelink}}">
                             <img src="/public/img/pfp.jpg"/>
                             </a>
                         </div>
                     </div>
                     <div class="profilecontainer">
+                        <a href="{{currentUser.userprofilelink}}">
                         <div class="profiledisplayname">
+                            
                             <span>{{currentUser.username}}</span>
                         </div>
                         <div class="profilehandlename">
-                            <span>{{current.userhandle}}</span>
+                            <span>{{currentUser.userhandle}}</span>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <div class="topbuttons">

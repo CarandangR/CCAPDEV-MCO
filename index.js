@@ -91,15 +91,14 @@ const users = function(username, userhandle, password, pfplink, bits, aboutme, u
     };
 }
 
-const Reply = function(postId, username, userhandle, password, pfplink, bits, aboutme, replycontent, replydate) {
+const Reply = function(postId, username, userhandle, userhandlelink, pfplink, bits, replycontent, replydate) {
     this.postId = postId;
     this.userdeets = {
         username: username,
         userhandle: userhandle,
-        password: password,
+        userhandlelink: userhandlelink,
         pfplink: pfplink,
         bits: bits,
-        aboutme: aboutme
     };
     this.replycontent = replycontent;
     this.replydate = replydate;
@@ -117,8 +116,6 @@ communityData.push(applecommunity, webdevcommunity)
 let repliesData = [1,2,3]
 let usersData = [];
 usersData.push(currentUser, newUser);
-
-
 let Replies = [{
     postId : "1111",
     userdeets: newUser,
@@ -190,6 +187,8 @@ let Posts = [
 
 app.get("/", function (req, res) {
     res.redirect('/mainpage_logged');
+    
+
 });
 
 app.get('/mainpage', (req, res) => {
@@ -198,7 +197,6 @@ app.get('/mainpage', (req, res) => {
 });
 app.get('/main_community/:community', function(req,res){
     const communityname = req.params.community
-    //currentCommunity = communityname
     for (let i = 0; i < communityData.length; i++){
         if (communityData[i].community== ("b/"+communityname)){
             currentCommunity = communityData[i]
@@ -257,6 +255,7 @@ app.get('/profileview/:username', (req, res) => {
 });
 
 app.get('/Create_post', function (req, res) {
+    console.log(currentCommunity)
     res.render("CreatePost.hbs", currentUser);
 });
 app.get('/samplepost2', (req, res) => {
@@ -298,7 +297,7 @@ app.get ('/samplepost1/:postId', (req, res) =>{
             
         }
     }
-    console.log(returnedPost)
+    console.log(postReplies)
     //const post = Posts.find(post => post.postId === parseInt(id))
     res.render ("samplepost1", {returnedPost, userPosted, reply: postReplies})
 
@@ -374,19 +373,27 @@ app.post('/submitpost', upload.single('file'), (req,res) => {
 
 app.post('/submitsignup', (req,res) => { 
     let newusername = req.body.username;
+    let newuserhandle = req.body.userhandle
     let newpassword = req.body.password;
     let confirmpass = req.body.confirmpass;
     
+    for (let i = 0 ; i < usersData.length; i++){
+        if (newusername == usersData[i].username){
+            return res.status(400).json({ error: "Username already taken" });
+        }
+        if (newuserhandle == usersData[i].userhandle){
+            return res.status(400).json({ error: "Userhandle already taken" });        }
+    }
     if (newpassword == confirmpass){
-        const newUser ={
-            username: newusername,
-            password: newpassword,
-            bits: "0"
-        };
+        let newUser = new users(newusername,"u/"+newuserhandle,newpassword,"../public/img/nopfp.jpg", "0", "", "/profileview/"+newusername)
+        
     usersData.push(newUser);
+    currentUser = newUser
     console.log(usersData);
     res.redirect('/mainpage_logged')
-}
+    } else{
+        return res.status(400).json({ error: "Passwords are the same" }); 
+    }
 })
 
 app.post('/submitsignin', (req,res) => { 
@@ -399,7 +406,9 @@ app.post('/submitsignin', (req,res) => {
             for (let j = 0; j < usersData.length; j++){
                 if (usersData[j].password == password){
                     res.redirect('/mainpage_logged')
-                } 
+                } else{
+                    return res.status(400).json({ error: "Wrong Username/Password" }); 
+                }
             }
         }
     }
