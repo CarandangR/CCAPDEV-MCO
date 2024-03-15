@@ -103,19 +103,26 @@ const Reply = function(postId, username, userhandle, userhandlelink, pfplink, bi
     this.replycontent = replycontent;
     this.replydate = replydate;
 };
-let applecommunity = new community("../public/img/apple_logo.jpg", "Apple", "b/apple", "/main_community/apple", "100","75", "../public/img/apple_banner.jpg" )
-let webdevcommunity = new community("../public/img/webdevicon.png", "b/webdev", "b/webdev", "/main_community/webdev", "1000", "500", "")
+
+let applecommunity = new community("../public/img/apple_logo.jpg", "Apple", "b/apple", "/main_community/apple", "100","75", "../public/img/apple_banner.jpg" );
+let webdevcommunity = new community("../public/img/webdevicon.png", "Web Development", "b/webdev", "/main_community/webdev", "1000", "500", "");
+let pcMasterrace = new community("../public/img/pcmrlogo.png", "PC MasterRace", "b/PCMasterRace", "/main_community/PCMasterRace", "1000", "500", "");
+let pcBuilding = new community("../public/img/pcbuildinglogo.png", "PC Building", "b/PCBuilding", "/main_community/PCBuilding", "1000", "500", "");
 let currentCommunity = applecommunity;
 
-let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "../public/img/pfp.jpg", "infinite", "Nah, I'd win.", "/profileview/gojowithiphone", applecommunity);
+let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "../public/img/pfp.jpg", "infinite", "Nah, I'd win.", "/profileview/gojowithiphone");
 let newUser = new users("sukunawithnokia", "u/sukuna", "12345", "../public/img/sukunayes.png", "1000", "Nah, I'd lose.", "/profileview/sukunawithnokia");
-
+let newUser2 = new users("Wala_3h", "u/WalaEh", "12345", "../public/img/AYAKA.jpg", "1", "hello!", "/profileview/WalaEh");
+let newUser3 = new users("Goatkotsu", "u/yutaokkotsu", "12345", "../public/img/goatkotsu.png", "100", "Nah, I'd copy.", "/profileview/Goatkotsu");
+let newUser4 = new users("LumpiangToge", "u/tunamayo", "12345", "../public/img/lumpiangtoge.jpg", "tuna", "Bonito flakes salmon cod roe", "/profileview/LumpiangToge");
+let newUser5 = new users("JoshHutcherson", "u/weewoowooweewoo", "12345", "../public/img/joshhutcherson.PNG", "46290", "Stream whistle", "/profileview/JoshHutcherson");
+let newUser6 = new users("RickAstley", "u/nvrgonnagive", "12345", "../public/img/rickastley.PNG", "4M", "You up, Never gonna let you down", "/profileview/RickAstley");
 
 let communityData = []
-communityData.push(applecommunity, webdevcommunity)
-let repliesData = [1,2,3]
+communityData.push(applecommunity, webdevcommunity, pcMasterrace, pcBuilding)
 let usersData = [];
-usersData.push(currentUser, newUser);
+usersData.push(currentUser, newUser, newUser2, newUser3, newUser4, newUser5, newUser6);
+
 let Replies = [{
     postId : "1111",
     userdeets: newUser,
@@ -150,10 +157,7 @@ let Posts = [
         postpicturecontent: "../public/img/gojowithiphone1.png",
         upvotes: 1,
         downvotes: 0,
-        numberofreplies: repliesData.length + " replies",
-        replies : [{
-            
-        }]
+        numberofreplies: Replies.length + " replies",
     },
     {
         postId: "1112",
@@ -161,29 +165,63 @@ let Posts = [
         userhandlelink: "/profileview/sukunawithnokia",
         userhandle: "u/wala3h",
         username: "sukunaryomen",
-        dateofpost: new Date(2018, 11, 24, 10, 33, 30, 0),
+        dateofpost: new Date(2017, 11, 24, 10, 33, 30, 0),
         linkofpost: "/samplepost1/1112" , 
         postheader: "MDN is very nice",
         postcontent: "It really helped us in creating this website! It gave a fast and easy way to access information to different elements. ^_^",
         postpicturecontent: "",
         upvotes: 20,
         downvotes: 0,
-        numberofreplies: repliesData.length + " replies",
-        replies : [{
-            
-        }]
+        numberofreplies: Replies.length + " replies",
+    },
+    {
+        postId: "1113",
+        communityinfo: applecommunity,
+        userhandlelink: "/profileview/sukunawithnokia",
+        userhandle: "u/sukunaryomen",
+        username: "SukunaWithNokia",
+        dateofpost: new Date(2019, 11, 24, 10, 33, 30, 0),
+        linkofpost: "/samplepost1/1113" , 
+        postheader: "Sell me on the iphone",
+        postcontent: "I have an android right now and i love the thing to death. I have encountered zero problems with it. I had an iphone once and hated it. But it was the 4 or 4s. All of my friends have iphones and they live in a different state so I know getting an iphone would make it easier for us to communicate. The only problem I have with the iphones are that every time I get new music I have to resynce my whole phone just to add a couple songs or albums. With photos I had to use the photos app and again sync my phone in order to get them off the phone. With Android all I have to do is click and drag both my photos and music and in less than 30 seconds I am done. So r/apple sell on why I should get an ihpone</span>",
+        postpicturecontent: "",
+        upvotes: 20,
+        downvotes: 0,
+        numberofreplies: Replies.length + " replies",
+    },
+
+    {
+        postId: "1114",
+        communityinfo: pcMasterrace,
+        userhandlelink: "/profileview/JoshHutcherson",
+        userhandle: "u/weewoowooweewoo",
+        username: "JoshHutcherson",
+        dateofpost: new Date(2015, 11, 24, 10, 33, 30, 0),
+        linkofpost: "/samplepost1/1114" , 
+        postheader: "Need help fixing something",
+        postcontent: "I think I broke a part of my pc, video proof is in this link.",
+        postpicturecontent: "",
+        upvotes: 20,
+        downvotes: 0,
+        numberofreplies: Replies.length + " replies",
+    },
+
+    {
+        postId: "1115",
+        communityinfo: pcBuilding,
+        userhandlelink: "/profileview/Goatkotsu",
+        userhandle: "u/yutaokkotsu",
+        username: "Goatkotsu",
+        dateofpost: new Date(2014, 11, 24, 10, 33, 30, 0),
+        linkofpost: "/samplepost1/1115" , 
+        postheader: "What are the ideal specs for a PC in 2023?",
+        postcontent: "I'm thinking of building my own PC within the next couple months once I save up enough money and I need some second opinions on if the PC hardware I'm looking at would run games like Minecraft, Overwatch 2, COD, etc. smoothly/around 1080p. I'll most likely be using it for uni assignments and general browsing on the side",
+        postpicturecontent: "",
+        upvotes: 20,
+        downvotes: 0,
+        numberofreplies: Replies.length + " replies",
     }
-    
 ];
-
-
-
-
-
-
-
-
-
 
 app.get("/", function (req, res) {
     res.redirect('/mainpage_logged');
@@ -226,7 +264,7 @@ app.get('/hotposts', (req, res) => {
 
 app.get('/newposts', (req, res) => {
     let user = currentUser;
-    let newposts = posts.sort((a, b) => b.dateofpost - a.dateofpost);
+    let newposts = Posts.sort((a, b) => b.dateofpost - a.dateofpost);
     res.render("mainpage_logged.hbs", {posts: newposts, user: user});
 });
 app.get('/profileview/:username', (req, res) => {
