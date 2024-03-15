@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> Profile page </title>
+    <link rel="stylesheet" type="text/css" href="../public/css/profilepage.css" />
+    <script src="../public/js/profile.js" defer></script>
+</head>
+<body>
+    <div class="homecontainer">
+        <div class = "webheader">
+            <div class = "headercontent">
+                <div class="headerhome">
+                    <div class="websitelogo">
+                        <a href="../mainpage_logged"><img src="../public/img/byte_logo.png"/></a>
+                        <span class = "link"> <a style = "color: beige; text-decoration: none" href = "../mainpage_logged"> byte. </a> </span>
+                    </div>
+                </div>
+                <div class="headersearchbar">
+                    <input type="search" class="searchbar" placeholder="Search byte"/>
+                </div>
+                <div class="headerprofile">
+                    <div class="profile">
+                        <div class="profileicon">
+                            <div class="profileiconholder">
+                                <a href="{{currentUser.userprofilelink}}">
+                                <img src="{{currentUser.pfplink}}"/>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="profilecontainer">
+                            <div class="profiledisplayname">
+                                <span>{{currentUser.username}}</span>
+                            </div>
+                            <div class="profilehandlename">
+                                <span>{{currentUser.userhandle}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="topbuttons">
+                        <a href="/Sign_up"> Log out </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="mainpage"> 
+            <div class="profilecontainer1">
+                <div class="userinfo">
+                    <div class="userpfp">
+                        <img class="userimg" src="{{selectedProfile.pfplink}}" />
+                    </div>
+                    <div class="pfpeditbutton"> <a href="" style="display: none;"> Edit </a></div>
+                </div>
+
+                <div class="profileinfo"> 
+                    <h3> {{selectedProfile.username}} </h3> <span>{{selectedProfile.userhandle}}</span><span class="usertitle" style="color: green">{{selectedProfile.role}}</span>
+                    <h5> Bits: {{selectedProfile.bits}} </h5>
+                    <h4> About me: </h4>
+                    
+                    <div class="profiledesc">
+                        <p name="profiledescription" id ="profiledescription">{{selectedProfile.aboutme}}</p>
+                    </div>
+                        
+                    
+                    <div class="editbutton"> 
+                        <form action="submiteditprofile"method="POST"><button type="submit">Confirm</button></form>
+                        <a href="" style="display: none;"> Edit description </a> 
+                    </div>
+                </div> 
+            </div>
+            <div class="latestpostscontainer">  
+                <h2> Latest Posts: </h2> 
+                {{#each posts}}
+                {{> profilepost this}}
+            {{/each}}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
