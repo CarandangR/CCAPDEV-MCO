@@ -76,7 +76,7 @@ const post = function(postId, communityinfo, communityicon,community, communityl
               
 }
 
-const users = function(username, userhandle, password, pfplink, bits, aboutme, userprofilelink){
+const users = function(username, userhandle, password, pfplink, bits, aboutme, userprofilelink, communitiesmember){
 
     this.username = username;
     this.userhandle = userhandle;
@@ -84,7 +84,8 @@ const users = function(username, userhandle, password, pfplink, bits, aboutme, u
     this.pfplink = pfplink
     this.bits = bits;
     this.aboutme = aboutme;
-    this.userprofilelink = userprofilelink
+    this.userprofilelink = userprofilelink;
+    this.communitiesmember = communitiesmember;
 }
 
 const Reply = function(postId, username, userhandle, password, pfplink, bits, aboutme, replycontent, replydate) {
@@ -100,7 +101,7 @@ const Reply = function(postId, username, userhandle, password, pfplink, bits, ab
     this.replycontent = replycontent;
     this.replydate = replydate;
 };
-let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "../public/img/pfp.jpg", "infinite", "Nah, I'd win.", "/profileview/gojowithiphone");
+let currentUser = new users("gojowithiphone", "u/gojo1234", "12345", "../public/img/pfp.jpg", "infinite", "Nah, I'd win.", "/profileview/gojowithiphone", applecommunity);
 let newUser = new users("sukunawithnokia", "u/sukuna", "12345", "../public/img/sukunayes.png", "1000", "Nah, I'd lose.", "/profileview/sukunawithnokia");
 let applecommunity = new community("../public/img/apple_logo.jpg", "b/apple", "b/apple", "/main_community/apple", "100","75", "../public/img/apple_banner.jpg" )
 let webdevcommunity = new community("../public/img/webdevicon.png", "b/webdev", "b/webdev", "/main_community/webdev", "1000", "500", "")
@@ -111,6 +112,8 @@ communityData.push(applecommunity, webdevcommunity)
 let repliesData = [1,2,3]
 let usersData = [];
 usersData.push(currentUser, newUser);
+
+
 let Replies = [{
     postId : "1111",
     userdeets: newUser,
@@ -181,7 +184,7 @@ let Posts = [
 
 
 app.get("/", function (req, res) {
-    res.redirect('/mainpage_logged');
+    res.redirect('/mainpage');
 });
 
 app.get('/mainpage', (req, res) => {
@@ -204,12 +207,12 @@ app.get('/main_community/:community', function(req,res){
             filteredPosts.push(Posts[j])
         }
     }
-    res.render ("main_community.hbs", {posts: filteredPosts, user: user, currentCommunity}) //comment add community object here for handlebars
+    res.render ("main_community.hbs", {posts: filteredPosts, user: user, currentCommunity, communitydrop: user.communitiesmember}) //comment add community object here for handlebars
 })
 app.get('/mainpage_logged', (req, res) => {
     let user = currentUser;
     
-    res.render("mainpage_logged.hbs", {posts: Posts, user: user});
+    res.render("mainpage_logged.hbs", {posts: Posts, user: user, communitydrop: user.communitiesmember});
 });
 
 app.get('/profileview/:username', (req, res) => {

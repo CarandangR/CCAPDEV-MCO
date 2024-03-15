@@ -69,9 +69,9 @@
                           <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-content">
-                          <a href="/main_community.html">r/apple</a>
-                          <a href="#">Link 2</a>
-                          <a href="#">Link 3</a>
+                            {{#each communitydrop}}
+                                {{> dropdown this}}
+                            {{/each}}
                         </div>
                     </div>
                 </div>
