@@ -23,16 +23,16 @@
                         <div class="profileicon">
                             <div class="profileiconholder">
                                 <a href="{{CurrUserProfileLink}}">
-                                <img src="{{currentUser.pfplink}}"/>
+                                <img src="{{selectedProfile.pfplink}}"/>
                                 </a>
                             </div>
                         </div>
                         <div class="profilecontainer">
                             <div class="profiledisplayname">
-                                <span>{{currentUser.username}}</span>
+                                <span>{{selectedProfile.username}}</span>
                             </div>
                             <div class="profilehandlename">
-                                <span>{{currentUser.userhandle}}</span>
+                                <span>{{selectedProfile.userhandle}}</span>
                             </div>
                         </div>
                     </div>
@@ -47,18 +47,18 @@
             <div class="profilecontainer1">
                 <div class="userinfo">
                     <div class="userpfp">
-                        <img class="userimg" src="{{currentUser.pfplink}}" />
+                        <img class="userimg" src="{{selectedProfile.pfplink}}" />
                     </div>
                     <div class="pfpeditbutton"> <a href=""> Edit </a></div>
                 </div>
 
                 <div class="profileinfo"> 
-                    <h3> {{currentUser.username}} </h3> <span>{{currentUser.userhandle}}</span><span class="usertitle" style="color: green">{{currentUser.role}}</span>
-                    <h5> Bits: {{currentUser.bits}} </h5>
+                    <h3> {{selectedProfile.username}} </h3> <span>{{selectedProfile.userhandle}}</span><span class="usertitle" style="color: green">{{selectedProfile.role}}</span>
+                    <h5> Bits: {{selectedProfile.bits}} </h5>
                     <h4> About me: </h4>
                     
                     <div class="profiledesc">
-                        <p>{{currentUser.aboutme}}</p>
+                        <p>{{selectedProfile.aboutme}}</p>
                     </div>
                         
                     
@@ -70,18 +70,9 @@
             </div>
             <div class="latestpostscontainer">  
                 <h2> Latest Posts: </h2> 
-                <div class="latestpost"> 
-                    <div class="latestpostinfo">
-                        <div class="latestpostpfp"> 
-                            <a href="./profilepage1.html"> <img class="userimg" src="{{currentUser.pfplink}}"/> </a>
-                        </div>
-                        <p> {{currentUser.username}} <br> <span style="padding: 5px;"> {{currentUser.userhandle}}</span><br> Bits: {{currentUser.bits}}</p>
-                    </div>
-                    <div class="latestpostsdetails"> 
-                        <h4> <a href="./samplepost1.html"> {{PostTitle}} </a> </h4> 
-                        <p> {{PostDesc}} </p>
-                    </div>
-                </div>
+                {{#each posts}}
+                {{> profilepost this}}
+            {{/each}}
             </div>
         </div>
     </div>

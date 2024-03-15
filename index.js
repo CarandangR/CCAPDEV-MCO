@@ -64,6 +64,7 @@ const post = function(postId, communityinfo, communityicon,community, communityl
     this.userhandlelink = userhandlelink;
     this.userhandle = userhandle;
     this.username = username;
+    this.userprofilelink = userprofilelink;
     this.dateofpost = dateofpost;
     this.linkofpost = linkofpost;
     this.postheader = postheader;
@@ -83,7 +84,6 @@ const users = function(username, userhandle, password, pfplink, bits, aboutme, u
     this.pfplink = pfplink
     this.bits = bits;
     this.aboutme = aboutme;
-    this.userprofilelink = userprofilelink;
 }
 
 const Reply = function(postId, username, userhandle, password, pfplink, bits, aboutme, replycontent, replydate) {
@@ -109,6 +109,7 @@ let communityData = []
 communityData.push(applecommunity, webdevcommunity)
 let repliesData = [1,2,3]
 let usersData = [];
+usersData.push(currentUser, newUser);
 let Replies = [{
     postId : "1111",
     userdeets: newUser,
@@ -133,7 +134,7 @@ let Posts = [
     {
         postId: "1111",
         communityinfo: applecommunity,
-        userhandlelink: "/profilepage",
+        userhandlelink: "/profileview/gojowithiphone",
         userhandle: "u/gojo1234",
         username: "gojowithiphone",
         dateofpost: new Date(2018, 11, 24, 10, 33, 30, 0),
@@ -151,7 +152,7 @@ let Posts = [
     {
         postId: "1112",
         communityinfo: webdevcommunity,
-        userhandlelink: "/profilepage",
+        userhandlelink: "/profileview/sukunawithnokia",
         userhandle: "u/wala3h",
         username: "sukunaryomen",
         dateofpost: new Date(2018, 11, 24, 10, 33, 30, 0),
@@ -177,7 +178,7 @@ let Posts = [
 
 
 
-usersData.push(currentUser);
+
 app.get("/", function (req, res) {
     res.redirect('/mainpage_logged');
 });
@@ -199,11 +200,9 @@ app.get('/main_community/:community', function(req,res){
     console.log(Posts.length)
     for (let j = 0; j < Posts.length; j++){
         if (Posts[j].communityinfo.community == ("b/"+communityname)){
-            console.log("trigger")
             filteredPosts.push(Posts[j])
         }
     }
-    console.log(filteredPosts)
     res.render ("main_community.hbs", {posts: filteredPosts, user: user, currentCommunity}) //comment add community object here for handlebars
 })
 app.get('/mainpage_logged', (req, res) => {
@@ -212,8 +211,24 @@ app.get('/mainpage_logged', (req, res) => {
     res.render("mainpage_logged.hbs", {posts: Posts, user: user});
 });
 
-app.get('/profilepage', (req, res) => {
-    res.render("profileview", {currentUser});
+app.get('/profileview/:username', (req, res) => {
+    const profilename = req.params.username
+    let selectedProfile
+    let userPosts = []
+
+
+    for (let i = 0; i < usersData.length; i++){
+        if (profilename == usersData[i].username){
+            selectedProfile = usersData[i]
+        }
+    }
+    for (let j = 0; j < Posts.length; j++){
+        if (selectedProfile.username == Posts[j].username){
+            userPosts.push(Posts[j])
+        }
+    }
+
+    res.render("profileview.hbs", {selectedProfile, posts: userPosts});
 });
 
 app.get('/Create_post', function (req, res) {
