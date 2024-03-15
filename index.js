@@ -86,15 +86,14 @@ const users = function(username, userhandle, password, pfplink, bits, aboutme, u
     this.userprofilelink = userprofilelink
 }
 
-const Reply = function(postId, username, userhandle, password, pfplink, bits, aboutme, replycontent, replydate) {
+const Reply = function(postId, username, userhandle, userhandlelink, pfplink, bits, replycontent, replydate) {
     this.postId = postId;
     this.userdeets = {
         username: username,
         userhandle: userhandle,
-        password: password,
+        userhandlelink: userhandlelink,
         pfplink: pfplink,
         bits: bits,
-        aboutme: aboutme
     };
     this.replycontent = replycontent;
     this.replydate = replydate;
@@ -111,24 +110,14 @@ communityData.push(applecommunity, webdevcommunity)
 let repliesData = [1,2,3]
 let usersData = [];
 usersData.push(currentUser, newUser);
-let Replies = [{
-    postId : "1111",
-    userdeets: newUser,
-    replycontent : "Bakit",
-    replydate : new Date(2018, 11, 25, 10, 33, 30, 0),
-},{
-    postId : "1111",
-    userdeets: newUser,
-    replycontent : "Fraudjo",
-    replydate : new Date(2018, 11, 25, 10, 35, 30, 0),
-},{
-    postId : "1112",
-    userdeets: newUser,
-    replycontent : "Test",
-    replydate : new Date(2018, 11, 25, 10, 35, 30, 0),
-}
-]
 
+//sample replies
+let reply1 = new Reply("1111", newUser.username, newUser.userhandle, newUser.profilelink, newUser.pfplink, newUser.bits, "Bakit", new Date(2018, 11, 25, 10, 33, 30, 0))
+let reply2 = new Reply("1111", newUser.username, newUser.userhandle, newUser.profilelink, newUser.pfplink, newUser.bits, "Fraudjo", new Date(2018, 11, 25, 10, 35, 30, 0))
+let reply3 = new Reply("1112", newUser.username, newUser.userhandle, newUser.profilelink, newUser.pfplink, newUser.bits, "Skill Issue", new Date(2018, 12, 25, 10, 33, 30, 0))
+
+let Replies = []
+Replies.push(reply1, reply2, reply3)
 
 
 let Posts = [
@@ -274,7 +263,7 @@ app.get ('/samplepost1/:postId', (req, res) =>{
             
         }
     }
-    console.log(returnedPost)
+    console.log(userPosted)
     //const post = Posts.find(post => post.postId === parseInt(id))
     res.render ("samplepost1", {returnedPost, userPosted, reply: postReplies})
 

@@ -23,7 +23,7 @@
                     <div class="profile">
                         <div class="profileicon">
                             <div class="profileiconholder">
-                                <a href="{{userPosted.userhandlelink}}">
+                                <a href="{{userPosted.userprofilelink}}">
                                 <img src="{{userPosted.pfplink}}"/>
                                 </a>
                             </div>
@@ -50,7 +50,7 @@
                         <h5> {{returnedPost.community}} </h5>
                     </div>
                     <div class ="userpfp">
-                        <a href="{{userPosted.username}}"> <img class="userimg" src="{{userPosted.pfplink}}"> </a>
+                        <a href="{{userPosted.userprofilelink}}"> <img class="userimg" src="{{userPosted.pfplink}}"> </a>
                     </div>
                 <div class="postuserinfo"> 
                     <p> {{userPosted.username}} <br><span>{{userPosted.userhandle}}</span><br> Bits: {{userPosted.bits}}</p>
@@ -93,7 +93,7 @@
         </div>
         </div>
         {{#each reply}}
-                {{> postreply this}}
+                {{> postreply}}
         {{/each}}
     </div>
 </div>
