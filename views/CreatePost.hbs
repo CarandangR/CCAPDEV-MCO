@@ -74,8 +74,9 @@
                 </div>
                 <div class = "communitybar">
                     <select id="community" name="community">
-                        <option value="b/apple">b/apple</option>
-                        <option value="b/webdev">b/webdev</option>
+                        {{#each communityNames}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
                     </select> <br>
                 </div>
                 <div class = "contentarea">
@@ -89,7 +90,7 @@
                 </div>
             </form> 
                 <div class = "cancel">
-                    <a href = "./mainpage">
+                    <a href = "./mainpage_logged">
                         <button class  = "submitbutton" type = "cancel" value = "cancel"> <span class ="buttontext">Cancel</span> </button>
                     </a>    
                 </div>

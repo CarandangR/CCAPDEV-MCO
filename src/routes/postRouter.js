@@ -24,8 +24,16 @@ let currentUser = {
 } // change this when session handling is implemented
 
 postRouter.get('/Create_post', async function (req, res) {
+    let communityNames = []
+    const foundUser = await Users.findOne({username: currentUser.username}).populate('followedCommunities').exec() // replace with logged in user
     const communityArr = await Community.find({}).lean().exec();
-    res.render("CreatePost.hbs", currentUser); // add here the user's joined communites and change hbs drop down
+    communityNames = foundUser.followedCommunities.map(community => community.community);
+    console.log(communityNames)
+    if (communityNames != ""){
+        res.render("CreatePost.hbs", {currentUser, communityNames});
+    } else{
+        //alert("Please join a community first!") change this to a web redirect
+    }
 });
 
 
@@ -83,7 +91,7 @@ postRouter.post('/submitpost', upload.single('file'), async (req,res) => {
     const communityId = foundCommuntiy._id
     console.log(communityId)
 
-    const foundUser = await Users.findOne({username: "gojowithiphone"}) // replace with logged in user
+    const foundUser = await Users.findOne({username: currentUser.username}) // replace with logged in user
     const userId = foundUser._id
     console.log(userId)
 
