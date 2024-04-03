@@ -3,7 +3,6 @@
 <head>
     <title> {{returnedPost.postheader}} </title>
     <link rel="stylesheet" type="text/css" href="/static/css/viewpost.css" />
-    <script src="/static/js/posts.js" defer></script>
 </head>
 
 <body>
@@ -91,12 +90,10 @@
             <div class="replybutton"><button type="submit" value="submit"> Reply </button> </div>
            
             </form>
-            {{#if postOwner}}
-                <div class="replybutton"><button type="submit" value="submit"> Edit </button> </div>
-                <div class="replybutton"><button type="button" value="button"> Delete </button> </div>
-            {{/if}}
+            
         </div>
         </div>
+        
         
         {{#if correctPost.replies}}
             {{#each correctPost.replies}}

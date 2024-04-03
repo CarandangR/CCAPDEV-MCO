@@ -123,8 +123,9 @@ postRouter.post('/submitpost', upload.single('file'), async (req,res) => {
 
 
 postRouter.post('/submitreply/:id', async (req, res) => {
+    console.log("Reply Post ")
     const id = req.params.id
-    const foundUser = await Users.findOne({username: "gojowithiphone"}) // replace with logged in user
+    const foundUser = await Users.findOne({username: currentUser.username}) // replace with logged in user
     const userId = foundUser._id
     
     

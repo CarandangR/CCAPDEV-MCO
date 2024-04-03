@@ -100,10 +100,11 @@ router.get ('/samplepost1/:postId', async(req, res) =>{
 
     let correctPost = foundPost[0]
 
-    console.log(correctPost)
+    //console.log(correctPost)
     if (correctPost.user.username == currentUser.username){
         postOwner = true
     }
+    console.log(id)
     res.render ("samplepost1", {correctPost, currentUser, id, postOwner})
 
 
