@@ -412,13 +412,35 @@ body
     margin: auto;
     padding: 5px;
     border-radius: 5px;
-    border: none; 
+    border: none;
+    cursor: pointer;
+ 
 }
 
-.replybutton a:hover {
+.editanddelete{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    height: 30px;
+    padding: 10px;
+}
+
+.ownerbutton {
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+    display:block;
+    background-color: #BD8FCB;
+    margin: auto;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+ 
+}
+.replybutton button:hover, .ownerbutton:hover {
     background-color: #7A03A1;
 }
-
 .replyinputarea {
     width: 650px;
     justify-content: center;

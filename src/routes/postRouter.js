@@ -82,10 +82,12 @@ postRouter.post('/submitpost', upload.single('file'), async (req,res) => {
     let count = await getCount();
     let postDate = new Date()
 
-    let postDay = postDate.getMinutes()
-    let postYear = postDate.getFullYear()
-    let postMin = postDate.getMinutes()
-    let postSeconds = postDate.getSeconds()
+    let postDay = postDate.getDay().toString()
+    let postYear = postDate.getFullYear().toString()
+    let postMin = postDate.getMinutes().toString()
+    let postSeconds = postDate.getSeconds().toString()
+
+    let postId = (postDay+postYear+postMin+postSeconds)
 
     const foundCommuntiy = await Community.findOne({community: req.body.community})
     const communityId = foundCommuntiy._id
@@ -104,11 +106,11 @@ postRouter.post('/submitpost', upload.single('file'), async (req,res) => {
     if (req.body.title !== "" && req.body.content !== ""){
         try {
             const result = await Post.create({
-                postId : (count + 1),
+                postId : postId,
                 communityinfo: new mongoose.Types.ObjectId(communityId),
                 user : new mongoose.Types.ObjectId(userId),
                 dateofpost: uploadedTime,
-                linkofpost: "/samplepost1/" + (count+1),
+                linkofpost: "/samplepost1/" + postId,
                 postheader: req.body.title,
                 postcontent: req.body.content,
                 postpicturecontent: uploadedFile,

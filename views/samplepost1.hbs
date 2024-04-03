@@ -65,10 +65,14 @@
                 <div class="postpicturecontent">
                 {{#if correctPost.postpicturecontent}}
                     <img src="{{correctPost.postpicturecontent}}"/>
-                {{else}}
-                    <span></span>
                 {{/if}}
-    </div>
+                </div>
+                {{#if postOwner}}
+                <div class = "editanddelete">
+                    <button type = "button" class = "ownerbutton"> Edit </button>
+                    <button type = "button" class = "ownerbutton"> Delete </button>
+                </div>
+                {{/if}}
                 <div class="footer">
                     <div class="upbit">
                         <img src="/static/img/up-arrow-regular-24.png"/>
@@ -92,6 +96,7 @@
             </form>
             
         </div>
+        
         </div>
         
         
