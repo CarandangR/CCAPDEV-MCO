@@ -34,7 +34,7 @@ router.get("/", function (req, res) {
 });
 
 router.get('/mainpage', async (req, res) => {
-    /*const data = [
+    const data = [
         {communityicon: "../public/img/apple_logo.jpg", communitybanner: "/static/img/apple_banner.jpg", communitydisplayname: "apple", community: "b/apple",
         communitylink: "/main_community/apple", totalmembers: "100", onlinemembers: "75"},
         {communityicon: "../public/img/webdevicon.png", communitybanner: "/static/img/apple_banner.jpg", communitydisplayname: "web development", community: "b/webdev",
@@ -52,7 +52,7 @@ router.get('/mainpage', async (req, res) => {
         })
         .catch(err => {
             console.error('Error inserting data:', err);
-        });*/
+        });
     
     const postsArr = await Post.find({}).populate('communityinfo').populate('user').lean().exec();
     console.log(postsArr)
