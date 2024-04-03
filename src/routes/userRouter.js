@@ -1,9 +1,12 @@
 import { Router } from 'express';
 import User from '../models/Users.js';
 import Post from '../models/Post.js'
+import express from 'express';
+import Community from '../models/Community.js'
 
 
 const userRouter = Router()
+userRouter.use(express.json());
 let currentUser = {
     username: "gojowithiphone",
     userhandle : "u/gojo",
@@ -89,5 +92,44 @@ userRouter.post('/submiteditprofile/:profilename', async (req, res) => {
     res.redirect('/profilepage');
 });
 
+userRouter.post('/followCommunity', async (req,res) => {
+    const spanText = req.body.spanText;
+    console.log(spanText);
 
+    try {
+        // Find the logged-in user
+        const foundUser = await User.findOne({ username: currentUser.username });
+
+        if (!foundUser) {
+            return res.status(404).json({ error: 'User not found.' });
+        }
+
+        // Find the community based on spanText
+        const community = await Community.findOne({ communitydisplayname: spanText });
+
+        if (!community) {
+            return res.status(404).json({ error: 'Community not found.' });
+        }
+
+        // Check if the user is already following the community
+        const isFollowing = foundUser.followedCommunities.some(communityId => communityId.equals(community._id));
+        console.log(isFollowing);
+
+        if (!isFollowing) {
+            // Add the community to followedCommunities array
+            foundUser.followedCommunities.push(community);
+            await foundUser.save();
+            return res.status(200).json({ message: 'Community followed successfully.' });
+        } else {
+            // Remove the community from followedCommunities array
+            foundUser.followedCommunities = foundUser.followedCommunities.filter(communityId => !communityId.equals(community._id));
+            await foundUser.save();
+            console.log("Community unfollowed successfully.");
+            return res.status(200).json({ message: 'Community unfollowed successfully.' });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal server error.' });
+    }
+})
 export default userRouter;

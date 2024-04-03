@@ -40,11 +40,12 @@ router.get('/mainpage', async (req, res) => {
         {communityicon: "../public/img/webdevicon.png", communitybanner: "/static/img/apple_banner.jpg", communitydisplayname: "web development", community: "b/webdev",
         communitylink: "/main_community/webdev", totalmembers: "1000", onlinemembers: "500"}
     ]
-
-    const user = [{username: "gojowithiphone", userhandle: "u/gojo", password: "1234", pfplink: "/static/img/nopfp.jpg", bits: 0, aboutme: "Such empty",
-        userprofilelink: "/profileview/gojowithiphone"}]
+    const userData = [
+        {username: "gojowithiphone", userhandle: "u/gojo", password: "1234", pfplink: "/static/img/nopfp.jpg", bits: "0",
+        aboutme: "Such empty", userprofilelink: "/profileview/gojowithiphone", followedCommunities: []}
+    ]
+    Users.insertMany(userData)
     
-    Users.insert(user)
     Community.insertMany(data)
         .then(docs => {
             console.log('Data inserted:', docs);
@@ -52,7 +53,7 @@ router.get('/mainpage', async (req, res) => {
         .catch(err => {
             console.error('Error inserting data:', err);
         });*/
-
+    
     const postsArr = await Post.find({}).populate('communityinfo').populate('user').lean().exec();
     console.log(postsArr)
     res.render("mainpage.hbs", {posts: postsArr}); //readd posts
@@ -61,10 +62,13 @@ router.get('/mainpage', async (req, res) => {
 router.get('/main_community/:community', async function(req,res){
 
     const communityname = req.params.community
+    const foundUser = await Users.findOne({ username: currentUser.username });
     const community = await Community.findOne({ communitydisplayname: communityname }).lean().exec();
+    const isFollowing = foundUser.followedCommunities.some(communityId => communityId.equals(community._id));
+
 
     const filteredPosts = await Post.find({communityinfo: community._id }).populate('communityinfo').populate('user').lean().exec();
-    res.render ("main_community.hbs", {posts: filteredPosts, user: currentUser, community})
+    res.render ("main_community.hbs", {posts: filteredPosts, user: currentUser, community, isFollowing})
 })
 router.get('/mainpage_logged', async (req, res) => {
     //let user = currentUser;

@@ -29,6 +29,11 @@ const userSchema = new Schema({
     userprofilelink: {
         type: SchemaTypes.String,
         required: true
+    },
+    followedCommunities: {
+        type: [SchemaTypes.ObjectId],
+        ref: 'Community',
+        required: true
     }
    
 });

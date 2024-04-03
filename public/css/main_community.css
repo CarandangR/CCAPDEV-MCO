@@ -299,14 +299,14 @@ body
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 110;
+    width: 150px;
     height: 45px;
 }
 
 .commuinitybuttons button
 {
     border-radius: 40px;
-    width: 100px;
+    width: 130px;
     height: 40px;
     
     display: inline-block;

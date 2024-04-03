@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="/static/css/main_community.css"/>
+<script src="/static/js/main_community.js" defer></script>
 <html>
     <title>
         Byte | {{community.community}}
@@ -60,7 +61,12 @@
                         </div>
                     </div>
                     <div class="commuinitybuttons">
-                        <button type="button">Follow</button>
+                        <button type="button" class = "followButton">
+                        {{#if isFollowing}}
+                            Followed
+                        {{else}}
+                            Follow
+                        {{/if}}</button>
                     </div>
                     <div class="communitystats">
                         <div class="totalmembers">
