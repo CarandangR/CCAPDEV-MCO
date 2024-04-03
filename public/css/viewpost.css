@@ -425,7 +425,7 @@ body
     padding: 10px;
 }
 
-.ownerbutton {
+.editbutton, .deletebutton, .save-button {
     text-decoration: none;
     color: black;
     font-size: 14px;

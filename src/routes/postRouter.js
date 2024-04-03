@@ -163,4 +163,27 @@ postRouter.post('/submitreply/:id', async (req, res) => {
     res.redirect('/samplepost1/'+id);
 })
 
+postRouter.post('/editpost', async (req, res) => {
+    const postId = req.body.hiddenValue; 
+    const editedPostContent = req.body.editedPost; 
+
+    try {
+        const updatedPost = await Post.findOneAndUpdate(
+            { post: postId }, 
+            { $set: { postcontent: editedPostContent } }, 
+            { new: true } 
+        );
+
+        if (!updatedPost) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        res.status(200).json({ message: 'Post content updated successfully', updatedPost });
+    } catch (error) {
+        console.error('Error updating post content:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+
+})
+
 export default postRouter;
