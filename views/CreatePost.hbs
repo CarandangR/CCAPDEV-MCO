@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/public/css/CreatePost.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/CreatePost.css"/>
 
     <script>
         function updateFileName(input) {
@@ -22,7 +22,7 @@
         <div class = "headercontent">
             <div class="headerhome">
                 <div class="websitelogo">
-                    <a href="./mainpage"><img src="/public/img/byte_logo.png"/></a>
+                    <a href="./mainpage"><img src="/static/img/byte_logo.png"/></a>
                     <span class = "link"> <a style = "color: beige; text-decoration: none" href = "./mainpage"> byte. </a> </span>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     <div class="profileicon">
                         <div class="profileiconholder">
                             <a href="{{currentUser.userprofilelink}}">
-                            <img src="/public/img/pfp.jpg"/>
+                            <img src="/static/img/pfp.jpg"/>
                             </a>
                         </div>
                     </div>
@@ -67,10 +67,16 @@
                 </div>
                 <div class = "icons">
                     <label for = "file-upload" class = "custom-file-upload">
-                        <img class ="attach" src = "/public/img/attach.png" title="Attach a file">
+                        <img class ="attach" src = "/static/img/attach.png" title="Attach a file">
                         <input id = "file-upload" name = "file" type = "file" accept ="image/*" onchange="updateFileName(this)"> 
                         <span id="fileNameDisplay"></span>
                     </label>
+                </div>
+                <div class = "communitybar">
+                    <select id="community" name="community">
+                        <option value="b/apple">b/apple</option>
+                        <option value="b/webdev">b/webdev</option>
+                    </select> <br>
                 </div>
                 <div class = "contentarea">
                     <textarea class ="content" name = "content" rows = "23"></textarea>

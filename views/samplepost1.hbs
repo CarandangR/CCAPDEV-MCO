@@ -2,8 +2,8 @@
 <html>
 <head>
     <title> {{returnedPost.postheader}} </title>
-    <link rel="stylesheet" type="text/css" href="../public/css/viewpost.css" />
-    <script src="../public/js/posts.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/viewpost.css" />
+    <script src="/static/js/posts.js" defer></script>
 </head>
 
 <body>
@@ -12,7 +12,7 @@
             <div class = "headercontent">
                 <div class="headerhome">
                     <div class="websitelogo">
-                        <a href="../mainpage"><img src="../public/img/byte_logo.png"/></a>
+                        <a href="../mainpage"><img src="/static/img/byte_logo.png"/></a>
                         <span class = "link"> <a style = "color: beige; text-decoration: none" href = "../mainpage"> byte. </a> </span>
                     </div>
                 </div>
@@ -47,53 +47,59 @@
             <div class="postcontainer">
                 <div class="userinfo">
                     <div class="postcommunity"> 
-                        <h5> {{returnedPost.community}} </h5>
+                        <h5> {{correctPost.community}} </h5>
                     </div>
                     <div class ="userpfp">
-                        <a href="{{userPosted.userprofilelink}}"> <img class="userimg" src="{{userPosted.pfplink}}"> </a>
+                        <a href="{{correctPost.user.userprofilelink}}"> <img class="userimg" src="{{correctPost.user.pfplink}}"> </a>
                     </div>
                 <div class="postuserinfo"> 
-                    <p> {{userPosted.username}} <br><span>{{userPosted.userhandle}}</span><br> Bits: {{userPosted.bits}}</p>
+                    <p> {{correctPost.user.username}} <br><span>{{correctPost.user.userhandle}}</span><br> Bits: {{correctPost.user.bits}}</p>
                 </div>
                 <div class="postdate"> 
-                    <h5> Posted on: {{returnedPost.dateofpost}}</h5>
+                    <h5> Posted on: {{correctPost.dateofpost}}</h5>
                     <p> {{DateDistance}} </p>
                 </div>
             </div>
             <div class="postinfocontainer">
-                <h4> {{returnedPost.postheader}} </h4>
-                <p> {{returnedPost.postcontent}} </p>
+                <h4> {{correctPost.postheader}} </h4>
+                <p> {{correctPost.postcontent}} </p>
                 <div class="postpicturecontent">
-                {{#if returnedPost.postpicturecontent}}
-                    <img src="{{returnedPost.postpicturecontent}}"/>
+                {{#if correctPost.postpicturecontent}}
+                    <img src="{{correctPost.postpicturecontent}}"/>
                 {{else}}
                     <span></span>
                 {{/if}}
     </div>
                 <div class="footer">
                     <div class="upbit">
-                        <img src="../public/img/up-arrow-regular-24.png"/>
+                        <img src="/static/img/up-arrow-regular-24.png"/>
                     </div>
                     <div class="downbit">
-                        <img src="../public/img/down-arrow-regular-24.png"/>
+                        <img src="/static/img/down-arrow-regular-24.png"/>
                     </div>
                     <div class="share">
-                        <img src="../public/img/share-regular-24.png"/>
+                        <img src="/static/img/share-regular-24.png"/>
                     </div>
                 </div>
             </div>
         </div>
         <div class="replyinputarea"> 
             <div class="replyinputbox">
-                <form action="/submitreply" method="POST"> 
+                <form action="/submitreply/{{id}}" method="POST"> 
                 <input type="text" id="replytextcontent" name="replytextcontent" placeholder="Reply to this post..."/> 
             </div>
             <div class="replybutton"><button type="submit" value="submit"> Reply </button> </div>
+           
             </form>
+            {{#if postOwner}}
+                <div class="replybutton"><button type="submit" value="submit"> Edit </button> </div>
+                <div class="replybutton"><button type="button" value="button"> Delete </button> </div>
+            {{/if}}
         </div>
         </div>
-        {{#if reply}}
-            {{#each reply}}
+        
+        {{#if correctPost.replies}}
+            {{#each correctPost.replies}}
                     {{> postreply}}
             {{/each}}
         {{else}}
