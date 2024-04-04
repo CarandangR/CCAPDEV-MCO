@@ -121,7 +121,7 @@ postRouter.post('/submitpost', upload.single('file'), async (req,res) => {
 
             })
 
-            res.redirect('/mainpage')
+            res.redirect('/mainpage_logged')
 
         }catch(err){
             console.error(err)
@@ -187,7 +187,6 @@ postRouter.post('/editpost', async (req, res) => {
     }
 
 })
-
 postRouter.delete('/deletepost/:id', async (req, res) =>{
     const postId = req.params.id
     try{
@@ -199,13 +198,17 @@ postRouter.delete('/deletepost/:id', async (req, res) =>{
         if (deletePost instanceof Post) {
             await Reply.deleteMany({ postId: postId });
             await Post.deleteOne({postId : deletePost.postId})
+
         } else {
             return res.status(500).json({ error: 'Unable to delete post' });
         }
-        res.redirect('/mainpage_logged')
     }catch(err){
         console.error(err)
     }
+    
+
 })
+
+
 
 export default postRouter;

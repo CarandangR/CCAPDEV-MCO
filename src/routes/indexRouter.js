@@ -3,6 +3,7 @@ import userRouter from './userRouter.js';
 import postRouter from './postRouter.js';
 import Post from '../models/Post.js';
 import Users from '../models/Users.js';
+import Reply from '../models/Reply.js'
 
 import Community from '../models/Community.js';
 
@@ -70,8 +71,32 @@ router.get('/main_community/:community', async function(req,res){
     const filteredPosts = await Post.find({communityinfo: community._id }).populate('communityinfo').populate('user').lean().exec();
     res.render ("main_community.hbs", {posts: filteredPosts, user: currentUser, community, isFollowing})
 })
+router.delete('/deletepost/:id', async (req, res) =>{
+    const postId = req.params.id
+    try{
+        const deletePost = await Post.findOne({postId: postId})
+        console.log(deletePost)
+        if (!deletePost) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+        if (deletePost instanceof Post) {
+            await Reply.deleteMany({ postId: postId });
+            await Post.deleteOne({postId : deletePost.postId})
+
+        } else {
+            return res.status(500).json({ error: 'Unable to delete post' });
+        }
+    }catch(err){
+        console.error(err)
+    }
+    console.log('Redirecting to mainpage_logged');
+
+    res.redirect('/')
+
+})
 router.get('/mainpage_logged', async (req, res) => {
     //let user = currentUser;
+    console.log("trigger")
     const postsArr = await Post.find({}).populate('communityinfo').populate('user').lean().exec();
     res.render("mainpage_logged.hbs", {posts: postsArr}); //readd posts
 });
@@ -109,6 +134,8 @@ router.get ('/samplepost1/:postId', async(req, res) =>{
 
 
 })
+
+
 
 router.use(userRouter)
 router.use(postRouter)

@@ -15,6 +15,13 @@ deleteButton.addEventListener('click', async() => {
         const response = await fetch ('/deletepost/'+hiddenValue, {
             method: 'DELETE',
         })
+        const mainPageResponse = await fetch('/mainpage_logged');
+        if (mainPageResponse.ok) {
+            window.location.href = '/mainpage_logged';
+        } else {
+            console.error('Failed to fetch mainpage_logged after deleting post');
+        }
+
     }catch (err){
         console.error(err)
     }
