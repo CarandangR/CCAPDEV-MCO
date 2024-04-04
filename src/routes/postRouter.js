@@ -241,23 +241,27 @@ postRouter.post('/editreply', async (req, res) => {
 })
 
 postRouter.delete('/deletereply/:id', async (req, res) =>{
-    /*const postId = req.params.id
+    const replyId = req.params.id
+    console.log("Delete trigger on reply " +replyId)
     try{
-        const deletePost = await Post.findOne({postId: postId})
-        console.log(deletePost)
-        if (!deletePost) {
+        const deleteReply = await Reply.findOne({replyId: replyId})
+        console.log(deleteReply)
+        if (!deleteReply) {
             return res.status(404).json({ error: 'Post not found' });
         }
-        if (deletePost instanceof Post) {
-            await Reply.deleteMany({ postId: postId });
-            await Post.deleteOne({postId : deletePost.postId})
+        if (deleteReply instanceof Reply) {
+            //await Reply.deleteMany({ postId: postId });
+            await Post.updateOne({postId: deleteReply.postId}, {$inc: {numberofreplies: -1},  $pull: { replies: deleteReply._id } })
+            await Reply.deleteOne({replyId : deleteReply.replyId})
+            
+
 
         } else {
-            return res.status(500).json({ error: 'Unable to delete post' });
+            return res.status(500).json({ error: 'Unable to delete Reply' });
         }
     }catch(err){
         console.error(err)
-    }*/
+    }
     
 
 })

@@ -49,6 +49,23 @@ saveReplyButtons.forEach(saveReplyButton => {
 
 })
 
+deleteReplyButtons.forEach(deleteReplyButton => {
+    deleteReplyButton.addEventListener('click', async () => {
+        replyId = deleteReplyButton.closest('.replycontainer').querySelector('#replyId').value;
+
+        try{
+            const response = await fetch ('/deletereply/'+replyId, {
+                method: 'DELETE'
+            })
+        if (response.ok){
+            location.reload()
+        }
+        }catch(err){
+            console.error(err)
+        }
+    })
+})
+
 editButton.addEventListener('click', () => {
     editPostForm.style.display = 'block';
 });
