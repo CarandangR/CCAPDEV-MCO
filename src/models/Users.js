@@ -4,11 +4,14 @@ const userSchema = new Schema({
     
     username: {
         type: SchemaTypes.String,
-        required: true
+        required: true,
+        unique: true
     },
     userhandle: {
         type: SchemaTypes.String,
-        required: true
+        required: true,
+        unique: true
+
     },
     password: {
         type: SchemaTypes.String,
