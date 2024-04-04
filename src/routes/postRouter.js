@@ -152,7 +152,7 @@ postRouter.post('/submitreply/:id', async (req, res) => {
 
             try{
                 const repliedPost = await Post.findOne({postId: id})
-                const updatedPost = await Post.findByIdAndUpdate(repliedPost._id, {$push: {replies: result}}, {new: true})
+                const updatedPost = await Post.findByIdAndUpdate(repliedPost._id, {$push: {replies: result}, $inc: { numberofreplies: 1 }}, {new: true})
 
                 console.log(updatedPost)
             }catch (err){
