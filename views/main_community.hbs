@@ -124,6 +124,9 @@
                     </a>
                 </div>
             </div>
+            {{#each posts}}
+                {{> postview this}}
+            {{/each}}
         </div>
     </body>
 </html>
