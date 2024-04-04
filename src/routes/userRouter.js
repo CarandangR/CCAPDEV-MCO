@@ -94,7 +94,7 @@ userRouter.post('/submiteditprofile/:profilename', async (req, res) => {
     let newDesc = req.body.profileDescription;
     try{
         const currentUser = await User.findOne({username: profilename})
-        const updatedDesc = await User.findByIdAndUpdate(currentUser._id, {$push: {aboutme: newDesc}}, {new: true})
+        const updatedDesc = await User.findByIdAndUpdate(currentUser._id, {aboutme: newDesc}, {new: true})
         console.log("trigger")
         console.log(updatedDesc)
 
@@ -102,7 +102,7 @@ userRouter.post('/submiteditprofile/:profilename', async (req, res) => {
         console.error(err)
     }
     console.log("New profile description:", newDesc);
-    res.redirect('/profilepage');
+    res.redirect('/profileview/' + profilename);
 });
 
 userRouter.post('/followCommunity', async (req,res) => {
