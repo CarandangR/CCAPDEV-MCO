@@ -100,7 +100,7 @@ postRouter.post('/submitpost', upload.single('file'), async (req,res) => {
     const uploadedTime = new Date()
 
     if (uploadedFile != ""){
-        uploadedFile = "../public/img/" + uploadedFile
+        uploadedFile = "/static/img/" + uploadedFile
     }
 
     if (req.body.title !== "" && req.body.content !== ""){
