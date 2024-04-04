@@ -66,7 +66,7 @@
                         <p>{{userProfile.aboutme}}</p>
                     </div>
                     <div class="profiledescinput"><input  type="text" placeholder="Edit profile description..." name="profileDescription" style = "display: none;"></input></div>
-                    {{#if currentUser && userProfile && currentUser.username === userProfile.username}}
+                    {{#if (isSameUser currentUser userProfile)}}
                          <!-- Check if the user is the owner of the profile, if so, show the edit option -->
                     <div class="editbutton"> 
                         <a> Edit Profile description</a>
