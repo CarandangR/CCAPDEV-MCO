@@ -62,9 +62,11 @@ router.get('/mainpage', async (req, res) => {
 
 router.get('/main_community/:community', async function(req,res){
 
-    const communityname = req.params.community
+    const communityname = "b/"+req.params.community
+    console.log(communityname)
     const foundUser = await Users.findOne({ username: currentUser.username });
-    const community = await Community.findOne({ communitydisplayname: communityname }).lean().exec();
+    const community = await Community.findOne({ community: communityname }).lean().exec();
+    console.log(community)
     const isFollowing = foundUser.followedCommunities.some(communityId => communityId.equals(community._id));
 
 
