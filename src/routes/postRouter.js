@@ -218,6 +218,49 @@ postRouter.delete('/deletepost/:id', async (req, res) =>{
 
 })
 
+
+postRouter.post('/updatevote/:postId', async (req, res) => {
+    console.log("post request for updating upvote/downvote received");
+    const updatePost = req.body.id;
+    const {type} = req.body;
+    console.log(updatePost);
+    try {
+        let postToUpdate;
+        if(type === 'upvote') {
+            postToUpdate = await Post.findOneAndUpdate(
+                { postId: updatePost },
+                { $inc: { upvotes: 1 } },
+                { new: true }
+            );
+        }
+        else if (type === 'downvote') {
+            postToUpdate = await Post.findOneAndUpdate(
+                { postId: updatePost },
+                { $inc: { downvotes: 1 } },
+                { new: true }
+            );
+        }
+        else {
+            console.log("invalid vote type.");
+        }
+
+        if (!postToUpdate) {
+            console.log("post does not exist.");
+        }
+        else {
+            console.log("post vote updated.");
+            
+        }
+        res.redirect('/mainpage_logged');
+        
+    }
+    catch (error) {
+        console.error('Error updating vote:', error);
+        res.status(500);
+    }
+})
+
+
 postRouter.post('/editreply', async (req, res) => {
     const replyId = req.body.replyId; 
     const editedReplyContent = req.body.editedReplyContent; 
