@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="../public/css/main_community.css"/>
+<link rel="stylesheet" href="/static/css/main_community.css"/>
+<script src="/static/js/main_community.js" defer></script>
 <html>
     <title>
         Byte | {{community.community}}
@@ -10,7 +11,7 @@
                 <div class = "headercontent">
                     <div class="headerhome">
                         <div class="websitelogo">
-                            <a href="/mainpage_logged"><img src="/public/img/byte_logo.png"/></a>
+                            <a href="/mainpage_logged"><img src="/static/img/byte_logo.png"/></a>
                             <span class = "link"> <a style = "color: beige; text-decoration: none" href = "/mainpage_logged"> byte. </a> </span>
                         </div>
                     </div>
@@ -60,7 +61,12 @@
                         </div>
                     </div>
                     <div class="commuinitybuttons">
-                        <button type="button">Follow</button>
+                        <button type="button" class = "followButton">
+                        {{#if isFollowing}}
+                            Followed
+                        {{else}}
+                            Follow
+                        {{/if}}</button>
                     </div>
                     <div class="communitystats">
                         <div class="totalmembers">
@@ -92,13 +98,13 @@
                     <input type="search" class="posttext" placeholder="Create Post" onclick="redirectToAnotherPage()"/>
                 </div>
                 <div class="createpostpic">
-                    <a href="./CreatePost.html">
-                    <img src="/public/img/image-alt-regular-24.png"/>
+                    <a href="/Create_Post">
+                    <img src="/static/img/image-alt-regular-24.png"/>
                     </a>
                 </div>
                 <div class="createpostattach">
-                    <a href="./CreatePost.html">
-                    <img src="/public/img/folder-plus-regular-24.png"/>
+                    <a href="/Create_Post">
+                    <img src="/static/img/folder-plus-regular-24.png"/>
                     </a>
                 </div>
             </div>
@@ -115,12 +121,12 @@
                 </div>
                 <div class="newposts">
                     <a href="/newposts">
-                    <img src="/public/img/badge-regular-24.png">
+                    <img src="/static/img/badge-regular-24.png">
                     </a>
                 </div>
                 <div class="hotposts">
                     <a href="/hotposts">
-                    <img src="/public/img/hot-solid-24.png">
+                    <img src="/static/img/hot-solid-24.png">
                     </a>
                 </div>
             </div>

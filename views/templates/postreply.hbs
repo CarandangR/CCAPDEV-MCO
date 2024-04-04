@@ -2,9 +2,9 @@
             <div class="replybox">
                 <div class = "replyinfo"> 
                     <div class="replypfp"> 
-                        <a href="{{userdeets.userhandlelink}}"> <img class="userimg" src="{{userdeets.pfplink}}"> </a>
+                        <a href="{{user.userhandlelink}}"> <img class="userimg" src="{{user.pfplink}}"> </a>
                     </div>
-                    <p> {{userdeets.username}} <br><span> {{userdeets.userhandle}} </span><br> Bits: {{userdeets.bits}}</p>
+                    <p> {{user.username}} <br><span> {{user.userhandle}} </span><br> Bits: {{user.bits}}</p>
                     <div class="postdate"> 
                         <h5> Posted on: {{replydate}} </h5>
                         <p> {{ReplyDateDistance}} </p>
@@ -16,13 +16,13 @@
                     <p> {{replycontent}} <br> </p>
                     <div class="footer">
                     <div class="upbit">
-                        <img src="../public/img/up-arrow-regular-24.png"/>
+                        <img src="/static/img/up-arrow-regular-24.png"/>
                     </div>
                     <div class="downbit">
-                        <img src="../public/img/down-arrow-regular-24.png"/>
+                        <img src="/static/img/down-arrow-regular-24.png"/>
                     </div>
                     <div class="share">
-                        <img src="../public/img/share-regular-24.png"/>
+                        <img src="/static/img/share-regular-24.png"/>
                     </div>
                     <div class="replybutton"><a href=""> Reply </a></div>
                 </div>

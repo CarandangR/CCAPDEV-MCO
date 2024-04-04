@@ -2,8 +2,8 @@
 <html>
 <head>
     <title> Profile page </title>
-    <link rel="stylesheet" type="text/css" href="../public/css/profilepage.css" />
-    <script src="../public/js/profile.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/profilepage.css" />
+    <script src="/static/js/profile.js" defer></script>
 </head>
 <body>
     <div class="homecontainer">
@@ -11,7 +11,7 @@
             <div class = "headercontent">
                 <div class="headerhome">
                     <div class="websitelogo">
-                        <a href="../mainpage_logged"><img src="../public/img/byte_logo.png"/></a>
+                        <a href="../mainpage_logged"><img src="/static/img/byte_logo.png"/></a>
                         <span class = "link"> <a style = "color: beige; text-decoration: none" href = "../mainpage_logged"> byte. </a> </span>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
             <div class="profilecontainer1">
                 <div class="userinfo">
                     <div class="userpfp">
-                        <img class="userimg" src="{{selectedProfile.pfplink}}" />
+                        <img class="userimg" src="{{userProfile.pfplink}}" />
                     </div>
                     <div class="pfpeditbutton">
                          <form action="/submiteditpfp"method="POST">
@@ -58,19 +58,20 @@
                 </div>
 
                 <div class="profileinfo"> 
-                    <h3> {{selectedProfile.username}} </h3> <span>{{selectedProfile.userhandle}}</span><span class="usertitle" style="color: green">{{selectedProfile.role}}</span>
-                    <h5> Bits: {{selectedProfile.bits}} </h5>
+                    <h3> {{userProfile.username}} </h3> <span>{{userProfile.userhandle}}</span><span class="usertitle" style="color: green">{{userProfile.role}}</span>
+                    <h5> Bits: {{userProfile.bits}} </h5>
                     <h4> About me: </h4>
                     
                     <div class="profiledesc">
-                        <p>{{selectedProfile.aboutme}}</p>
+                        <p>{{userProfile.aboutme}}</p>
                     </div>
                         
-                    
+                    <form action="submiteditprofile/{{profilename}}" method="POST">
                     <div class="editbutton"> 
-                        <form action="submiteditprofile"method="POST"><button type="submit">Confirm</button></form>
+                        <button type="submit" value = "submit">Confirm</button>
                         <a href=""> Edit description </a> 
                     </div>
+                    </form>
                 </div> 
             </div>
             <div class="latestpostscontainer">  

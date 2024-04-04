@@ -14,33 +14,25 @@ const reply = function(user, userhandle, userbits, userimg, replycontent) {
 
 document.addEventListener("DOMContentLoaded", function() {
     window.scrollTo(0, 0);
-    document.querySelector(".replybutton a").addEventListener("click", function(e) { 
+    document.querySelector(".replybutton").addEventListener("click", function(e) { 
 		e.preventDefault();
         
         console.log("Reply clicked");
         let replytext = document.querySelector("input#replytextcontent").value;
-        let webUser = document.querySelector('.profiledisplayname span').textContent.trim();
-        let webUserhandle = document.querySelector('.profilehandlename span').textContent.trim();
-        let userimgdir = document.querySelector('.profileiconholder img').getAttribute('src');
-
 
         if(replytext != "") {
-            let newReply = new reply(webUser, webUserhandle, 99999, userimgdir, replytext);
-            replies.push(newReply);
-            replycount = replycount + 1;
-            displayReplies(replies);
             document.querySelector("#replytextcontent").value = "";
         }
     });
     
-    function displayReplies(replies) { 
+   /* function displayReplies(replies) { 
 
         const currDate = new Date();
         const day = currDate.getDate();
         const month = currDate.getMonth();
         const year = currDate.getFullYear();
         const formattedDate = monthNames[month] + " " + day + ", " + year;
-        document.querySelector(".replycontainer").innerText = "";
+        document.querySelector("#replytextcontent").innerText = "";
 
 
         for(i = 0; i < replies.length; i++) {
@@ -71,9 +63,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                     "</div>" +
                                 "</div>" +
                             "</div>";
-            document.querySelector("div.replycontainer").innerHTML += currentReply;
+            //document.querySelector("div.replycontainer").innerHTML += currentReply;
         }
-    };
+    };*/
     function toggleImage(imgElement, originalSrc, clickedSrc) {
         if (imgElement.getAttribute('src').includes(clickedSrc)) {
             imgElement.setAttribute('src', originalSrc);
