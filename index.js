@@ -39,8 +39,10 @@ async function main() {
             },
             object: function(options) {
                 return options.hash;
+            },
+            isSameUser: function(currentUser, userProfile) {
+                return currentUser.username === userProfile.username;
             }
-            
            
         }
     }));
