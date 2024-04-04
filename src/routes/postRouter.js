@@ -145,7 +145,9 @@ postRouter.post('/submitreply/:id', async (req, res) => {
                 postId: id,
                 user : new mongoose.Types.ObjectId(userId),
                 replycontent : req.body.replytextcontent,
-                replydate: new Date()
+                replydate: new Date(),
+                upvotes: 0,
+                downvotes: 0
             })
 
             try{

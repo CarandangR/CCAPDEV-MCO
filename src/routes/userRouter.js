@@ -97,26 +97,22 @@ userRouter.post('/followCommunity', async (req,res) => {
     console.log(spanText);
 
     try {
-        // Find the logged-in user
         const foundUser = await User.findOne({ username: currentUser.username });
 
         if (!foundUser) {
             return res.status(404).json({ error: 'User not found.' });
         }
 
-        // Find the community based on spanText
         const community = await Community.findOne({ communitydisplayname: spanText });
 
         if (!community) {
             return res.status(404).json({ error: 'Community not found.' });
         }
 
-        // Check if the user is already following the community
         const isFollowing = foundUser.followedCommunities.some(communityId => communityId.equals(community._id));
         console.log(isFollowing);
 
         if (!isFollowing) {
-            // Add the community to followedCommunities array
             foundUser.followedCommunities.push(community);
             await foundUser.save();
             return res.status(200).json({ message: 'Community followed successfully.' });

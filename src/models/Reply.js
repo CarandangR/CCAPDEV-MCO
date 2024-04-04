@@ -18,7 +18,15 @@ const replySchema = new Schema({
     replydate: {
         type: SchemaTypes.Date,
         required: true
-    }
+    },
+    upvotes: {
+        type: SchemaTypes.Number,
+        required: true
+    },
+    downvotes: {
+        type: SchemaTypes.Number,
+        required: true
+    },
    
 });
 
