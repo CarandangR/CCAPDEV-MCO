@@ -5,24 +5,25 @@ const editTextarea = document.querySelector('.edit-textarea');
 const saveButton = document.querySelector('.save-button');
 const hiddenValue = document.getElementById('hiddenValue').value;
 
-// Add event listener to edit button
 editButton.addEventListener('click', () => {
-    // Show the edit post form
     editPostForm.style.display = 'block';
 });
 
-// Add event listener to delete button
-deleteButton.addEventListener('click', () => {
-    // Implement delete functionality here
+deleteButton.addEventListener('click', async() => {
     console.log('Delete button clicked');
+    try{
+        const response = await fetch ('/deletepost/'+hiddenValue, {
+            method: 'DELETE',
+        })
+    }catch (err){
+        console.error(err)
+    }
 });
 
-// Add event listener to save button
 saveButton.addEventListener('click', async () => {
-    // Implement save functionality here
     const editedPost = editTextarea.value;
+    console.log("Save button trigger")
     console.log('Save button clicked, edited post:', editedPost);
-    // Hide the edit post form after saving
     editPostForm.style.display = 'none';
     try{
         const response = await fetch('/editpost', {

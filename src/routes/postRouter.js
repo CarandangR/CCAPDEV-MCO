@@ -168,11 +168,11 @@ postRouter.post('/submitreply/:id', async (req, res) => {
 postRouter.post('/editpost', async (req, res) => {
     const postId = req.body.hiddenValue; 
     const editedPostContent = req.body.editedPost; 
-
+    console.log("Trigger on postId" + postId + "edit with" + editedPostContent)
     try {
         const updatedPost = await Post.findOneAndUpdate(
-            { post: postId }, 
-            { $set: { postcontent: editedPostContent } }, 
+            { postId: postId }, 
+            { $set: { postcontent: editedPostContent, postId: postId } }, 
             { new: true } 
         );
 
@@ -186,6 +186,26 @@ postRouter.post('/editpost', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 
+})
+
+postRouter.delete('/deletepost/:id', async (req, res) =>{
+    const postId = req.params.id
+    try{
+        const deletePost = await Post.findOne({postId: postId})
+        console.log(deletePost)
+        if (!deletePost) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+        if (deletePost instanceof Post) {
+            await Reply.deleteMany({ postId: postId });
+            await Post.deleteOne({postId : deletePost.postId})
+        } else {
+            return res.status(500).json({ error: 'Unable to delete post' });
+        }
+        res.redirect('/mainpage_logged')
+    }catch(err){
+        console.error(err)
+    }
 })
 
 export default postRouter;
