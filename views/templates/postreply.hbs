@@ -1,10 +1,12 @@
 <div class="replycontainer"> 
             <div class="replybox">
                 <div class = "replyinfo"> 
+                    <input type="hidden" id="replyId" value="{{replyId}}">
+
                     <div class="replypfp"> 
                         <a href="{{user.userhandlelink}}"> <img class="userimg" src="{{user.pfplink}}"> </a>
                     </div>
-                    <p> {{user.username}} <br><span> {{user.userhandle}} </span><br> Bits: {{user.bits}}</p>
+                    <p> {{user.username}} {{currentUser.username}} <br><span> {{user.userhandle}} </span><br> Bits: {{user.bits}}</p>
                     <div class="postdate"> 
                         <h5> Posted on: {{replydate}} </h5>
                         <p> {{ReplyDateDistance}} </p>
@@ -15,6 +17,25 @@
                 <div class="replycontent"> 
                     <p> {{replycontent}} <br> </p>
                     <div class="footer">
+                    {{#if isOwner}}
+                        <div class = "editanddelete">
+                            <button type = "button" class = "editreplybutton"> Edit </button>
+                            <button type = "button" class = "deletereplybutton"> Delete </button>
+                        </div>
+                        <div class="edit-reply-form" style="display: none;">
+                            <textarea class="edit-textarea"></textarea>
+                            <button type="button" class="savereplybutton">Save</button>
+                        </div>
+                    {{else}}
+                        <div class = "editanddelete" style="display: none;">
+                            <button type = "button" class = "editreplybutton"> Edit </button>
+                            <button type = "button" class = "deletereplybutton"> Delete </button>
+                        </div>
+                        <div class="edit-post-form" style="display: none;">
+                            <textarea class="edit-textarea"></textarea>
+                            <button type="button" class="save-button">Save</button>
+                        </div>
+                    {{/if}}
                     <div class="upbit">
                         <img src="/static/img/up-arrow-regular-24.png"/>
                     </div>

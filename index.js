@@ -36,7 +36,12 @@ async function main() {
             relativeTime: (date) => {
                 const diff = moment().diff(date);
                 return moment.duration(diff).humanize() + " ago";
+            },
+            object: function(options) {
+                return options.hash;
             }
+            
+           
         }
     }));
     app.use(router)

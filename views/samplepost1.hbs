@@ -79,6 +79,15 @@
                     <textarea class="edit-textarea"></textarea>
                     <button type="button" class="save-button">Save</button>
                 </div>
+                {{else}}
+                    <div class = "editanddelete" style="display: none;">
+                    <button type = "button" class = "editbutton"> Edit </button>
+                    <button type = "button" class = "deletebutton"> Delete </button>
+                </div>
+                <div class="edit-post-form" style="display: none;">
+                    <textarea class="edit-textarea"></textarea>
+                    <button type="button" class="save-button">Save</button>
+                </div>
                 {{/if}}
                 <div class="footer">
                     <div class="upbit">
@@ -109,7 +118,7 @@
         
         {{#if correctPost.replies}}
             {{#each correctPost.replies}}
-                    {{> postreply}}
+                    {{> postreply this}}
             {{/each}}
         {{else}}
             

@@ -10,15 +10,15 @@ import Community from '../models/Community.js';
 const router = Router()
 
 /*let currentUser = {
-    username: "Karmaa",
-    userhandle : "u/karma",
-    password : "1234",
+    username: "Nyett",
+    userhandle : "u/nyet",
+    password : "Pass1234",
     pfplink: "/static/img/nopfp.jpg",
     bits: "0",
     aboutme: "such empty",
-    userprofilelink : "/profileview/Karmaa"
-} // change this when session handling is implemented
-*/
+    userprofilelink : "/profileview/Nyett"
+} // change this when session handling is implemented*/
+
 let currentUser = {
     username: "gojowithiphone",
     userhandle : "u/gojo",
@@ -107,8 +107,20 @@ router.get ('/samplepost1/:postId', async(req, res) =>{
     if (correctPost.user.username == currentUser.username){
         postOwner = true
     }
-    console.log(id)
-    res.render ("samplepost1", {correctPost, currentUser, id, postOwner})
+    let repliesArr = await Reply.find({}).populate('user').populate('replies').lean().exec();
+    for (const reply of repliesArr) {
+        const replyUser = await Users.findById(reply.user);
+        if (replyUser && replyUser.username === currentUser.username) {
+            reply.isOwner = true;
+        } else {
+            reply.isOwner = false;
+        }
+        // Save the updated reply
+        await Reply.findByIdAndUpdate(reply._id, { isOwner: reply.isOwner });
+    }
+    let updatedReplies = await Reply.find({}).populate('user').populate('replies').lean().exec();
+    console.log(updatedReplies)
+    res.render ("samplepost1", {correctPost: correctPost, currentUser: currentUser, id, postOwner})
 
 
 })

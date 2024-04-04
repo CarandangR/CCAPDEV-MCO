@@ -137,17 +137,26 @@ postRouter.post('/submitreply/:id', async (req, res) => {
     const id = req.params.id
     const foundUser = await Users.findOne({username: currentUser.username}) // replace with logged in user
     const userId = foundUser._id
-    
+    let postDate = new Date()
+
+    let postDay = postDate.getDay().toString()
+    let postYear = postDate.getFullYear().toString()
+    let postMin = postDate.getMinutes().toString()
+    let postSeconds = postDate.getSeconds().toString()
+    let replyId = (postDay+postYear+postMin+postSeconds)
     
     if (req.body.replytextcontent != ""){
         try{
             const result = await Reply.create({
+                replyId: replyId,
                 postId: id,
                 user : new mongoose.Types.ObjectId(userId),
                 replycontent : req.body.replytextcontent,
                 replydate: new Date(),
                 upvotes: 0,
-                downvotes: 0
+                downvotes: 0,
+                replies: [],
+                isOwner: true
             })
 
             try{
@@ -209,6 +218,48 @@ postRouter.delete('/deletepost/:id', async (req, res) =>{
 
 })
 
+postRouter.post('/editreply', async (req, res) => {
+    const replyId = req.body.replyId; 
+    const editedReplyContent = req.body.editedReplyContent; 
+    try {
+        const updatedReply = await Reply.findOneAndUpdate(
+            { replyId: replyId }, 
+            { $set: { replycontent: editedReplyContent, replyId: replyId } }, 
+            { new: true } 
+        );
 
+        if (!updatedReply) {
+            return res.status(404).json({ error: 'Reply not found' });
+        }
+
+        res.status(200).json({ message: 'Reply content updated successfully', updatedReply });
+    } catch (error) {
+        console.error('Error updating post content:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+
+})
+
+postRouter.delete('/deletereply/:id', async (req, res) =>{
+    /*const postId = req.params.id
+    try{
+        const deletePost = await Post.findOne({postId: postId})
+        console.log(deletePost)
+        if (!deletePost) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+        if (deletePost instanceof Post) {
+            await Reply.deleteMany({ postId: postId });
+            await Post.deleteOne({postId : deletePost.postId})
+
+        } else {
+            return res.status(500).json({ error: 'Unable to delete post' });
+        }
+    }catch(err){
+        console.error(err)
+    }*/
+    
+
+})
 
 export default postRouter;
