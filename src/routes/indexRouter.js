@@ -60,9 +60,10 @@ router.get('/hotposts', async (req, res) => {
         res.redirect('/');
         return;
     }
+    currentUser = req.session.user;
     const postsArr = await Post.find({}).populate('communityinfo').populate('user').lean().exec();
     let hotposts = postsArr.sort((a, b) => b.upvotes - a.upvotes);
-    res.render("mainpage_logged.hbs", {posts: hotposts} );//readd posts
+    res.render("mainpage_logged.hbs", {user: currentUser, posts: hotposts} );//readd posts
 });
 
 router.get('/newposts', async (req, res) => {
@@ -71,9 +72,10 @@ router.get('/newposts', async (req, res) => {
         res.redirect('/');
         return;
     }
+    currentUser = req.session.user;
     const postsArr = await Post.find({}).populate('communityinfo').populate('user').lean().exec();
     let newposts = postsArr.sort((a, b) => b.dateofpost - a.dateofpost);
-    res.render("mainpage_logged.hbs", {posts:newposts} );//readd posts
+    res.render("mainpage_logged.hbs", {user: currentUser, posts:newposts} );//readd posts
 });
 
 router.get('/newpostscommunity/:communityname', async (req, res) => {
@@ -87,7 +89,6 @@ router.get('/newpostscommunity/:communityname', async (req, res) => {
     const foundUser = await Users.findOne({ username: currentUser.username });
     const community = await Community.findOne({ community: currentCommunity }).lean().exec();
     const isFollowing = foundUser.followedCommunities.some(communityId => communityId.equals(community._id));
-
     const filteredPosts = await Post.find({communityinfo: community._id }).populate('communityinfo').populate('user').lean().exec();
     let newposts = filteredPosts.sort((a, b) => b.dateofpost - a.dateofpost);
 
