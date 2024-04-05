@@ -44,6 +44,7 @@ var upload = multer({ storage: storage })
 
 
 postRouter.post('/submitpost', upload.single('file'), async (req,res) => {
+    currentUser = req.session.user
     let uploadedFile
     try {
         if (req.file && req.file.filename) {
@@ -355,6 +356,7 @@ postRouter.post('/editreply', async (req, res) => {
 
     const replyId = req.body.replyId; 
     const editedReplyContent = req.body.editedReplyContent; 
+    let postId
     try {
         const updatedReply = await Reply.findOneAndUpdate(
             { replyId: replyId }, 
@@ -366,12 +368,15 @@ postRouter.post('/editreply', async (req, res) => {
             return res.status(404).json({ error: 'Reply not found' });
         }
 
+        postId = updatedReply.postId
+
         res.status(200).json({ message: 'Reply content updated successfully', updatedReply });
     } catch (error) {
         console.error('Error updating post content:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 
+    
 })
 
 postRouter.delete('/deletereply/:id', async (req, res) =>{

@@ -11,6 +11,8 @@ const router = Router()
 let currentUser
 router.get("/", function (req, res) {
     res.redirect('/Sign_in');
+    currentUser = req.session.user;
+
 
 });
 
@@ -22,7 +24,7 @@ router.get('/mainpage', async (req, res) => {
 });
 
 router.get('/main_community/:community', async function(req,res){
-    
+    currentUser = req.session.user;
     const communityname = "b/"+req.params.community
     console.log(communityname)
     const foundUser = await Users.findOne({ username: currentUser.username });
@@ -72,7 +74,7 @@ router.get('/newpostscommunity/:communityname', async (req, res) => {
 
 router.get('/hotpostscommunity/:communityname', async (req, res) => {
     let currentCommunity = "b/"+req.params.communityname
-
+    currentUser = req.session.user;
     const foundUser = await Users.findOne({ username: currentUser.username });
     const community = await Community.findOne({ community: currentCommunity }).lean().exec();
     const isFollowing = foundUser.followedCommunities.some(communityId => communityId.equals(community._id));
@@ -86,6 +88,7 @@ router.get('/hotpostscommunity/:communityname', async (req, res) => {
 })
 
 router.get ('/samplepost1/:postId', async(req, res) =>{
+    currentUser = req.session.user;
     const id = req.params.postId;
     let postOwner = false;
     let foundPost = await Post.findOne({ postId: id })

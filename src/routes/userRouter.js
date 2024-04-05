@@ -39,6 +39,7 @@ userRouter.get('/Sign_in', function (req, res) {
 });
 
 userRouter.get('/profileview/:username', async (req, res) => {
+    currentUser = req.session.user;
 
     const profilename = req.params.username
 
@@ -96,6 +97,7 @@ userRouter.post('/submitsignin', async function(req, res){
 
 userRouter.post('/submiteditprofile/:profilename', async (req, res) => {
     const profilename = req.params.profilename
+    currentUser = req.session.user;
     let newDesc = req.body.profileDescription;
     try{
         const currentUser = await User.findOne({username: profilename})
