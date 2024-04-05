@@ -63,7 +63,7 @@ async function main() {
         store: new MongoStore({ 
             uri: process.env.MONGO_URI,
             collection: 'MySessions',
-            expires: 1000*60*60*24*30
+            expires: 1000*60*60
           })
     }));
 
