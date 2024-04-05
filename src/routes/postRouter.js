@@ -235,6 +235,7 @@ postRouter.post('/updatepostvote/:postId', async (req, res) => {
             if (updatedPost && updatedPost.user) {
                 await Users.findByIdAndUpdate(updatedPost.user._id, { $inc: { bits: 1 } });
                 console.log("User bits incremented.");
+                
             }
         }
         else if (type === 'downvote') {
