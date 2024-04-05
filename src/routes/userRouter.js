@@ -130,12 +130,18 @@ userRouter.post('/followCommunity', async (req,res) => {
 
         if (!isFollowing) {
             foundUser.followedCommunities.push(community);
+            community.totalmembers += 1
+            community.onlinemembers += 1
             await foundUser.save();
+            await community.save()
             return res.status(200).json({ message: 'Community followed successfully.' });
         } else {
             // Remove the community from followedCommunities array
             foundUser.followedCommunities = foundUser.followedCommunities.filter(communityId => !communityId.equals(community._id));
+            community.totalmembers -= 1
+            community.onlinemembers -= 1
             await foundUser.save();
+            await community.save()
             console.log("Community unfollowed successfully.");
             return res.status(200).json({ message: 'Community unfollowed successfully.' });
         }
