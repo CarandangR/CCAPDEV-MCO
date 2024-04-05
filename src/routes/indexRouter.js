@@ -56,7 +56,6 @@ router.get('/mainpage', async (req, res) => {
         });*/
     
     const postsArr = await Post.find({}).populate('communityinfo').populate('user').lean().exec();
-    console.log(postsArr)
     res.render("mainpage.hbs", {posts: postsArr}); //readd posts
 });
 
@@ -81,14 +80,16 @@ router.get('/mainpage_logged', async (req, res) => {
     res.render("mainpage_logged.hbs", {posts: postsArr}); //readd posts
 });
 
-router.get('/hotposts', (req, res) => {
-    //let hotposts = Posts.sort((a, b) => b.upvotes - a.upvotes);
-    res.render("mainpage_logged.hbs" );//readd posts
+router.get('/hotposts', async (req, res) => {
+    const postsArr = await Post.find({}).populate('communityinfo').populate('user').lean().exec();
+    let hotposts = postsArr.sort((a, b) => b.upvotes - a.upvotes);
+    res.render("mainpage_logged.hbs", {posts: hotposts} );//readd posts
 });
 
-router.get('/newposts', (req, res) => {
-    //let newposts = Posts.sort((a, b) => b.dateofpost - a.dateofpost);
-    res.render("mainpage_logged.hbs" );//readd posts
+router.get('/newposts', async (req, res) => {
+    const postsArr = await Post.find({}).populate('communityinfo').populate('user').lean().exec();
+    let newposts = postsArr.sort((a, b) => b.dateofpost - a.dateofpost);
+    res.render("mainpage_logged.hbs", {posts:newposts} );//readd posts
 });
 
 
