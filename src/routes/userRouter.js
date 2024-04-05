@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { Router } from 'express';
 import User from '../models/Users.js';
 import Post from '../models/Post.js'

@@ -6,6 +6,12 @@ var filterHot = document.querySelector('.hotposts')
 var communityname = document.querySelector('.comhandle').innerText
 let parts = communityname.split('/'); 
 let result = parts[1];
+var toCreatePost = document.querySelector('.posttext')
+
+toCreatePost.addEventListener('click', function(){
+
+    window.location = "/Create_Post"
+})
 filterNew.addEventListener('click', async function (){
 
     

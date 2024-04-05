@@ -40,7 +40,7 @@ saveReplyButtons.forEach(saveReplyButton => {
                 },
                 body: JSON.stringify({editedReplyContent: editedReplyContent, replyId: replyId}) 
             });
-            //location.reload()
+            window.location.href = "/samplepost1/"+ hiddenValue;
         }catch(err){
             console.error(err)
         }
@@ -98,7 +98,7 @@ saveButton.addEventListener('click', async () => {
             },
             body: JSON.stringify({editedPost: editedPost, hiddenValue: hiddenValue}) 
         });
-        location.reload()
+        window.location.href = "/samplepost1/"+ hiddenValue;
     }catch(err){
         console.error(err)
     }

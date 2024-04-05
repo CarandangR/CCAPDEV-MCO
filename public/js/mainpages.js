@@ -1,3 +1,11 @@
+var toCreatePost = document.querySelector('.posttext')
+
+toCreatePost.addEventListener('click', function(){
+
+    window.location = "/Create_Post"
+})
+
+
 function toggleImage(imgElement, originalSrc, clickedSrc) {
     if (imgElement.getAttribute('src').includes(clickedSrc)) {
         imgElement.setAttribute('src', originalSrc);

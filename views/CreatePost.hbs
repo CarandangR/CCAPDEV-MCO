@@ -22,8 +22,8 @@
         <div class = "headercontent">
             <div class="headerhome">
                 <div class="websitelogo">
-                    <a href="./mainpage"><img src="/static/img/byte_logo.png"/></a>
-                    <span class = "link"> <a style = "color: beige; text-decoration: none" href = "./mainpage"> byte. </a> </span>
+                    <a href="/mainpage_logged"><img src="/static/img/byte_logo.png"/></a>
+                    <span class = "link"> <a style = "color: beige; text-decoration: none" href = "/mainpage_logged"> byte. </a> </span>
                 </div>
             </div>
             <div class="headersearchbar">
@@ -34,7 +34,7 @@
                     <div class="profileicon">
                         <div class="profileiconholder">
                             <a href="{{currentUser.userprofilelink}}">
-                            <img src="/static/img/pfp.jpg"/>
+                            <img src="{{currentUser.pfplink}}"/>
                             </a>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                 </div>
             </form> 
                 <div class = "cancel">
-                    <a href = "./mainpage_logged">
+                    <a href = "/mainpage_logged">
                         <button class  = "submitbutton" type = "cancel" value = "cancel"> <span class ="buttontext">Cancel</span> </button>
                     </a>    
                 </div>
