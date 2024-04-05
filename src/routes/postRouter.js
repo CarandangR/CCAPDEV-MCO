@@ -239,6 +239,20 @@ postRouter.post('/updatevote/:postId', async (req, res) => {
                 { new: true }
             );
         }
+        else if (type === 'upvote reduce') {
+            postToUpdate = await Post.findOneAndUpdate(
+                { postId: updatePost },
+                { $inc: { upvotes: -1 } },
+                { new: true }
+            );
+        }
+        else if (type === 'downvote reduce') {
+            postToUpdate = await Post.findOneAndUpdate(
+                { postId: updatePost },
+                { $inc: { downvotes: -1 } },
+                { new: true }
+            );
+        }
         else {
             console.log("invalid vote type.");
         }
