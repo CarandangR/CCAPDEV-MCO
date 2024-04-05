@@ -17,5 +17,13 @@ NOTES:
 - You may edit the text contents of your posts and replies and delete them as well.
 - You may also update the about me of your profile.
 
-P.S Images uploaded to the program via the website will not be seen by the program if downloaded locally. This is due to images being uploaded on the website being stored on Render's cloud servers instead of GitHub, so the picture content link will not obtain an image.
+P.S Images uploaded to the program via the website will not be seen by the program if downloaded locally. This is due to images being uploaded on the website being stored on Render's cloud servers instead of GitHub, so the picture content link will not obtain an image. The same also applies if you upload an image locally. The picture will not load on the website until you push your local changes into github and redeploy the website. 
+
+User information:
+- Username: Karmaa Password: Password
+- Username: Nyett Password: Pass1234
+- Username: ghostlypir8 Password: 1234
+- Username: Devoid Password: devoid123
+
+
 
