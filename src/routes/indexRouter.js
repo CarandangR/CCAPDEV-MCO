@@ -92,6 +92,35 @@ router.get('/newposts', async (req, res) => {
     res.render("mainpage_logged.hbs", {posts:newposts} );//readd posts
 });
 
+router.get('/newpostscommunity/:communityname', async (req, res) => {
+    let currentCommunity = "b/"+req.params.communityname
+    console.log(currentCommunity)
+    const foundUser = await Users.findOne({ username: currentUser.username });
+    const community = await Community.findOne({ community: currentCommunity }).lean().exec();
+    const isFollowing = foundUser.followedCommunities.some(communityId => communityId.equals(community._id));
+
+
+    const filteredPosts = await Post.find({communityinfo: community._id }).populate('communityinfo').populate('user').lean().exec();
+    let newposts = filteredPosts.sort((a, b) => b.dateofpost - a.dateofpost);
+
+
+    res.render ("main_community.hbs", {posts: newposts, user: currentUser, community, isFollowing})
+})
+
+router.get('/hotpostscommunity/:communityname', async (req, res) => {
+    let currentCommunity = "b/"+req.params.communityname
+
+    const foundUser = await Users.findOne({ username: currentUser.username });
+    const community = await Community.findOne({ community: currentCommunity }).lean().exec();
+    const isFollowing = foundUser.followedCommunities.some(communityId => communityId.equals(community._id));
+
+
+    const filteredPosts = await Post.find({communityinfo: community._id }).populate('communityinfo').populate('user').lean().exec();
+    let hotposts = filteredPosts.sort((a, b) => b.upvotes - a.upvotes);
+
+
+    res.render ("main_community.hbs", {posts: hotposts, user: currentUser, community, isFollowing})
+})
 
 router.get ('/samplepost1/:postId', async(req, res) =>{
     const id = req.params.postId;

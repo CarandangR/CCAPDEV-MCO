@@ -1,5 +1,26 @@
 var button = document.querySelector('.followButton');
 
+var filterNew = document.querySelector('.newposts')
+var filterHot = document.querySelector('.hotposts')
+
+var communityname = document.querySelector('.comhandle').innerText
+let parts = communityname.split('/'); 
+let result = parts[1];
+filterNew.addEventListener('click', async function (){
+
+    
+    window.location.href = "/newpostscommunity/"+result;
+
+
+})
+
+filterHot.addEventListener('click', async function (){
+
+    
+    window.location.href = "/hotpostscommunity/"+result;
+
+
+})
 button.addEventListener('click', async function() {
     var buttonText = button.innerText.trim();
 
