@@ -9,6 +9,11 @@ import Community from '../models/Community.js';
 const router = Router()
 let currentUser
 router.get("/", function (req, res) {
+    if(req.session.authorized)
+    {
+        res.redirect('/mainpage_logged');
+        return;
+    }
     res.redirect('/mainpage');
     currentUser = req.session.user;
 });
