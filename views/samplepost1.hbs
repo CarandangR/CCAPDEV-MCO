@@ -64,7 +64,7 @@
             </div>
             <div class="postinfocontainer">
                 <h4> {{correctPost.postheader}} </h4>
-                <p> {{correctPost.postcontent}} </p>
+                <p id ="postcontent"> {{correctPost.postcontent}} </p>
                 <div class="postpicturecontent">
                 {{#if correctPost.postpicturecontent}}
                     <img src="{{correctPost.postpicturecontent}}"/>
@@ -76,7 +76,7 @@
                     <button type = "button" class = "deletebutton"> Delete </button>
                 </div>
                 <div class="edit-post-form" style="display: none;">
-                    <textarea class="edit-textarea"></textarea>
+                    <textarea class="edit-postarea"></textarea>
                     <button type="button" class="save-button">Save</button>
                 </div>
                 {{else}}
@@ -85,7 +85,7 @@
                     <button type = "button" class = "deletebutton"> Delete </button>
                 </div>
                 <div class="edit-post-form" style="display: none;">
-                    <textarea class="edit-textarea"></textarea>
+                    <textarea class="edit-postarea"></textarea>
                     <button type="button" class="save-button">Save</button>
                 </div>
                 {{/if}}

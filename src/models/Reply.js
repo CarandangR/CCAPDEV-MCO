@@ -31,10 +31,6 @@ const replySchema = new Schema({
         type: SchemaTypes.Number,
         required: true
     },
-    replies: {
-        type: [SchemaTypes.ObjectId],
-        ref: 'Replies'
-    },
     isOwner: {
         type: SchemaTypes.Boolean,
         required: true

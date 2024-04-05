@@ -93,45 +93,39 @@ router.get('/newposts', (req, res) => {
 
 
 router.get ('/samplepost1/:postId', async(req, res) =>{
-    const id = req.params.postId
-    let postOwner = false
+    const id = req.params.postId;
+    let postOwner = false;
     let foundPost = await Post.findOne({ postId: id })
-    .populate('communityinfo')
-    .populate('user')
-    .populate({
-        path: 'replies',
-        populate: {
-            path: 'user',
-            model: 'Users'
+        .populate('communityinfo')
+        .populate('user')
+        .populate({
+            path: 'replies',
+            populate: {
+                path: 'user',
+                model: 'Users'
+            }
+        })
+        .lean()
+        .exec();
+    
+    let correctPost = foundPost;
+
+    if (correctPost.user.username === currentUser.username) {
+        postOwner = true;
+    }
+    for (let i = 0; i < foundPost.replies.length; i++) {
+        const reply = foundPost.replies[i];
+        if (reply.user.username === currentUser.username) {
+            reply.isOwner = true;
+        } else {
+            reply.isOwner = false;
         }
-    })
-    .lean()
-    .exec();
-    let correctPost = foundPost
+    }
+    
+
 
     //console.log(correctPost)
-    if (correctPost.user.username == currentUser.username){
-        postOwner = true
-    }
-    let repliesArr = await Reply.find({}).populate('user').populate('replies').lean().exec();
-    async function populateReplies(replies) {
-        for (const reply of replies) {
-            if (reply.replies && reply.replies.length > 0) {
-                await populateReplies(reply.replies);
-            }
-            const replyUser = await Users.findById(reply.user);
-            if (replyUser && replyUser.username === currentUser.username) {
-                reply.isOwner = true;
-            } else {
-                reply.isOwner = false;
-            }
-        }
-    }
 
-    //let updatedReplies = await Reply.find({}).populate('user').populate('replies').lean().exec();
-    //console.log(updatedReplies)
-    await populateReplies(correctPost.replies);
-    console.log(correctPost)
     res.render ("samplepost1", {correctPost: correctPost, currentUser: currentUser, id, postOwner})
 
 

@@ -2,6 +2,7 @@ const editButton = document.querySelector('.editbutton');
 const deleteButton = document.querySelector('.deletebutton');
 const editPostForm = document.querySelector('.edit-post-form');
 const editTextarea = document.querySelector('.edit-textarea');
+const editPostarea = document.querySelector('.edit-postarea');
 const saveButton = document.querySelector('.save-button');
 const hiddenValue = document.getElementById('hiddenValue').value;
 
@@ -14,10 +15,10 @@ editReplyButtons.forEach(editReplyButton => {
     editReplyButton.addEventListener('click', () => {
         // Find the corresponding edit reply form
         const editReplyForm = editReplyButton.closest('.replycontainer').querySelector('.edit-reply-form');
-        
-        // Display the edit reply form
+        const replyContentElement = editReplyButton.closest('.replycontainer').querySelector('.replyvalue');
+        const replyContent = replyContentElement.textContent.trim();
         editReplyForm.style.display = 'block';
-
+        editReplyForm.querySelector('.edit-textarea').value = replyContent
         // Get the replyId of the clicked reply
         replyId = editReplyButton.closest('.replycontainer').querySelector('#replyId').value;
     });
@@ -52,22 +53,23 @@ saveReplyButtons.forEach(saveReplyButton => {
 deleteReplyButtons.forEach(deleteReplyButton => {
     deleteReplyButton.addEventListener('click', async () => {
         replyId = deleteReplyButton.closest('.replycontainer').querySelector('#replyId').value;
-
         try{
             const response = await fetch ('/deletereply/'+replyId, {
                 method: 'DELETE'
             })
-        if (response.ok){
-            location.reload()
-        }
+        
+    
         }catch(err){
             console.error(err)
         }
     })
+    
 })
 
 editButton.addEventListener('click', () => {
     editPostForm.style.display = 'block';
+    let postContent = document.getElementById('postcontent').innerText
+    editPostarea.value = postContent
 });
 
 deleteButton.addEventListener('click', async() => {
@@ -89,7 +91,7 @@ deleteButton.addEventListener('click', async() => {
 });
 
 saveButton.addEventListener('click', async () => {
-    const editedPost = editTextarea.value;
+    const editedPost = editPostarea.value;
     console.log("Save button trigger")
     console.log('Save button clicked, edited post:', editedPost);
     editPostForm.style.display = 'none';

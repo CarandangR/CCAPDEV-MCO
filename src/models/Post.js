@@ -59,5 +59,18 @@ const postSchema = new Schema({
 
 const Post = model('Post', postSchema); // posts collection 
 
+const autoPopulateReplies = function (next) {
+    this.populate({
+        path: 'replies',
+        populate: { path: 'replies' } // Recursively populate replies within replies
+    });
+    next();
+};
+
+postSchema.pre('findOne', autoPopulateReplies)
+         .pre('find', autoPopulateReplies);
+
+
+
 export default Post;
 // module.exports = Post;

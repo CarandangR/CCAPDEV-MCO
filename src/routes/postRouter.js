@@ -155,7 +155,6 @@ postRouter.post('/submitreply/:id', async (req, res) => {
                 replydate: new Date(),
                 upvotes: 0,
                 downvotes: 0,
-                replies: [],
                 isOwner: true
             })
 
@@ -309,47 +308,6 @@ postRouter.delete('/deletereply/:id', async (req, res) =>{
 
 })
 
-postRouter.post('/submitsubreply/:replyId', async (req, res) => {
-    let replyId = req.params.replyId
-    const foundUser = await Users.findOne({username: currentUser.username}) // replace with logged in user
-    const userId = foundUser._id
-    let postDate = new Date()
-    const repliedPost = await Reply.findOne({replyId: replyId})
-    //console.log(repliedPost)
 
-    let postDay = postDate.getDay().toString()
-    let postYear = postDate.getFullYear().toString()
-    let postMin = postDate.getMinutes().toString()
-    let postSeconds = postDate.getSeconds().toString()
-    let replyIdValue = (postDay+postYear+postMin+postSeconds)
-    console.log(req.body.replytextcontent)
-    if (req.body.replytextcontent != ""){
-        try{
-            const result = await Reply.create({
-                replyId: replyIdValue,
-                postId: repliedPost.postId,
-                user : new mongoose.Types.ObjectId(userId),
-                replycontent : req.body.replytextcontent,
-                replydate: new Date(),
-                upvotes: 0,
-                downvotes: 0,
-                replies: [],
-                isOwner: true
-            })
-
-            try{
-                const updatedPost = await Reply.findByIdAndUpdate(repliedPost._id, {$push: {replies: result}, $inc: { numberofreplies: 1 }}, {new: true})
-
-                console.log(updatedPost)
-            }catch (err){
-                console.error(err)
-            }
-        }catch(err){
-            console.error(err)
-        }
-    }
-    res.redirect('/mainpage_logged');
-
-})
 
 export default postRouter;
