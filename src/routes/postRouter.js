@@ -24,6 +24,11 @@ let currentUser = {
 } // change this when session handling is implemented
 
 postRouter.get('/Create_post', async function (req, res) {
+    if(!req.session.authorized)
+    {
+        res.redirect('/');
+        return;
+    }
     let communityNames = []
     const foundUser = await Users.findOne({username: currentUser.username}).populate('followedCommunities').exec() // replace with logged in user
     const communityArr = await Community.find({}).lean().exec();

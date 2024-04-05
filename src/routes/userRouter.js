@@ -29,10 +29,20 @@ let currentUser = {
 } // change this when session handling is implemented
 
 userRouter.get('/Sign_up', function (req, res) {
+    if(req.session.authorized)
+    {
+        res.redirect('/mainpage_logged')
+        return;
+    }
     res.render("signup.hbs");
 });
 
 userRouter.get('/Sign_in', function (req, res) {
+    if(req.session.authorized)
+    {
+        res.redirect('/mainpage_logged')
+        return;
+    }
     res.render("signin.hbs");
 });
 
@@ -43,8 +53,6 @@ userRouter.get('/profileview/:username', async (req, res) => {
     const userProfile = await User.findOne({username: profilename}).lean().exec();
     const userPosts = await Post.find({user: userProfile._id}).populate('communityinfo').populate('user').lean().exec();
     res.render("profileview.hbs", {currentUser, userProfile, posts: userPosts, profilename});
-
-
 
 })
 
