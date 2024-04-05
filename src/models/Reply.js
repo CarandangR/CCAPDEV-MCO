@@ -2,6 +2,10 @@ import { SchemaTypes, Schema, model } from 'mongoose';
 
 const replySchema = new Schema({
     
+    replyId: {
+        type: SchemaTypes.String,
+        required: true
+    },
     postId: {
         type : SchemaTypes.String,
         required: true
@@ -27,6 +31,14 @@ const replySchema = new Schema({
         type: SchemaTypes.Number,
         required: true
     },
+    replies: {
+        type: [SchemaTypes.ObjectId],
+        ref: 'Replies'
+    },
+    isOwner: {
+        type: SchemaTypes.Boolean,
+        required: true
+    }
    
 });
 

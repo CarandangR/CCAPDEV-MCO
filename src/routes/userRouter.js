@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import { Router } from 'express';
 import User from '../models/Users.js';
 import Post from '../models/Post.js'
@@ -6,6 +7,16 @@ import Community from '../models/Community.js'
 
 
 const userRouter = Router()
+const hashPassword = async(password) => {
+    const saltRounds = 10
+    return await bcrypt.hash(password, saltRounds)
+}
+
+const comparePasswords = async (password, hashedPassword) => {
+    return await bcrypt.compare(password, hashedPassword);
+};
+
+
 userRouter.use(express.json());
 let currentUser = {
     username: "gojowithiphone",
@@ -40,10 +51,11 @@ userRouter.get('/profileview/:username', async (req, res) => {
 userRouter.post('/submitsignup', async function (req, res) {
     console.log("POST request received for /submitsignup");
     try {
+        const hashedPassword = await hashPassword(req.body.password)
         const result = await User.create({
             username: req.body.username,
             userhandle: "u/"+req.body.userhandle,
-            password: req.body.password,
+            password: hashedPassword,
             pfplink: "/static/img/nopfp.jpg",
             bits: 0,
             aboutme: "Such empty",
@@ -61,16 +73,17 @@ userRouter.post('/submitsignin', async function(req, res){
     const userInput = req.body.username
     const passwordInput = req.body.password
     try{
-        const user = await User.findOne({ username: userInput }).lean().exec();
-        //assigns as an object
+        const user = await User.findOne({ username: userInput });
         if (!user) {
             res.status(404).json({ message: 'User not found' });
-        }
-        if (user.password !== passwordInput) {
-            res.status(401).json({ message: 'Invalid password' }); 
-        }
-        res.redirect('/mainpage_logged')
-        
+        } else{
+            const passCheck = await comparePasswords(passwordInput, user.password)
+            if (passCheck){
+                res.redirect('/mainpage_logged')
+            }else{
+                res.status(401).json({ message: 'Invalid password' }); 
+            }
+        }        
     }catch(err){
         console.error(err)
     }
@@ -81,7 +94,7 @@ userRouter.post('/submiteditprofile/:profilename', async (req, res) => {
     let newDesc = req.body.profileDescription;
     try{
         const currentUser = await User.findOne({username: profilename})
-        const updatedDesc = await User.findByIdAndUpdate(currentUser._id, {$push: {aboutme: newDesc}}, {new: true})
+        const updatedDesc = await User.findByIdAndUpdate(currentUser._id, {aboutme: newDesc}, {new: true})
         console.log("trigger")
         console.log(updatedDesc)
 
@@ -89,7 +102,7 @@ userRouter.post('/submiteditprofile/:profilename', async (req, res) => {
         console.error(err)
     }
     console.log("New profile description:", newDesc);
-    res.redirect('/profilepage');
+    res.redirect('/profileview/' + profilename);
 });
 
 userRouter.post('/followCommunity', async (req,res) => {

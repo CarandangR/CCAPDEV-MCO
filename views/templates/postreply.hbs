@@ -1,31 +1,65 @@
 <div class="replycontainer"> 
             <div class="replybox">
                 <div class = "replyinfo"> 
+                    <input type="hidden" id="replyId" value="{{this.replyId}}">
+
                     <div class="replypfp"> 
-                        <a href="{{user.userhandlelink}}"> <img class="userimg" src="{{user.pfplink}}"> </a>
+                        <a href="{{this.user.userhandlelink}}"> <img class="userimg" src="{{this.user.pfplink}}"> </a>
                     </div>
-                    <p> {{user.username}} <br><span> {{user.userhandle}} </span><br> Bits: {{user.bits}}</p>
+                    <p> {{this.user.username}} {{this.currentUser.username}} <br><span> {{this.user.userhandle}} </span><br> Bits: {{this.user.bits}}</p>
                     <div class="postdate"> 
-                        <h5> Posted on: {{replydate}} </h5>
-                        <p> {{ReplyDateDistance}} </p>
+                        <h5> Posted on: {{this.replydate}} </h5>
+                        <p> {{this.ReplyDateDistance}} </p>
                     </div>
                 </div>
                 
                 
                 <div class="replycontent"> 
-                    <p> {{replycontent}} <br> </p>
+                    <p> {{this.replycontent}} <br> </p>
                     <div class="footer">
+                    {{#if isOwner}}
+                        <div class = "editanddelete">
+                            <button type = "button" class = "editreplybutton"> Edit </button>
+                            <button type = "button" class = "deletereplybutton"> Delete </button>
+                        </div>
+                        <div class="edit-reply-form" style="display: none;">
+                            <textarea class="edit-textarea"></textarea>
+                            <button type="button" class="savereplybutton">Save</button>
+                        </div>
+                    {{else}}
+                        <div class = "editanddelete" style="display: none;">
+                            <button type = "button" class = "editreplybutton"> Edit </button>
+                            <button type = "button" class = "deletereplybutton"> Delete </button>
+                        </div>
+                        <div class="edit-post-form" style="display: none;">
+                            <textarea class="edit-textarea"></textarea>
+                            <button type="button" class="save-button">Save</button>
+                        </div>
+                    {{/if}}
                     <div class="upbit">
                         <img src="/static/img/up-arrow-regular-24.png"/>
                     </div>
                     <div class="downbit">
                         <img src="/static/img/down-arrow-regular-24.png"/>
                     </div>
-                    <div class="share">
-                        <img src="/static/img/share-regular-24.png"/>
-                    </div>
                     <div class="replybutton"><a href=""> Reply </a></div>
                 </div>
                 </div>
             </div>
+            <div class="replyinputarea"> 
+            <div class="replyinputbox">
+                <form action="/submitsubreply/{{this.replyId}}" method="POST"> 
+                <input type="text" id="replytextcontent" name="replytextcontent" placeholder="Reply to this post..."/> 
+            </div>
+            <div class="replybutton"><button type="submit" value="submit"> Reply </button> </div>
+           
+            </form>
+            
         </div>
+        </div>
+
+        {{#if this.replies}}
+            {{#each this.replies}}
+                    {{> postreply this}} 
+            {{/each}}
+        {{/if}}

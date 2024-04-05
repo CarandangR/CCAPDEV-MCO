@@ -36,7 +36,14 @@ async function main() {
             relativeTime: (date) => {
                 const diff = moment().diff(date);
                 return moment.duration(diff).humanize() + " ago";
+            },
+            object: function(options) {
+                return options.hash;
+            },
+            isSameUser: function(currentUser, userProfile) {
+                return currentUser.username === userProfile.username;
             }
+           
         }
     }));
     app.use(router)

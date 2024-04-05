@@ -14,8 +14,8 @@
             <div class = "headercontent">
                 <div class="headerhome">
                     <div class="websitelogo">
-                        <a href="../mainpage"><img src="/static/img/byte_logo.png"/></a>
-                        <span class = "link"> <a style = "color: beige; text-decoration: none" href = "../mainpage"> byte. </a> </span>
+                        <a href="/mainpage_logged"><img src="/static/img/byte_logo.png"/></a>
+                        <span class = "link"> <a style = "color: beige; text-decoration: none" href = "/mainpage_logged"> byte. </a> </span>
                     </div>
                 </div>
                 <div class="headersearchbar">
@@ -79,6 +79,15 @@
                     <textarea class="edit-textarea"></textarea>
                     <button type="button" class="save-button">Save</button>
                 </div>
+                {{else}}
+                    <div class = "editanddelete" style="display: none;">
+                    <button type = "button" class = "editbutton"> Edit </button>
+                    <button type = "button" class = "deletebutton"> Delete </button>
+                </div>
+                <div class="edit-post-form" style="display: none;">
+                    <textarea class="edit-textarea"></textarea>
+                    <button type="button" class="save-button">Save</button>
+                </div>
                 {{/if}}
                 <div class="footer">
                     <div class="upbit">
@@ -86,9 +95,6 @@
                     </div>
                     <div class="downbit">
                         <img src="/static/img/down-arrow-regular-24.png"/>
-                    </div>
-                    <div class="share">
-                        <img src="/static/img/share-regular-24.png"/>
                     </div>
                 </div>
             </div>
@@ -109,7 +115,7 @@
         
         {{#if correctPost.replies}}
             {{#each correctPost.replies}}
-                    {{> postreply}}
+                    {{> postreply this}}
             {{/each}}
         {{else}}
             

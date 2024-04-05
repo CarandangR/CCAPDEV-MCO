@@ -1,5 +1,5 @@
 <script src="/static/js/postview.js" defer></script>
-<div class="postscontainer">
+<div class="postscontainer"  data-postid="{{postId}}">
     <div class="postheader">
         <div class="communityposticonholder">
             <div class="communityposticon">
@@ -22,7 +22,7 @@
     </div>
     <div class="postpicturecontent">
         {{#if postpicturecontent}}
-            <img src="{{postpicturecontent}}"/>
+            <img class = "piccontent" src="{{postpicturecontent}}"/>
         {{else}}
             <span></span>
         {{/if}}
@@ -38,9 +38,6 @@
         </div>
         <div class="comment">
             <img src="/static/img/comment-regular-24.png"/>
-        </div>
-        <div class="share">
-            <img src="/static/img/share-regular-24.png"/>
         </div>
         <div class="commentcounter">
             <span><a href="{{linkofpost}}">{{numberofreplies}}</a></span>

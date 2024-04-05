@@ -100,7 +100,7 @@ postRouter.post('/submitpost', upload.single('file'), async (req,res) => {
     const uploadedTime = new Date()
 
     if (uploadedFile != ""){
-        uploadedFile = "../public/img/" + uploadedFile
+        uploadedFile = "/static/img/" + uploadedFile
     }
 
     if (req.body.title !== "" && req.body.content !== ""){
@@ -121,7 +121,7 @@ postRouter.post('/submitpost', upload.single('file'), async (req,res) => {
 
             })
 
-            res.redirect('/mainpage')
+            res.redirect('/mainpage_logged')
 
         }catch(err){
             console.error(err)
@@ -137,17 +137,26 @@ postRouter.post('/submitreply/:id', async (req, res) => {
     const id = req.params.id
     const foundUser = await Users.findOne({username: currentUser.username}) // replace with logged in user
     const userId = foundUser._id
-    
+    let postDate = new Date()
+
+    let postDay = postDate.getDay().toString()
+    let postYear = postDate.getFullYear().toString()
+    let postMin = postDate.getMinutes().toString()
+    let postSeconds = postDate.getSeconds().toString()
+    let replyId = (postDay+postYear+postMin+postSeconds)
     
     if (req.body.replytextcontent != ""){
         try{
             const result = await Reply.create({
+                replyId: replyId,
                 postId: id,
                 user : new mongoose.Types.ObjectId(userId),
                 replycontent : req.body.replytextcontent,
                 replydate: new Date(),
                 upvotes: 0,
-                downvotes: 0
+                downvotes: 0,
+                replies: [],
+                isOwner: true
             })
 
             try{
@@ -187,7 +196,6 @@ postRouter.post('/editpost', async (req, res) => {
     }
 
 })
-
 postRouter.delete('/deletepost/:id', async (req, res) =>{
     const postId = req.params.id
     try{
@@ -199,13 +207,149 @@ postRouter.delete('/deletepost/:id', async (req, res) =>{
         if (deletePost instanceof Post) {
             await Reply.deleteMany({ postId: postId });
             await Post.deleteOne({postId : deletePost.postId})
+
         } else {
             return res.status(500).json({ error: 'Unable to delete post' });
         }
-        res.redirect('/mainpage_logged')
     }catch(err){
         console.error(err)
     }
+    
+
+})
+
+
+postRouter.post('/updatevote/:postId', async (req, res) => {
+    console.log("post request for updating upvote/downvote received");
+    const updatePost = req.body.id;
+    const {type} = req.body;
+    console.log(updatePost);
+    try {
+        let postToUpdate;
+        if(type === 'upvote') {
+            postToUpdate = await Post.findOneAndUpdate(
+                { postId: updatePost },
+                { $inc: { upvotes: 1 } },
+                { new: true }
+            );
+        }
+        else if (type === 'downvote') {
+            postToUpdate = await Post.findOneAndUpdate(
+                { postId: updatePost },
+                { $inc: { downvotes: 1 } },
+                { new: true }
+            );
+        }
+        else {
+            console.log("invalid vote type.");
+        }
+
+        if (!postToUpdate) {
+            console.log("post does not exist.");
+        }
+        else {
+            console.log("post vote updated.");
+            
+        }
+        res.redirect('/mainpage_logged');
+        
+    }
+    catch (error) {
+        console.error('Error updating vote:', error);
+        res.status(500);
+    }
+})
+
+
+postRouter.post('/editreply', async (req, res) => {
+    const replyId = req.body.replyId; 
+    const editedReplyContent = req.body.editedReplyContent; 
+    try {
+        const updatedReply = await Reply.findOneAndUpdate(
+            { replyId: replyId }, 
+            { $set: { replycontent: editedReplyContent, replyId: replyId } }, 
+            { new: true } 
+        );
+
+        if (!updatedReply) {
+            return res.status(404).json({ error: 'Reply not found' });
+        }
+
+        res.status(200).json({ message: 'Reply content updated successfully', updatedReply });
+    } catch (error) {
+        console.error('Error updating post content:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+
+})
+
+postRouter.delete('/deletereply/:id', async (req, res) =>{
+    const replyId = req.params.id
+    console.log("Delete trigger on reply " +replyId)
+    try{
+        const deleteReply = await Reply.findOne({replyId: replyId})
+        console.log(deleteReply)
+        if (!deleteReply) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+        if (deleteReply instanceof Reply) {
+            //await Reply.deleteMany({ postId: postId });
+            await Post.updateOne({postId: deleteReply.postId}, {$inc: {numberofreplies: -1},  $pull: { replies: deleteReply._id } })
+            await Reply.deleteOne({replyId : deleteReply.replyId})
+            
+
+
+        } else {
+            return res.status(500).json({ error: 'Unable to delete Reply' });
+        }
+    }catch(err){
+        console.error(err)
+    }
+    
+
+})
+
+postRouter.post('/submitsubreply/:replyId', async (req, res) => {
+    let replyId = req.params.replyId
+    const foundUser = await Users.findOne({username: currentUser.username}) // replace with logged in user
+    const userId = foundUser._id
+    let postDate = new Date()
+    const repliedPost = await Reply.findOne({replyId: replyId})
+    //console.log(repliedPost)
+
+    let postDay = postDate.getDay().toString()
+    let postYear = postDate.getFullYear().toString()
+    let postMin = postDate.getMinutes().toString()
+    let postSeconds = postDate.getSeconds().toString()
+    let replyIdValue = (postDay+postYear+postMin+postSeconds)
+    console.log(req.body.replytextcontent)
+    if (req.body.replytextcontent != ""){
+        try{
+            const result = await Reply.create({
+                replyId: replyIdValue,
+                postId: repliedPost.postId,
+                user : new mongoose.Types.ObjectId(userId),
+                replycontent : req.body.replytextcontent,
+                replydate: new Date(),
+                upvotes: 0,
+                downvotes: 0,
+                replies: [],
+                isOwner: true
+            })
+
+            try{
+                const updatedPost = await Reply.findByIdAndUpdate(repliedPost._id, {$push: {replies: result}, $inc: { numberofreplies: 1 }}, {new: true})
+
+                console.log(updatedPost)
+            }catch (err){
+                console.error(err)
+            }
+        }catch(err){
+            console.error(err)
+        }
+    }
+    res.redirect('/mainpage_logged');
+
 })
 
 export default postRouter;

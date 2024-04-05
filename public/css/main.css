@@ -659,3 +659,6 @@ a
     text-decoration: none;
     color: black;
 }
+.piccontent{
+    max-width: 620px;
+}

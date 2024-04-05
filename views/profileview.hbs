@@ -65,13 +65,14 @@
                     <div class="profiledesc">
                         <p>{{userProfile.aboutme}}</p>
                     </div>
-                        
-                    <form action="submiteditprofile/{{profilename}}" method="POST">
+                    <div class="profiledescinput"><input  type="text" placeholder="Edit profile description..." name="profileDescription" style = "display: none;"></input></div>
+                    {{#if (isSameUser currentUser userProfile)}}
+                         <!-- Check if the user is the owner of the profile, if so, show the edit option -->
                     <div class="editbutton"> 
-                        <button type="submit" value = "submit">Confirm</button>
-                        <a href=""> Edit description </a> 
+                        <a> Edit Profile description</a>
+                    <button type="submit" value="submit" style="display: none;">Submit Edits</button>
                     </div>
-                    </form>
+                    {{/if}}
                 </div> 
             </div>
             <div class="latestpostscontainer">  

@@ -5,6 +5,67 @@ const editTextarea = document.querySelector('.edit-textarea');
 const saveButton = document.querySelector('.save-button');
 const hiddenValue = document.getElementById('hiddenValue').value;
 
+const editReplyButtons = document.querySelectorAll('.editreplybutton')
+const deleteReplyButtons = document.querySelectorAll('.deletereplybutton')
+const saveReplyButtons = document.querySelectorAll('.savereplybutton')
+const editReplyForm = document.querySelectorAll('.edit-reply-form')
+let replyId
+editReplyButtons.forEach(editReplyButton => {
+    editReplyButton.addEventListener('click', () => {
+        // Find the corresponding edit reply form
+        const editReplyForm = editReplyButton.closest('.replycontainer').querySelector('.edit-reply-form');
+        
+        // Display the edit reply form
+        editReplyForm.style.display = 'block';
+
+        // Get the replyId of the clicked reply
+        replyId = editReplyButton.closest('.replycontainer').querySelector('#replyId').value;
+    });
+});
+
+saveReplyButtons.forEach(saveReplyButton => {
+    saveReplyButton.addEventListener('click', async () => {
+        const editReplyForm = saveReplyButton.closest('.replycontainer').querySelector('.edit-reply-form');
+        const editedReplyContent = editReplyForm.querySelector('.edit-textarea').value;
+        editReplyForm.style.display = 'none';
+        console.log(replyId)
+        console.log(editedReplyContent);
+
+        try{
+            const response = await fetch('/editreply', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({editedReplyContent: editedReplyContent, replyId: replyId}) 
+            });
+            location.reload()
+        }catch(err){
+            console.error(err)
+        }
+
+
+    })
+
+})
+
+deleteReplyButtons.forEach(deleteReplyButton => {
+    deleteReplyButton.addEventListener('click', async () => {
+        replyId = deleteReplyButton.closest('.replycontainer').querySelector('#replyId').value;
+
+        try{
+            const response = await fetch ('/deletereply/'+replyId, {
+                method: 'DELETE'
+            })
+        if (response.ok){
+            location.reload()
+        }
+        }catch(err){
+            console.error(err)
+        }
+    })
+})
+
 editButton.addEventListener('click', () => {
     editPostForm.style.display = 'block';
 });
@@ -15,6 +76,13 @@ deleteButton.addEventListener('click', async() => {
         const response = await fetch ('/deletepost/'+hiddenValue, {
             method: 'DELETE',
         })
+        const mainPageResponse = await fetch('/mainpage_logged');
+        if (mainPageResponse.ok) {
+            window.location.href = '/mainpage_logged';
+        } else {
+            console.error('Failed to fetch mainpage_logged after deleting post');
+        }
+
     }catch (err){
         console.error(err)
     }

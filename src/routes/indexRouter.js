@@ -3,21 +3,22 @@ import userRouter from './userRouter.js';
 import postRouter from './postRouter.js';
 import Post from '../models/Post.js';
 import Users from '../models/Users.js';
+import Reply from '../models/Reply.js'
 
 import Community from '../models/Community.js';
 
 const router = Router()
 
 /*let currentUser = {
-    username: "Karmaa",
-    userhandle : "u/karma",
-    password : "1234",
+    username: "Nyett",
+    userhandle : "u/nyet",
+    password : "Pass1234",
     pfplink: "/static/img/nopfp.jpg",
     bits: "0",
     aboutme: "such empty",
-    userprofilelink : "/profileview/Karmaa"
-} // change this when session handling is implemented
-*/
+    userprofilelink : "/profileview/Nyett"
+} // change this when session handling is implemented*/
+
 let currentUser = {
     username: "gojowithiphone",
     userhandle : "u/gojo",
@@ -61,17 +62,21 @@ router.get('/mainpage', async (req, res) => {
 
 router.get('/main_community/:community', async function(req,res){
 
-    const communityname = req.params.community
+    const communityname = "b/"+req.params.community
+    console.log(communityname)
     const foundUser = await Users.findOne({ username: currentUser.username });
-    const community = await Community.findOne({ communitydisplayname: communityname }).lean().exec();
+    const community = await Community.findOne({ community: communityname }).lean().exec();
+    console.log(community)
     const isFollowing = foundUser.followedCommunities.some(communityId => communityId.equals(community._id));
 
 
     const filteredPosts = await Post.find({communityinfo: community._id }).populate('communityinfo').populate('user').lean().exec();
     res.render ("main_community.hbs", {posts: filteredPosts, user: currentUser, community, isFollowing})
 })
+
 router.get('/mainpage_logged', async (req, res) => {
     //let user = currentUser;
+    console.log("trigger")
     const postsArr = await Post.find({}).populate('communityinfo').populate('user').lean().exec();
     res.render("mainpage_logged.hbs", {posts: postsArr}); //readd posts
 });
@@ -90,25 +95,49 @@ router.get('/newposts', (req, res) => {
 router.get ('/samplepost1/:postId', async(req, res) =>{
     const id = req.params.postId
     let postOwner = false
-    let foundPost = await Post.find({postId: id}).populate('communityinfo').populate('user').populate({
+    let foundPost = await Post.findOne({ postId: id })
+    .populate('communityinfo')
+    .populate('user')
+    .populate({
         path: 'replies',
         populate: {
             path: 'user',
-            model: 'Users' 
+            model: 'Users'
         }
-    }).lean().exec();
-
-    let correctPost = foundPost[0]
+    })
+    .lean()
+    .exec();
+    let correctPost = foundPost
 
     //console.log(correctPost)
     if (correctPost.user.username == currentUser.username){
         postOwner = true
     }
-    console.log(id)
-    res.render ("samplepost1", {correctPost, currentUser, id, postOwner})
+    let repliesArr = await Reply.find({}).populate('user').populate('replies').lean().exec();
+    async function populateReplies(replies) {
+        for (const reply of replies) {
+            if (reply.replies && reply.replies.length > 0) {
+                await populateReplies(reply.replies);
+            }
+            const replyUser = await Users.findById(reply.user);
+            if (replyUser && replyUser.username === currentUser.username) {
+                reply.isOwner = true;
+            } else {
+                reply.isOwner = false;
+            }
+        }
+    }
+
+    //let updatedReplies = await Reply.find({}).populate('user').populate('replies').lean().exec();
+    //console.log(updatedReplies)
+    await populateReplies(correctPost.replies);
+    console.log(correctPost)
+    res.render ("samplepost1", {correctPost: correctPost, currentUser: currentUser, id, postOwner})
 
 
 })
+
+
 
 router.use(userRouter)
 router.use(postRouter)
