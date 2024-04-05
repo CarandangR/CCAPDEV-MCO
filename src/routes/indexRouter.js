@@ -15,32 +15,14 @@ router.get("/", function (req, res) {
 });
 
 router.get('/mainpage', async (req, res) => {
-    /*const data = [
-        {communityicon: "../public/img/apple_logo.jpg", communitybanner: "/static/img/apple_banner.jpg", communitydisplayname: "apple", community: "b/apple",
-        communitylink: "/main_community/apple", totalmembers: "100", onlinemembers: "75"},
-        {communityicon: "../public/img/webdevicon.png", communitybanner: "/static/img/apple_banner.jpg", communitydisplayname: "web development", community: "b/webdev",
-        communitylink: "/main_community/webdev", totalmembers: "1000", onlinemembers: "500"}
-    ]
-    const userData = [
-        {username: "gojowithiphone", userhandle: "u/gojo", password: "1234", pfplink: "/static/img/nopfp.jpg", bits: "0",
-        aboutme: "Such empty", userprofilelink: "/profileview/gojowithiphone", followedCommunities: []}
-    ]
-    Users.insertMany(userData)
     
-    Community.insertMany(data)
-        .then(docs => {
-            console.log('Data inserted:', docs);
-        })
-        .catch(err => {
-            console.error('Error inserting data:', err);
-        });*/
     
     const postsArr = await Post.find({}).populate('communityinfo').populate('user').lean().exec();
     res.render("mainpage.hbs", {posts: postsArr}); //readd posts
 });
 
 router.get('/main_community/:community', async function(req,res){
-
+    
     const communityname = "b/"+req.params.community
     console.log(communityname)
     const foundUser = await Users.findOne({ username: currentUser.username });
@@ -54,6 +36,22 @@ router.get('/main_community/:community', async function(req,res){
 })
 
 router.get('/mainpage_logged', async (req, res) => {
+    const data = [
+        {communityicon: "/static/img/pcmrlogo.png", communitybanner: "/static/img/apple_banner.jpg", communitydisplayname: "PC Master Race", community: "b/pcmasterrace",
+        communitylink: "/main_community/pcmasterrace", totalmembers: "100", onlinemembers: "75"},
+        {communityicon: "/static/img/pcbuildinglogo.png", communitybanner: "/static/img/apple_banner.jpg", communitydisplayname: "PC Building", community: "b/pcbuilding",
+        communitylink: "/main_community/pcbuilding", totalmembers: "1000", onlinemembers: "500"},
+        {communityicon: "/static/img/phflag.png", communitybanner: "/static/img/apple_banner.jpg", communitydisplayname: "Philippines", community: "b/philippines",
+        communitylink: "/main_community/philippines", totalmembers: "1500", onlinemembers: "800"}
+    ]
+    
+    Community.insertMany(data)
+        .then(docs => {
+            console.log('Data inserted:', docs);
+        })
+        .catch(err => {
+            console.error('Error inserting data:', err);
+        });
     let user = req.session.user;
     currentUser = req.session.user;
     console.log("trigger")

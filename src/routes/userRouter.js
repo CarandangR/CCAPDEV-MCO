@@ -5,7 +5,7 @@ import Post from '../models/Post.js'
 import express from 'express';
 import Community from '../models/Community.js'
 
-
+let currentUser
 const userRouter = Router()
 const hashPassword = async(password) => {
     const saltRounds = 10
@@ -18,15 +18,7 @@ const comparePasswords = async (password, hashedPassword) => {
 
 
 userRouter.use(express.json());
-let currentUser = {
-    username: "gojowithiphone",
-    userhandle : "u/gojo",
-    password : "1234",
-    pfplink: "/static/img/nopfp.jpg",
-    bits: "0",
-    aboutme: "such empty",
-    userprofilelink : "/profileview/gojowithiphone"
-} // change this when session handling is implemented
+
 
 userRouter.get('/Sign_up', function (req, res) {
     res.render("signup.hbs");
@@ -64,6 +56,7 @@ userRouter.post('/submitsignup', async function (req, res) {
         req.session.user = result
         req.session.authorized = true
         res.redirect('/mainpage_logged')
+        currentUser = req.session.user        
 
     }catch(err){
         console.error(err)
@@ -86,7 +79,8 @@ userRouter.post('/submitsignin', async function(req, res){
             }else{
                 res.status(401).json({ message: 'Invalid password' }); 
             }
-        }        
+        }
+        currentUser = req.session.user        
     }catch(err){
         console.error(err)
     }

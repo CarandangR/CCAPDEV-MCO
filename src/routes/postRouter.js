@@ -9,21 +9,13 @@ import Reply from '../models/Reply.js';
 import multer from 'multer';
 import crypto from 'crypto';
 import path from 'path';
-
+let currentUser
 
 
 const postRouter = Router()
-let currentUser = {
-    username: "gojowithiphone",
-    userhandle : "u/gojo",
-    password : "1234",
-    pfplink: "/static/img/nopfp.jpg",
-    bits: "0",
-    aboutme: "such empty",
-    userprofilelink : "/profileview/gojowithiphone"
-} // change this when session handling is implemented
 
 postRouter.get('/Create_post', async function (req, res) {
+    currentUser = req.session.user
     let communityNames = []
     const foundUser = await Users.findOne({username: currentUser.username}).populate('followedCommunities').exec() // replace with logged in user
     const communityArr = await Community.find({}).lean().exec();
@@ -133,6 +125,7 @@ postRouter.post('/submitpost', upload.single('file'), async (req,res) => {
 
 
 postRouter.post('/submitreply/:id', async (req, res) => {
+    currentUser = req.session.user
     console.log("Reply Post ")
     const id = req.params.id
     const foundUser = await Users.findOne({username: currentUser.username}) // replace with logged in user
@@ -174,6 +167,8 @@ postRouter.post('/submitreply/:id', async (req, res) => {
 })
 
 postRouter.post('/editpost', async (req, res) => {
+    currentUser = req.session.user
+
     const postId = req.body.hiddenValue; 
     const editedPostContent = req.body.editedPost; 
     console.log("Trigger on postId" + postId + "edit with" + editedPostContent)
@@ -196,6 +191,8 @@ postRouter.post('/editpost', async (req, res) => {
 
 })
 postRouter.delete('/deletepost/:id', async (req, res) =>{
+    currentUser = req.session.user
+
     const postId = req.params.id
     try{
         const deletePost = await Post.findOne({postId: postId})
@@ -219,6 +216,8 @@ postRouter.delete('/deletepost/:id', async (req, res) =>{
 
 
 postRouter.post('/updatepostvote/:postId', async (req, res) => {
+    currentUser = req.session.user
+
     console.log("post request for updating upvote/downvote received");
     const updatePost = req.body.id;
     const {type} = req.body;
@@ -352,6 +351,8 @@ postRouter.post('/updatereplyvote/:replyId', async (req, res) => {
 
 
 postRouter.post('/editreply', async (req, res) => {
+    currentUser = req.session.user
+
     const replyId = req.body.replyId; 
     const editedReplyContent = req.body.editedReplyContent; 
     try {
@@ -374,6 +375,8 @@ postRouter.post('/editreply', async (req, res) => {
 })
 
 postRouter.delete('/deletereply/:id', async (req, res) =>{
+    currentUser = req.session.user
+
     const replyId = req.params.id
     let currentPost
     console.log("Delete trigger on reply " +replyId)
