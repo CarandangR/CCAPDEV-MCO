@@ -15,6 +15,11 @@ let currentUser
 const postRouter = Router()
 
 postRouter.get('/Create_post', async function (req, res) {
+    if(!req.session.authorized)
+    {
+        res.redirect('/Sign_up')
+        return;
+    }
     currentUser = req.session.user
     let communityNames = []
     const foundUser = await Users.findOne({username: currentUser.username}).populate('followedCommunities').exec() // replace with logged in user
