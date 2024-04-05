@@ -4,12 +4,7 @@ import User from '../models/Users.js';
 import Post from '../models/Post.js'
 import express from 'express';
 import Community from '../models/Community.js'
-import jwt from 'jsonwebtoken'
 
-
-const createtoken = (_id) => {
-    return jwt.sign({_id}, process.env.SECRET,{ expiresIn: '3d'})
-}
 
 const userRouter = Router()
 const hashPassword = async(password) => {
@@ -66,10 +61,8 @@ userRouter.post('/submitsignup', async function (req, res) {
             aboutme: "Such empty",
             userprofilelink: "/profileview/"+req.body.username
         })
-        console.log(result)
-        const token = createtoken(result._id)
-
-        res.status(200).json({token})
+        req.session.user = result
+        req.session.authorized = true
         res.redirect('/mainpage_logged')
 
     }catch(err){
@@ -87,10 +80,9 @@ userRouter.post('/submitsignin', async function(req, res){
         } else{
             const passCheck = await comparePasswords(passwordInput, user.password)
             if (passCheck){
+                req.session.user = user
+                req.session.authorized = true
                 res.redirect('/mainpage_logged')
-                const token = createtoken(user._id)
-                console.log(token);
-                res.status(200).json({token})
             }else{
                 res.status(401).json({ message: 'Invalid password' }); 
             }

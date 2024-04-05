@@ -9,28 +9,8 @@ import Community from '../models/Community.js';
 
 const router = Router()
 
-/*let currentUser = {
-    username: "Nyett",
-    userhandle : "u/nyet",
-    password : "Pass1234",
-    pfplink: "/static/img/nopfp.jpg",
-    bits: "0",
-    aboutme: "such empty",
-    userprofilelink : "/profileview/Nyett"
-} // change this when session handling is implemented*/
-
-let currentUser = {
-    username: "gojowithiphone",
-    userhandle : "u/gojo",
-    password : "1234",
-    pfplink: "/static/img/nopfp.jpg",
-    bits: "0",
-    aboutme: "such empty",
-    userprofilelink : "/profileview/gojowithiphone"
-} // change this when session handling is implemented
-
 router.get("/", function (req, res) {
-    res.redirect('/mainpage_logged');
+    res.redirect('/Sign_in');
 
 });
 
@@ -74,10 +54,10 @@ router.get('/main_community/:community', async function(req,res){
 })
 
 router.get('/mainpage_logged', async (req, res) => {
-    //let user = currentUser;
+    let user = req.session.user;
     console.log("trigger")
     const postsArr = await Post.find({}).populate('communityinfo').populate('user').lean().exec();
-    res.render("mainpage_logged.hbs", {posts: postsArr}); //readd posts
+    res.render("mainpage_logged.hbs", {user: user,posts: postsArr}); //readd posts
 });
 
 router.get('/hotposts', async (req, res) => {

@@ -7,10 +7,15 @@ import exphbs from 'express-handlebars';
 import path from 'path';
 import bodyParser from 'body-parser';
 import moment from 'moment';
+import session from 'express-session';
+import cookieParser from 'cookie-parser'
+import connectMongoDBSession from 'connect-mongodb-session';
+import mongoose from 'mongoose';
 
+
+const MongoStore = connectMongoDBSession(session);
 
 import router from "./src/routes/indexRouter.js";
-
 
 async function main() {
     const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -46,6 +51,22 @@ async function main() {
            
         }
     }));
+
+    app.use(session({
+        secret: 'MCOcarandangnuneztansecret',
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            maxAge:1000*60*60*24*30,
+            httpOnly: true
+        },
+        store: new MongoStore({ 
+            uri: process.env.MONGO_URI,
+            collection: 'MySessions',
+            expires: 1000*60*60*24*30
+          })
+    }));
+
     app.use(router)
     app.set('views', path.join(__dirname, 'views'));
     app.set("view engine", "hbs");
