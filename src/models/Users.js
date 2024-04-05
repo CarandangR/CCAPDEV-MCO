@@ -37,8 +37,27 @@ const userSchema = new Schema({
         type: [SchemaTypes.ObjectId],
         ref: 'Community',
         required: true
-    }
-   
+    },
+    upvPosts: {
+        type: [SchemaTypes.ObjectId],
+        ref: 'Post',
+        required: false
+    },
+    upvReplies: {
+        type: [SchemaTypes.ObjectId],
+        ref: 'Reply',
+        required: false
+    },
+   downvPosts: {
+        type: [SchemaTypes.ObjectId],   
+        ref: 'Post',
+        required: false
+   },
+   downvReplies: {
+        type: [SchemaTypes.ObjectId],
+        ref: 'Reply',
+        required: false
+   }
 });
 
 const Users = model('Users', userSchema); 
