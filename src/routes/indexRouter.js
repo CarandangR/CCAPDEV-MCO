@@ -30,7 +30,7 @@ let currentUser = {
 } // change this when session handling is implemented
 
 router.get("/", function (req, res) {
-    res.redirect('/Sign_in');
+    res.redirect('/mainpage_logged');
 
 });
 

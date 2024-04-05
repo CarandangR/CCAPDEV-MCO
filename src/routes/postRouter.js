@@ -214,7 +214,7 @@ postRouter.delete('/deletepost/:id', async (req, res) =>{
         console.error(err)
     }
     
-
+    res.redirect('/mainpage_logged')
 })
 
 
@@ -284,6 +284,7 @@ postRouter.post('/editreply', async (req, res) => {
 
 postRouter.delete('/deletereply/:id', async (req, res) =>{
     const replyId = req.params.id
+    let currentPost
     console.log("Delete trigger on reply " +replyId)
     try{
         const deleteReply = await Reply.findOne({replyId: replyId})
@@ -295,7 +296,7 @@ postRouter.delete('/deletereply/:id', async (req, res) =>{
             //await Reply.deleteMany({ postId: postId });
             await Post.updateOne({postId: deleteReply.postId}, {$inc: {numberofreplies: -1},  $pull: { replies: deleteReply._id } })
             await Reply.deleteOne({replyId : deleteReply.replyId})
-            
+            currentPost = await Post.findOne({postId: deleteReply.postId})
 
 
         } else {
@@ -304,7 +305,9 @@ postRouter.delete('/deletereply/:id', async (req, res) =>{
     }catch(err){
         console.error(err)
     }
-    
+
+    console.log(currentPost)
+    res.redirect(currentPost.linkofpost)
 
 })
 

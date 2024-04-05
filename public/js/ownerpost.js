@@ -40,7 +40,7 @@ saveReplyButtons.forEach(saveReplyButton => {
                 },
                 body: JSON.stringify({editedReplyContent: editedReplyContent, replyId: replyId}) 
             });
-            location.reload()
+            //location.reload()
         }catch(err){
             console.error(err)
         }
@@ -56,9 +56,9 @@ deleteReplyButtons.forEach(deleteReplyButton => {
         try{
             const response = await fetch ('/deletereply/'+replyId, {
                 method: 'DELETE'
-            })
+            });
         
-    
+            location.reload()// not triggering
         }catch(err){
             console.error(err)
         }
@@ -77,13 +77,8 @@ deleteButton.addEventListener('click', async() => {
     try{
         const response = await fetch ('/deletepost/'+hiddenValue, {
             method: 'DELETE',
-        })
-        const mainPageResponse = await fetch('/mainpage_logged');
-        if (mainPageResponse.ok) {
-            window.location.href = '/mainpage_logged';
-        } else {
-            console.error('Failed to fetch mainpage_logged after deleting post');
-        }
+        });
+        window.location.href = "/mainpage_logged";
 
     }catch (err){
         console.error(err)
