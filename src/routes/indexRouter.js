@@ -8,7 +8,7 @@ import Reply from '../models/Reply.js'
 import Community from '../models/Community.js';
 
 const router = Router()
-
+let currentUser
 router.get("/", function (req, res) {
     res.redirect('/mainpage');
 
@@ -50,6 +50,7 @@ router.get('/mainpage_logged', async (req, res) => {
         return;
     }
     let user = req.session.user;
+    console.log("trigger")
     const postsArr = await Post.find({}).populate('communityinfo').populate('user').lean().exec();
     res.render("mainpage_logged.hbs", {user: user,posts: postsArr}); //readd posts
 });
