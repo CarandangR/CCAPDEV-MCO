@@ -103,3 +103,215 @@ saveButton.addEventListener('click', async () => {
         console.error(err)
     }
 });
+
+
+// attempt at implementation of upvote/downvote
+// For replies: 
+// Get the replyId of the clicked reply
+// replyId = editReplyButton.closest('.replycontainer').querySelector('#replyId').value;
+
+
+function toggleImage(imgElement, originalSrc, clickedSrc) {
+    if (imgElement.getAttribute('src').includes(clickedSrc)) {
+        imgElement.setAttribute('src', originalSrc);
+        
+    } else {
+        imgElement.src = clickedSrc;
+    }
+}
+
+//For the Post
+document.querySelectorAll('.postinfocontainer .footer').forEach(function(postfooter) {
+    // const postContainerElement = footer.closest('.postscontainer');
+    // const postId = postContainerElement.getAttribute('data-postid');
+    // let isRegular = true;
+    postfooter.querySelector('.upbit').addEventListener('click', async function () {
+        console.log("Upbit Clicked");
+        if(postfooter.querySelector('.upbit img').getAttribute('src').includes('/static/img/up-arrow-regular-24.png')) {
+            console.log("icnrease votes by 1 cuz regular img");
+            postfooter.querySelector('.upbit img').setAttribute('src', '/static/img/up-arrow-solid-24.png');
+            try {
+                    const response = await fetch(`/updatepostvote/` + hiddenValue, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ 
+                            type: 'upvote',
+                            id: hiddenValue,
+                         })
+                    });
+                    if (!response.ok) {
+                        console.error('Error updating vote:', response.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error updating vote:', error);
+                }
+                isRegular = false;
+        }
+        else if(postfooter.querySelector('.upbit img').getAttribute('src').includes('/static/img/up-arrow-solid-24.png')) {
+            console.log("decrease votes by 1 cuz solid img");
+            postfooter.querySelector('.upbit img').setAttribute('src', '/static/img/up-arrow-regular-24.png');
+            try {
+                const response = await fetch(`/updatepostvote/` + hiddenValue, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        type: 'upvote reduce',
+                        id: hiddenValue,
+                     })
+                });
+                if (!response.ok) {
+                    console.error('Error updating vote:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error updating vote:', error);
+            }
+        }
+    }); 
+    postfooter.querySelector('.downbit').addEventListener('click', async function() { 
+         console.log("Downbit Clicked");
+         if(postfooter.querySelector('.downbit img').getAttribute('src').includes('/static/img/down-arrow-regular-24.png')) {
+            postfooter.querySelector('.downbit img').setAttribute('src', '/static/img/down-arrow-solid-24.png');
+            try {
+                const response = await fetch(`/updatepostvote/` + hiddenValue, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        type: 'downvote',
+                        id: hiddenValue,
+                     })
+                });
+                if (!response.ok) {
+                    console.error('Error updating vote:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error updating vote:', error);
+            }
+        }
+        else if(postfooter.querySelector('.downbit img').getAttribute('src').includes('/static/img/down-arrow-solid-24.png')) {
+            postfooter.querySelector('.downbit img').setAttribute('src', '/static/img/down-arrow-regular-24.png');
+            try {
+                const response = await fetch(`/updatepostvote/` + hiddenValue, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        type: 'downvote reduce',
+                        id: hiddenValue,
+                     })
+                });
+                if (!response.ok) {
+                    console.error('Error updating vote:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error updating vote:', error);
+            }
+        }
+    });
+});
+
+// For replies
+
+document.querySelectorAll('.replycontainer .footer').forEach(function(replyfooter) {
+    // const postContainerElement = footer.closest('.postscontainer');
+    // const postId = postContainerElement.getAttribute('data-postid');
+    // let isRegular = true;
+    let currReplyId = replyfooter.closest('.replycontainer').querySelector('#replyId').value;
+    replyfooter.querySelector('.upbit').addEventListener('click', async function () {
+        console.log("Upbit Clicked");
+        if(replyfooter.querySelector('.upbit img').getAttribute('src').includes('/static/img/up-arrow-regular-24.png')) {
+            console.log("icnrease votes by 1 cuz regular img");
+            replyfooter.querySelector('.upbit img').setAttribute('src', '/static/img/up-arrow-solid-24.png');
+            try {
+                    const response = await fetch(`/updatereplyvote/` + currReplyId, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ 
+                            type: 'upvote',
+                            id: currReplyId,
+                         })
+                    });
+                    if (!response.ok) {
+                        console.error('Error updating vote:', response.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error updating vote:', error);
+                }
+                isRegular = false;
+        }
+        else if(replyfooter.querySelector('.upbit img').getAttribute('src').includes('/static/img/up-arrow-solid-24.png')) {
+            console.log("decrease votes by 1 cuz solid img");
+            replyfooter.querySelector('.upbit img').setAttribute('src', '/static/img/up-arrow-regular-24.png');
+            try {
+                const response = await fetch(`/updatereplyvote/` + currReplyId, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        type: 'upvote reduce',
+                        id: currReplyId,
+                     })
+                });
+                if (!response.ok) {
+                    console.error('Error updating vote:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error updating vote:', error);
+            }
+        }
+    }); 
+    replyfooter.querySelector('.downbit').addEventListener('click', async function() { 
+         console.log("Downbit Clicked");
+         if(replyfooter.querySelector('.downbit img').getAttribute('src').includes('/static/img/down-arrow-regular-24.png')) {
+            replyfooter.querySelector('.downbit img').setAttribute('src', '/static/img/down-arrow-solid-24.png');
+            try {
+                const response = await fetch(`/updatereplyvote/` + currReplyId, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        type: 'downvote',
+                        id: currReplyId,
+                     })
+                });
+                if (!response.ok) {
+                    console.error('Error updating vote:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error updating vote:', error);
+            }
+        }
+        else if(replyfooter.querySelector('.downbit img').getAttribute('src').includes('/static/img/down-arrow-solid-24.png')) {
+            replyfooter.querySelector('.downbit img').setAttribute('src', '/static/img/down-arrow-regular-24.png');
+            try {
+                const response = await fetch(`/updatereplyvote/` + currReplyId, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        type: 'downvote reduce',
+                        id: currReplyId,
+                     })
+                });
+                if (!response.ok) {
+                    console.error('Error updating vote:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error updating vote:', error);
+            }
+        }
+    });
+});
+
+

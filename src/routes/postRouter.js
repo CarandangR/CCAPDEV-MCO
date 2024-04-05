@@ -218,7 +218,7 @@ postRouter.delete('/deletepost/:id', async (req, res) =>{
 })
 
 
-postRouter.post('/updatevote/:postId', async (req, res) => {
+postRouter.post('/updatepostvote/:postId', async (req, res) => {
     console.log("post request for updating upvote/downvote received");
     const updatePost = req.body.id;
     const {type} = req.body;
@@ -230,7 +230,12 @@ postRouter.post('/updatevote/:postId', async (req, res) => {
                 { postId: updatePost },
                 { $inc: { upvotes: 1 } },
                 { new: true }
-            );
+            ).populate('user');
+            const updatedPost = await Post.findOne({ postId: updatePost }).populate('user');
+            if (updatedPost && updatedPost.user) {
+                await Users.findByIdAndUpdate(updatedPost.user._id, { $inc: { bits: 1 } });
+                console.log("User bits incremented.");
+            }
         }
         else if (type === 'downvote') {
             postToUpdate = await Post.findOneAndUpdate(
@@ -238,6 +243,11 @@ postRouter.post('/updatevote/:postId', async (req, res) => {
                 { $inc: { downvotes: 1 } },
                 { new: true }
             );
+            const updatedPost = await Post.findOne({ postId: updatePost }).populate('user');
+            if (updatedPost && updatedPost.user) {
+                await Users.findByIdAndUpdate(updatedPost.user._id, { $inc: { bits: -1 } });
+                console.log("User bits -1.");
+            }
         }
         else if (type === 'upvote reduce') {
             postToUpdate = await Post.findOneAndUpdate(
@@ -245,10 +255,76 @@ postRouter.post('/updatevote/:postId', async (req, res) => {
                 { $inc: { upvotes: -1 } },
                 { new: true }
             );
+            const updatedPost = await Post.findOne({ postId: updatePost }).populate('user');
+            if (updatedPost && updatedPost.user) {
+                await Users.findByIdAndUpdate(updatedPost.user._id, { $inc: { bits: -1 } });
+                console.log("User bits -1.");
+            }
         }
         else if (type === 'downvote reduce') {
             postToUpdate = await Post.findOneAndUpdate(
                 { postId: updatePost },
+                { $inc: { downvotes: -1 } },
+                { new: true }
+            );
+            const updatedPost = await Post.findOne({ postId: updatePost }).populate('user');
+            if (updatedPost && updatedPost.user) {
+                await Users.findByIdAndUpdate(updatedPost.user._id, { $inc: { bits: 1 } });
+                console.log("User bits incremented.");
+            }
+        }
+        else {
+            console.log("invalid vote type.");
+        }
+
+        if (!postToUpdate) {
+            console.log("post does not exist.");
+        }
+        else {
+            console.log("post vote updated.");
+            
+
+        }
+        res.redirect('/mainpage_logged');
+        
+    }
+    catch (error) {
+        console.error('Error updating vote:', error);
+        res.status(500);
+    }
+})
+
+postRouter.post('/updatereplyvote/:replyId', async (req, res) => {
+    console.log("post request for updating upvote/downvote received");
+    const updateReplyvotes = req.body.id;
+    const {type} = req.body;
+    console.log(updateReplyvotes);
+    try {
+        let postToUpdate;
+        if(type === 'upvote') {
+            postToUpdate = await Reply.findOneAndUpdate(
+                { replyId: updateReplyvotes },
+                { $inc: { upvotes: 1 } },
+                { new: true }
+            );
+        }
+        else if (type === 'downvote') {
+            postToUpdate = await Reply.findOneAndUpdate(
+                { replyId: updateReplyvotes },
+                { $inc: { downvotes: 1 } },
+                { new: true }
+            );
+        }
+        else if (type === 'upvote reduce') {
+            postToUpdate = await Reply.findOneAndUpdate(
+                { replyId: updateReplyvotes },
+                { $inc: { upvotes: -1 } },
+                { new: true }
+            );
+        }
+        else if (type === 'downvote reduce') {
+            postToUpdate = await Reply.findOneAndUpdate(
+                { replyId: updateReplyvotes },
                 { $inc: { downvotes: -1 } },
                 { new: true }
             );
