@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }); 
         footer.querySelector('.downbit').addEventListener('click', async function() { 
              console.log("Downbit Clicked");
-             if(footer.querySelector('.downbit img').includes('/static/img/down-arrow-regular-24.png')) {
-                footer.querySelector('.upbit img').setAttribute('src', '/static/img/down-arrow-solid-24.png');
+             if(footer.querySelector('.downbit img').getAttribute('src').includes('/static/img/down-arrow-regular-24.png')) {
+                footer.querySelector('.downbit img').setAttribute('src', '/static/img/down-arrow-solid-24.png');
                 try {
                     const response = await fetch(`/updatevote/` + postId, {
                         method: 'POST',
@@ -98,8 +98,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.error('Error updating vote:', error);
                 }
             }
-            else if(footer.querySelector('.downbit img').includes('/static/img/down-arrow-solid-24.png')) {
-                footer.querySelector('.upbit img').setAttribute('src', '/static/img/down-arrow-regular-24.png');
+            else if(footer.querySelector('.downbit img').getAttribute('src').includes('/static/img/down-arrow-solid-24.png')) {
+                footer.querySelector('.downbit img').setAttribute('src', '/static/img/down-arrow-regular-24.png');
                 try {
                     const response = await fetch(`/updatevote/` + postId, {
                         method: 'POST',
