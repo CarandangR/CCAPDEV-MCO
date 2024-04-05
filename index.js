@@ -61,7 +61,7 @@ async function main() {
             httpOnly: true
         },
         store: new MongoStore({ 
-            uri: process.env.MONGO_URI,
+            uri: "mongodb+srv://joshchristiannunez:TestBench1234@cluster0.ngd7avr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
             collection: 'MySessions',
             expires: 1000*60*60
           })
